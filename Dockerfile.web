@@ -1,0 +1,19 @@
+FROM node:20-bookworm-slim AS deps
+WORKDIR /app
+RUN corepack enable pnpm
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+COPY apps/web/package.json apps/web/package.json
+COPY packages/shared/package.json packages/shared/package.json
+RUN pnpm install --frozen-lockfile
+
+FROM deps AS build
+WORKDIR /app
+COPY . .
+ARG VITE_API_BASE=/api
+RUN pnpm --filter @ai-adventure/shared build
+RUN pnpm --filter @ai-adventure/web build
+
+FROM nginx:1.27-alpine
+COPY --from=build /app/apps/web/dist /usr/share/nginx/html
+COPY nginx/default.conf /etc/nginx/conf.d/default.conf
+EXPOSE 80

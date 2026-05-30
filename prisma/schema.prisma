@@ -1,0 +1,75 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Session {
+  id        String         @id @default(cuid())
+  nickname  String
+  mode      String         @default("student")
+  ageGroup  String         @default("6-8")
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @updatedAt
+  progress  GameProgress[]
+  prompts   PromptAttempt[]
+  messages  ChatMessage[]
+  images    GeneratedImage[]
+}
+
+model GameProgress {
+  id        String   @id @default(cuid())
+  sessionId String
+  gameKey   String
+  score     Int
+  maxScore  Int
+  metadata  String
+  createdAt DateTime @default(now())
+  session   Session  @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+}
+
+model PromptAttempt {
+  id             String   @id @default(cuid())
+  sessionId      String
+  rawPrompt      String
+  improvedPrompt String
+  score          Int
+  feedback       String
+  createdAt      DateTime @default(now())
+  session        Session  @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+}
+
+model ChatMessage {
+  id          String   @id @default(cuid())
+  sessionId   String
+  role        String
+  content     String
+  safetyLevel String
+  createdAt   DateTime @default(now())
+  session     Session  @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+}
+
+model GeneratedImage {
+  id          String   @id @default(cuid())
+  sessionId   String
+  promptUsed  String
+  theme       String
+  style       String
+  safetyLevel String
+  filePath    String
+  label       String   @default("Hình này được tạo bởi AI.")
+  createdAt   DateTime @default(now())
+  session     Session  @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+}
+
+model TeacherActivity {
+  id        String   @id @default(cuid())
+  title     String
+  type      String
+  config    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

@@ -1,0 +1,193 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-sky: #38bdf8;
+  --color-blue: #60a5fa;
+  --color-purple: #a78bfa;
+  --color-pink: #f472b6;
+  --color-yellow: #facc15;
+  --color-orange: #fb923c;
+  --color-green: #4ade80;
+  --color-mint: #5eead4;
+  --color-red-soft: #fca5a5;
+  --color-cream: #fff7ed;
+  --color-white: #ffffff;
+  --color-ink: #1f2937;
+  --color-muted: #6b7280;
+  font-family: Inter, Nunito, Quicksand, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+html {
+  min-height: 100%;
+  overflow-x: clip;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  color: var(--color-ink);
+  background-image: 
+    linear-gradient(to bottom, rgba(255, 247, 237, 0.85), rgba(255, 247, 237, 0.93)),
+    url('../assets/classroom_bg.png');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  overflow-x: clip;
+  -webkit-tap-highlight-color: transparent;
+}
+
+button, input, select, textarea {
+  font: inherit;
+}
+
+/* ===== Reusable Card & Button Styles ===== */
+
+.lab-card {
+  @apply rounded-[2rem] border border-white/80 bg-white/90 shadow-soft backdrop-blur-sm transition-all duration-300 hover:shadow-md;
+}
+
+.glass-panel {
+  @apply rounded-[2rem] border border-white/60 bg-white/70 backdrop-blur-md shadow-soft;
+}
+
+.big-button {
+  @apply min-h-12 rounded-2xl px-5 py-3 font-bold transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md active:translate-y-0 focus:outline-none focus:ring-4 focus:ring-skyLab/30;
+  touch-action: manipulation;
+}
+
+/* ===== Floating Decorations ===== */
+
+.floating-star {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  background: radial-gradient(circle, var(--color-yellow) 0%, transparent 70%);
+  border-radius: 50%;
+  opacity: 0.35;
+  animation: float-twinkle 6s ease-in-out infinite;
+}
+
+.floating-cloud {
+  position: absolute;
+  width: 80px;
+  height: 32px;
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 999px;
+  opacity: 0.3;
+  animation: float-drift 18s ease-in-out infinite;
+}
+.floating-cloud::before {
+  content: "";
+  position: absolute;
+  top: -14px;
+  left: 18px;
+  width: 36px;
+  height: 36px;
+  background: rgba(255, 255, 255, 0.35);
+  border-radius: 50%;
+}
+.floating-cloud::after {
+  content: "";
+  position: absolute;
+  top: -8px;
+  left: 44px;
+  width: 24px;
+  height: 24px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+}
+
+.floating-bubble {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, rgba(167, 139, 250, 0.25), rgba(244, 114, 182, 0.15));
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  opacity: 0.4;
+  animation: float-rise 12s ease-in-out infinite;
+}
+
+/* ===== Keyframe Animations ===== */
+
+@keyframes float-twinkle {
+  0%, 100% { transform: translateY(0) scale(1); opacity: 0.25; }
+  50% { transform: translateY(-15px) scale(1.3); opacity: 0.5; }
+}
+
+@keyframes float-drift {
+  0%, 100% { transform: translateX(0) translateY(0); }
+  25% { transform: translateX(25px) translateY(-8px); }
+  50% { transform: translateX(50px) translateY(0); }
+  75% { transform: translateX(25px) translateY(8px); }
+}
+
+@keyframes float-rise {
+  0%, 100% { transform: translateY(0) scale(1); opacity: 0.3; }
+  50% { transform: translateY(-25px) scale(1.15); opacity: 0.5; }
+}
+
+@keyframes sparkle-pop {
+  0% { transform: scale(0) rotate(0deg); opacity: 0; }
+  50% { transform: scale(1.2) rotate(180deg); opacity: 1; }
+  100% { transform: scale(1) rotate(360deg); opacity: 0.8; }
+}
+
+@keyframes confetti-fall {
+  0% { transform: translateY(-10px) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(30px) rotate(360deg); opacity: 0; }
+}
+
+@keyframes gentle-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+.animate-sparkle {
+  animation: sparkle-pop 0.6s ease-out;
+}
+
+.animate-gentle-bounce {
+  animation: gentle-bounce 2s ease-in-out infinite;
+}
+
+@media (hover: none) and (pointer: coarse) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .lab-card,
+  .glass-panel,
+  .big-button {
+    backdrop-filter: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .lab-card,
+  .glass-panel {
+    border-radius: 1.5rem;
+  }
+
+  .big-button {
+    min-height: 48px;
+    padding-inline: 1rem;
+    padding-block: 0.75rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -1,0 +1,7 @@
+node_modules
+dist
+.env
+.git
+apps/api/uploads
+*.db
+coverage

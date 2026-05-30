@@ -1,0 +1,31 @@
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    env_file:
+      - path: .env.example
+        required: true
+      - path: .env
+        required: false
+    environment:
+      DATABASE_URL: file:/data/prod.db
+      UPLOAD_DIR: /data/uploads
+      CORS_ORIGIN: http://localhost,http://localhost:5173
+    volumes:
+      - api-data:/data
+    ports:
+      - "3001:3001"
+    command: node apps/api/dist/index.js
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.web
+    depends_on:
+      - api
+    ports:
+      - "80:80"
+
+volumes:
+  api-data:
