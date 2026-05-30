@@ -1,8 +1,8 @@
 import { prisma } from "./client";
 
 export async function ensureDatabase() {
-  await prisma.$executeRawUnsafe("PRAGMA foreign_keys = ON;");
-  await prisma.$executeRawUnsafe(`
+	await prisma.$executeRawUnsafe("PRAGMA foreign_keys = ON;");
+	await prisma.$executeRawUnsafe(`
     CREATE TABLE IF NOT EXISTS "Session" (
       "id" TEXT NOT NULL PRIMARY KEY,
       "nickname" TEXT NOT NULL,
@@ -12,7 +12,7 @@ export async function ensureDatabase() {
       "updatedAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
     );
   `);
-  await prisma.$executeRawUnsafe(`
+	await prisma.$executeRawUnsafe(`
     CREATE TABLE IF NOT EXISTS "GameProgress" (
       "id" TEXT NOT NULL PRIMARY KEY,
       "sessionId" TEXT NOT NULL,
@@ -24,7 +24,7 @@ export async function ensureDatabase() {
       CONSTRAINT "GameProgress_sessionId_fkey" FOREIGN KEY ("sessionId") REFERENCES "Session" ("id") ON DELETE CASCADE ON UPDATE CASCADE
     );
   `);
-  await prisma.$executeRawUnsafe(`
+	await prisma.$executeRawUnsafe(`
     CREATE TABLE IF NOT EXISTS "PromptAttempt" (
       "id" TEXT NOT NULL PRIMARY KEY,
       "sessionId" TEXT NOT NULL,
@@ -36,7 +36,7 @@ export async function ensureDatabase() {
       CONSTRAINT "PromptAttempt_sessionId_fkey" FOREIGN KEY ("sessionId") REFERENCES "Session" ("id") ON DELETE CASCADE ON UPDATE CASCADE
     );
   `);
-  await prisma.$executeRawUnsafe(`
+	await prisma.$executeRawUnsafe(`
     CREATE TABLE IF NOT EXISTS "ChatMessage" (
       "id" TEXT NOT NULL PRIMARY KEY,
       "sessionId" TEXT NOT NULL,
@@ -47,7 +47,7 @@ export async function ensureDatabase() {
       CONSTRAINT "ChatMessage_sessionId_fkey" FOREIGN KEY ("sessionId") REFERENCES "Session" ("id") ON DELETE CASCADE ON UPDATE CASCADE
     );
   `);
-  await prisma.$executeRawUnsafe(`
+	await prisma.$executeRawUnsafe(`
     CREATE TABLE IF NOT EXISTS "GeneratedImage" (
       "id" TEXT NOT NULL PRIMARY KEY,
       "sessionId" TEXT NOT NULL,
@@ -61,7 +61,7 @@ export async function ensureDatabase() {
       CONSTRAINT "GeneratedImage_sessionId_fkey" FOREIGN KEY ("sessionId") REFERENCES "Session" ("id") ON DELETE CASCADE ON UPDATE CASCADE
     );
   `);
-  await prisma.$executeRawUnsafe(`
+	await prisma.$executeRawUnsafe(`
     CREATE TABLE IF NOT EXISTS "TeacherActivity" (
       "id" TEXT NOT NULL PRIMARY KEY,
       "title" TEXT NOT NULL,

@@ -7,141 +7,177 @@ import { imageRedirectMessage } from "../prompts/safety.system";
 import { safetyService, normalizeText } from "./safety.service";
 
 export interface BuiltImagePrompt {
-  safe: boolean;
-  prompt: string;
-  reason: string;
-  studentMessage: string;
+	safe: boolean;
+	prompt: string;
+	reason: string;
+	studentMessage: string;
 }
 
 export class ImageService {
-  async buildPrompt(input: ImageGenerateInput): Promise<BuiltImagePrompt> {
-    const colors = input.details.colors.length ? input.details.colors.join(", ") : "màu sắc tươi sáng";
-    const textRule = input.details.includeText ? "có chữ ngắn tối đa 3 từ" : "không có chữ trong ảnh";
-    const prompt = normalizeText(
-      `Tạo một ${input.style.toLowerCase()} thiếu nhi, an toàn, vui vẻ, về ${input.details.subject} trong bối cảnh ${input.details.setting}. Chủ đề ${input.theme}. Màu sắc: ${colors}. Cảm xúc: ${input.details.mood}. Mục đích học tập cho học sinh ${input.ageGroup} tuổi, ${textRule}. Chỉ dùng nhân vật tưởng tượng, phong cách minh họa lớp học, nội dung tích cực.`
-    );
+	async buildPrompt(input: ImageGenerateInput): Promise<BuiltImagePrompt> {
+		const colors = input.details.colors.length
+			? input.details.colors.join(", ")
+			: "màu sắc tươi sáng";
+		const textRule = input.details.includeText
+			? "có chữ ngắn tối đa 3 từ"
+			: "không có chữ trong ảnh";
+		const prompt = normalizeText(
+			`Tạo một ${input.style.toLowerCase()} thiếu nhi, an toàn, vui vẻ, về ${input.details.subject} trong bối cảnh ${input.details.setting}. Chủ đề ${input.theme}. Màu sắc: ${colors}. Cảm xúc: ${input.details.mood}. Mục đích học tập cho học sinh ${input.ageGroup} tuổi, ${textRule}. Chỉ dùng nhân vật tưởng tượng, phong cách minh họa lớp học, nội dung tích cực.`,
+		);
 
-    const safety = safetyService.checkImagePrompt(prompt);
-    if (!safety.safe) {
-      return { safe: false, prompt: "", reason: safety.reason ?? "unsafe", studentMessage: imageRedirectMessage };
-    }
+		const safety = safetyService.checkImagePrompt(prompt);
+		if (!safety.safe) {
+			return {
+				safe: false,
+				prompt: "",
+				reason: safety.reason ?? "unsafe",
+				studentMessage: imageRedirectMessage,
+			};
+		}
 
-    return {
-      safe: true,
-      prompt,
-      reason: "safe_guided_blocks",
-      studentMessage: "Prompt đã sẵn sàng để tạo tranh AI an toàn."
-    };
-  }
+		return {
+			safe: true,
+			prompt,
+			reason: "safe_guided_blocks",
+			studentMessage: "Prompt đã sẵn sàng để tạo tranh AI an toàn.",
+		};
+	}
 
-  async generateImageFile(prompt: string, id: string, style?: string) {
-    const uploadRoot = path.resolve(process.env.UPLOAD_DIR || "./uploads");
-    const imageDir = path.join(uploadRoot, "generated-images");
-    await fs.mkdir(imageDir, { recursive: true });
+	async generateImageFile(prompt: string, id: string, style?: string) {
+		const uploadRoot = path.resolve(process.env.UPLOAD_DIR || "./uploads");
+		const imageDir = path.join(uploadRoot, "generated-images");
+		await fs.mkdir(imageDir, { recursive: true });
 
-    const apiKey = process.env.IMAGE_API_KEY || process.env.OPENAI_API_KEY;
-    const baseURL = process.env.IMAGE_BASE_URL;
+		const apiKey = process.env.IMAGE_API_KEY || process.env.OPENAI_API_KEY;
+		const baseURL = process.env.IMAGE_BASE_URL;
 
-    if (!apiKey) return this.writeFallbackSvg(imageDir, id, prompt);
+		if (!apiKey) return this.writeFallbackSvg(imageDir, id, prompt);
 
-    try {
-      const isCustomProxy = baseURL?.includes("image-for-kids") || apiKey === "free-for-kids";
-      
-      const client = new OpenAI({
-        apiKey,
-        baseURL: baseURL || undefined,
-        timeout: 60_000,
-        maxRetries: 1,
-        defaultHeaders: isCustomProxy ? {
-          "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
-        } : undefined
-      });
+		try {
+			const isCustomProxy =
+				baseURL?.includes("image-for-kids") || apiKey === "free-for-kids";
 
-      let model = process.env.OPENAI_IMAGE_MODEL || "gpt-image-1";
-      
-      if (style && isCustomProxy) {
-        const s = style.toLowerCase();
-        if (s.includes("hoạt hình") || s.includes("anime")) {
-          model = "anime";
-        } else if (s.includes("3d") || s.includes("3 chiều") || s.includes("đất sét")) {
-          model = "3d";
-        } else if (s.includes("màu nước") || s.includes("watercolor") || s.includes("sách tranh") || s.includes("thiếu nhi")) {
-          model = "flux";
-        } else if (s.includes("sticker") || s.includes("pixel") || s.includes("poster") || s.includes("đơn giản")) {
-          model = "turbo";
-        } else {
-          model = "turbo";
-        }
-      }
+			const client = new OpenAI({
+				apiKey,
+				baseURL: baseURL || undefined,
+				timeout: 60_000,
+				maxRetries: 1,
+				defaultHeaders: isCustomProxy
+					? {
+							"User-Agent":
+								"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+						}
+					: undefined,
+			});
 
-      // Build parameters, avoiding sending quality and n if using the custom proxy (which might crash it)
-      const baseParams: OpenAI.Images.ImageGenerateParams = {
-        model,
-        prompt,
-        size: (process.env.OPENAI_IMAGE_SIZE || "1024x1024") as OpenAI.Images.ImageGenerateParams["size"]
-      };
+			let model = process.env.OPENAI_IMAGE_MODEL || "gpt-image-1";
 
-      if (isCustomProxy) {
-        baseParams.response_format = "url";
-      } else {
-        if (process.env.OPENAI_IMAGE_QUALITY) {
-          baseParams.quality = process.env.OPENAI_IMAGE_QUALITY as OpenAI.Images.ImageGenerateParams["quality"];
-        }
-        baseParams.n = 1;
-      }
+			if (style && isCustomProxy) {
+				const s = style.toLowerCase();
+				if (s.includes("hoạt hình") || s.includes("anime")) {
+					model = "anime";
+				} else if (
+					s.includes("3d") ||
+					s.includes("3 chiều") ||
+					s.includes("đất sét")
+				) {
+					model = "3d";
+				} else if (
+					s.includes("màu nước") ||
+					s.includes("watercolor") ||
+					s.includes("sách tranh") ||
+					s.includes("thiếu nhi")
+				) {
+					model = "flux";
+				} else if (
+					s.includes("sticker") ||
+					s.includes("pixel") ||
+					s.includes("poster") ||
+					s.includes("đơn giản")
+				) {
+					model = "turbo";
+				} else {
+					model = "turbo";
+				}
+			}
 
-      const result = await client.images.generate(baseParams);
+			// Build parameters, avoiding sending quality and n if using the custom proxy (which might crash it)
+			const baseParams: OpenAI.Images.ImageGenerateParams = {
+				model,
+				prompt,
+				size: (process.env.OPENAI_IMAGE_SIZE ||
+					"1024x1024") as OpenAI.Images.ImageGenerateParams["size"],
+			};
 
-      const image = result.data?.[0];
-      if (image?.b64_json) {
-        const filename = `${id}.png`;
-        const filePath = path.join(imageDir, filename);
-        await fs.writeFile(filePath, Buffer.from(image.b64_json, "base64"));
-        return { filename, filePath };
-      }
-      if (image?.url) {
-        let downloadUrl = image.url;
-        if (isCustomProxy && downloadUrl.includes("ai-proxy.phongdang.io.vn/generate")) {
-          downloadUrl = downloadUrl.replace(
-            "ai-proxy.phongdang.io.vn/generate",
-            "ai-proxy.phongdang.io.vn/image-for-kids/generate"
-          );
-          if (downloadUrl.startsWith("http://")) {
-            downloadUrl = downloadUrl.replace("http://", "https://");
-          }
-        }
+			if (isCustomProxy) {
+				baseParams.response_format = "url";
+			} else {
+				if (process.env.OPENAI_IMAGE_QUALITY) {
+					baseParams.quality = process.env
+						.OPENAI_IMAGE_QUALITY as OpenAI.Images.ImageGenerateParams["quality"];
+				}
+				baseParams.n = 1;
+			}
 
-        const safeDownloadUrl = validateImageDownloadUrl(downloadUrl);
-        if (!safeDownloadUrl) throw new Error("download_url_not_allowed");
+			const result = await client.images.generate(baseParams);
 
-        // Also send browser User-Agent when fetching the image to avoid Cloudflare 403 on download
-        const response = await fetch(safeDownloadUrl, {
-          headers: isCustomProxy ? {
-            "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
-          } : undefined
-        });
-        if (!response.ok) throw new Error(`download_failed: ${response.status}`);
-        const filename = `${id}.png`;
-        const filePath = path.join(imageDir, filename);
-        await fs.writeFile(filePath, Buffer.from(await response.arrayBuffer()));
-        return { filename, filePath };
-      }
-      return this.writeFallbackSvg(imageDir, id, prompt);
-    } catch (error) {
-      console.error("Lỗi tạo ảnh từ Kids Proxy:", error);
-      return this.writeFallbackSvg(imageDir, id, prompt);
-    }
-  }
+			const image = result.data?.[0];
+			if (image?.b64_json) {
+				const filename = `${id}.png`;
+				const filePath = path.join(imageDir, filename);
+				await fs.writeFile(filePath, Buffer.from(image.b64_json, "base64"));
+				return { filename, filePath };
+			}
+			if (image?.url) {
+				let downloadUrl = image.url;
+				if (
+					isCustomProxy &&
+					downloadUrl.includes("ai-proxy.phongdang.io.vn/generate")
+				) {
+					downloadUrl = downloadUrl.replace(
+						"ai-proxy.phongdang.io.vn/generate",
+						"ai-proxy.phongdang.io.vn/image-for-kids/generate",
+					);
+					if (downloadUrl.startsWith("http://")) {
+						downloadUrl = downloadUrl.replace("http://", "https://");
+					}
+				}
 
-  getSystemPrompt() {
-    return imageStudioSystemPrompt;
-  }
+				const safeDownloadUrl = validateImageDownloadUrl(downloadUrl);
+				if (!safeDownloadUrl) throw new Error("download_url_not_allowed");
 
-  private async writeFallbackSvg(imageDir: string, id: string, prompt: string) {
-    const filename = `${id}.svg`;
-    const filePath = path.join(imageDir, filename);
-    const safePrompt = escapeXml(prompt).slice(0, 88);
-    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+				// Also send browser User-Agent when fetching the image to avoid Cloudflare 403 on download
+				const response = await fetch(safeDownloadUrl, {
+					headers: isCustomProxy
+						? {
+								"User-Agent":
+									"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+							}
+						: undefined,
+				});
+				if (!response.ok)
+					throw new Error(`download_failed: ${response.status}`);
+				const filename = `${id}.png`;
+				const filePath = path.join(imageDir, filename);
+				await fs.writeFile(filePath, Buffer.from(await response.arrayBuffer()));
+				return { filename, filePath };
+			}
+			return this.writeFallbackSvg(imageDir, id, prompt);
+		} catch (error) {
+			console.error("Lỗi tạo ảnh từ Kids Proxy:", error);
+			return this.writeFallbackSvg(imageDir, id, prompt);
+		}
+	}
+
+	getSystemPrompt() {
+		return imageStudioSystemPrompt;
+	}
+
+	private async writeFallbackSvg(imageDir: string, id: string, prompt: string) {
+		const filename = `${id}.svg`;
+		const filePath = path.join(imageDir, filename);
+		const safePrompt = escapeXml(prompt).slice(0, 88);
+		const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
 <rect width="1024" height="1024" fill="#FFF7ED"/>
 <circle cx="210" cy="190" r="96" fill="#5EEAD4"/>
 <circle cx="820" cy="230" r="120" fill="#FACC15"/>
@@ -155,33 +191,33 @@ export class ImageService {
 <text x="512" y="830" text-anchor="middle" font-family="Arial, sans-serif" font-size="34" fill="#1F2937">Hình minh họa AI an toàn</text>
 <text x="512" y="880" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" fill="#6B7280">${safePrompt}</text>
 </svg>`;
-    await fs.writeFile(filePath, svg, "utf8");
-    return { filename, filePath };
-  }
+		await fs.writeFile(filePath, svg, "utf8");
+		return { filename, filePath };
+	}
 }
 
 function escapeXml(value: string) {
-  return value
-    .replace(/[\u0000-\u001F\u007F]/g, " ")
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&apos;");
+	return value
+		.replace(/[\u0000-\u001F\u007F]/g, " ")
+		.replace(/&/g, "&amp;")
+		.replace(/</g, "&lt;")
+		.replace(/>/g, "&gt;")
+		.replace(/"/g, "&quot;")
+		.replace(/'/g, "&apos;");
 }
 
 function validateImageDownloadUrl(value: string) {
-  try {
-    const url = new URL(value);
-    if (url.protocol !== "https:") return null;
-    const host = url.hostname.toLowerCase();
-    if (host === "localhost" || host.endsWith(".local")) return null;
-    if (/^(127|10|0|169\.254|192\.168)\./.test(host)) return null;
-    if (/^172\.(1[6-9]|2\d|3[0-1])\./.test(host)) return null;
-    return url.toString();
-  } catch {
-    return null;
-  }
+	try {
+		const url = new URL(value);
+		if (url.protocol !== "https:") return null;
+		const host = url.hostname.toLowerCase();
+		if (host === "localhost" || host.endsWith(".local")) return null;
+		if (/^(127|10|0|169\.254|192\.168)\./.test(host)) return null;
+		if (/^172\.(1[6-9]|2\d|3[0-1])\./.test(host)) return null;
+		return url.toString();
+	} catch {
+		return null;
+	}
 }
 
 export const imageService = new ImageService();
