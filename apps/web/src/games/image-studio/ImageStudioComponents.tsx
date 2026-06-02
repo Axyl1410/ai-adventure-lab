@@ -1,11 +1,4 @@
-import {
-  BookOpen,
-  Check,
-  Download,
-  HelpCircle,
-  Sparkles,
-  Trash2,
-} from "lucide-react";
+import { BookOpen, Check, Download, HelpCircle, Trash2 } from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { TTSButton } from "../../components/TTSButton";

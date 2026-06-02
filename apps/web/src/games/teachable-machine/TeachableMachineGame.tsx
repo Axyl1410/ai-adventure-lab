@@ -1,22 +1,9 @@
 import * as tf from "@tensorflow/tfjs";
-import { AnimatePresence, motion } from "framer-motion";
-import {
-  BookOpen,
-  Camera,
-  Cpu,
-  HelpCircle,
-  Sparkles,
-  StopCircle,
-  Trash2,
-  X,
-} from "lucide-react";
+import { motion } from "framer-motion";
+import { BookOpen, Camera, Cpu, Sparkles, Trash2, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { BuddyBot } from "../../components/BuddyBot";
-import {
-  ConfettiSuccess,
-  HappyFeedback,
-  TryAgainFeedback,
-} from "../../components/Feedback";
+import { ConfettiSuccess } from "../../components/Feedback";
 import { GameShell } from "../../components/GameShell";
 import { TTSButton } from "../../components/TTSButton";
 import { useSession } from "../../hooks/useSession";

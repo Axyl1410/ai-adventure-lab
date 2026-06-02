@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Award, Check, ShieldCheck, Sparkles, Star, Wand2 } from "lucide-react";
+import { Check, ShieldCheck, Sparkles, Star, Wand2 } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { BadgeReward, LoadingBuddy } from "../../components/Feedback";
 import { GameShell } from "../../components/GameShell";

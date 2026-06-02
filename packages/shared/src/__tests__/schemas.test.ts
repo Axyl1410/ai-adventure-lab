@@ -3,7 +3,6 @@ import {
   chatSchema,
   imageGenerateSchema,
   progressSchema,
-  promptFeedbackSchema,
   sessionSchema,
   ttsSchema,
 } from "../schemas";

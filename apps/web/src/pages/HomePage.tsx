@@ -18,7 +18,6 @@ import {
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import detectiveBanner from "../assets/detective-banner.png";
-import buddyHero from "../assets/mascot/buddy-bot-hero.svg";
 import buddyReading from "../assets/mascot/buddy-bot-reading.png";
 import oopsBanner from "../assets/oops-banner.png";
 import robotLab from "../assets/robot-lab.png";

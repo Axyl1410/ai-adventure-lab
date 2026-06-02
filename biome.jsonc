@@ -1,22 +1,8 @@
 {
+  "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
   "extends": [
     "ultracite/biome/core",
     "ultracite/biome/react",
     "ultracite/biome/vitest"
-  ],
-  "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
-  "linter": {
-    "rules": {
-      // Tạm thời: mọi lint error → warning (sửa dần, không chặn CI/editor).
-      // Xóa block này hoặc đổi lại "error" khi codebase sạch hơn.
-      "a11y": "warn",
-      "complexity": "warn",
-      "correctness": "warn",
-      "nursery": "warn",
-      "performance": "warn",
-      "security": "warn",
-      "style": "warn",
-      "suspicious": "warn"
-    }
-  }
+  ]
 }

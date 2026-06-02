@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { Bot, Check, Cpu, HelpCircle } from "lucide-react";
+import { Bot, Cpu, HelpCircle } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import robotLab from "../../assets/robot-lab.png";
 import {
