@@ -21,29 +21,43 @@ export async function api<T>(path: string, init?: RequestInit): Promise<T> {
 	}
 	return response.json() as Promise<T>;
 }
+let activeSessionPromise: Promise<Session> | null = null;
 
 export async function getOrCreateSession() {
-	const existing = localStorage.getItem("ai-lab-session");
-	if (existing) {
-		try {
-			const parsed = JSON.parse(existing) as Session;
-			// Xác thực session ID có tồn tại trong SQLite hay không
-			const verified = await api<Session>(`/api/sessions/${parsed.id}`);
-			return verified;
-		} catch {
-			localStorage.removeItem("ai-lab-session");
-		}
+	if (activeSessionPromise) {
+		return activeSessionPromise;
 	}
-	const session = await api<Session>("/api/sessions", {
-		method: "POST",
-		body: JSON.stringify({
-			nickname: "Bạn nhỏ",
-			mode: "student",
-			ageGroup: "6-8",
-		}),
-	});
-	localStorage.setItem("ai-lab-session", JSON.stringify(session));
-	return session;
+
+	activeSessionPromise = (async () => {
+		const existing = localStorage.getItem("ai-lab-session");
+		if (existing) {
+			try {
+				const parsed = JSON.parse(existing) as Session;
+				// Xác thực session ID có tồn tại trong SQLite hay không
+				const verified = await api<Session>(`/api/sessions/${parsed.id}`);
+				return verified;
+			} catch {
+				localStorage.removeItem("ai-lab-session");
+			}
+		}
+		const session = await api<Session>("/api/sessions", {
+			method: "POST",
+			body: JSON.stringify({
+				nickname: "Bạn nhỏ",
+				mode: "student",
+				ageGroup: "6-8",
+			}),
+		});
+		localStorage.setItem("ai-lab-session", JSON.stringify(session));
+		return session;
+	})();
+
+	try {
+		return await activeSessionPromise;
+	} catch (error) {
+		activeSessionPromise = null; // Reset để thử lại nếu lỗi
+		throw error;
+	}
 }
 
 export async function saveProgress(

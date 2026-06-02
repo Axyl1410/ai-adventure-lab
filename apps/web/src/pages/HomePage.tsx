@@ -276,11 +276,9 @@ export function HomePage() {
 							<ShieldCheck className="mr-1 inline h-4 w-4 text-green-600" />
 							Học AI an toàn
 						</div>
-						<img
-							src={buddyHero}
-							alt="Buddy Bot chào mừng học sinh vào phòng thí nghiệm AI"
-							className="mx-auto h-[250px] w-full object-contain sm:h-[320px]"
-						/>
+						<div className="mx-auto flex h-[250px] sm:h-[320px] items-center justify-center">
+							<BuddyBot state="happy" size={240} />
+						</div>
 						<div className="absolute bottom-5 right-5 max-w-[230px] rounded-3xl bg-white/90 px-4 py-3 text-sm font-black leading-snug text-ink shadow-sm">
 							AI có thể sai. Mình cùng kiểm tra với thầy cô nhé!
 						</div>
@@ -289,17 +287,17 @@ export function HomePage() {
 			</section>
 
 			<section className="mt-6 grid gap-3 sm:grid-cols-3">
-				<div className="rounded-3xl border border-skyLab/20 bg-skyLab/15 px-4 py-3 font-bold text-ink">
-					<BookOpen className="mr-2 inline h-5 w-5 text-sky-600" />
-					Bài học ngắn, dễ hiểu cho học sinh tiểu học.
+				<div className="rounded-3xl border-2 border-skyLab bg-white px-4 py-3.5 font-bold text-ink shadow-sm flex items-center gap-2">
+					<BookOpen className="h-6 w-6 shrink-0 text-sky-600" />
+					<span>Bài học ngắn, dễ hiểu cho học sinh tiểu học.</span>
 				</div>
-				<div className="rounded-3xl border border-greenLab/25 bg-greenLab/15 px-4 py-3 font-bold text-ink">
-					<ShieldCheck className="mr-2 inline h-5 w-5 text-green-600" />
-					Không yêu cầu tên thật hay tài khoản cá nhân.
+				<div className="rounded-3xl border-2 border-greenLab bg-white px-4 py-3.5 font-bold text-ink shadow-sm flex items-center gap-2">
+					<ShieldCheck className="h-6 w-6 shrink-0 text-green-600" />
+					<span>Không yêu cầu tên thật hay tài khoản cá nhân.</span>
 				</div>
-				<div className="rounded-3xl border border-yellowLab/35 bg-yellowLab/20 px-4 py-3 font-bold text-ink">
-					<Star className="mr-2 inline h-5 w-5 text-orange-500" />
-					Hoàn thành thử thách để mở sticker Buddy Bot.
+				<div className="rounded-3xl border-2 border-yellowLab bg-white px-4 py-3.5 font-bold text-ink shadow-sm flex items-center gap-2">
+					<Star className="h-6 w-6 shrink-0 text-orange-500" />
+					<span>Hoàn thành thử thách để mở sticker Buddy Bot.</span>
 				</div>
 			</section>
 
@@ -325,7 +323,7 @@ export function HomePage() {
 						return (
 							<motion.article
 								key={card.title}
-								className="group overflow-hidden rounded-[2rem] border border-white/80 bg-white/90 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+								className="group overflow-hidden rounded-[2rem] border border-white bg-white shadow-md transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:border-purpleLab/35"
 								initial={{ opacity: 0, y: 18 }}
 								animate={{ opacity: 1, y: 0 }}
 								transition={{ duration: 0.35, delay: index * 0.04 }}
@@ -363,7 +361,7 @@ export function HomePage() {
 									</div>
 
 									<Link
-										className={`big-button flex w-full items-center justify-center gap-2 bg-gradient-to-r ${card.color} text-ink shadow-sm`}
+										className={`big-button flex w-full items-center justify-center gap-2 bg-gradient-to-r ${card.color} text-ink shadow-md hover:shadow-lg transition-all duration-300 font-black`}
 										to={card.to}
 									>
 										Bắt đầu{" "}

@@ -25,8 +25,8 @@ export function ImageStudioGame() {
 	const [theme, setTheme] = useState(themes[1]);
 	const [style, setStyle] = useState(styles[0]);
 	const [details, setDetails] = useState<ImageDetails>({
-		subject: "một robot thân thiện đang đọc sách",
-		setting: "lớp học cầu vồng",
+		subject: "một chú mèo con đeo ba lô",
+		setting: "trong lớp học cầu vồng",
 		colors: ["xanh da trời", "vàng"],
 		mood: "vui vẻ",
 		includeText: false,
@@ -188,7 +188,7 @@ export function ImageStudioGame() {
 									</motion.article>
 								) : loading ? (
 									<div className="flex flex-col items-center justify-center space-y-5 py-4 text-center">
-										<BuddyBot state="thinking" size={140} />
+										<BuddyBot state="artist" size={140} />
 										<div className="space-y-1.5 px-4">
 											<h3 className="text-xl font-black text-ink animate-pulse">
 												🎨 Đang tô vẽ tranh...
@@ -214,7 +214,7 @@ export function ImageStudioGame() {
 									</div>
 								) : (
 									<div className="flex flex-col items-center justify-center space-y-5 py-6 text-center px-4">
-										<BuddyBot state="happy" size={140} />
+										<BuddyBot state="artist" size={140} />
 										<div className="space-y-1.5">
 											<h3 className="text-lg font-black text-ink">
 												Bản thiết kế tranh của em

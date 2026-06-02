@@ -98,6 +98,10 @@ export class TtsService {
 				.replace(/\bGoogle\b/gi, "gu-gờ")
 				.replace(/\bT-rex\b/gi, "ti-rét")
 				.replace(/\bWebcam\b/gi, "uép-cam");
+
+			const controller = new AbortController();
+			const timeoutId = setTimeout(() => controller.abort(), 2500);
+
 			if (provider === "vitts" || provider === "openai") {
 				const url = `${baseUrl.replace(/\/$/, "")}/audio/speech`;
 				response = await fetch(url, {
@@ -110,6 +114,7 @@ export class TtsService {
 						response_format: ext === "wav" ? "wav" : ext,
 						speed: 1.0,
 					}),
+					signal: controller.signal,
 				});
 			} else {
 				const url = `${baseUrl.replace(/\/$/, "")}/tts`;
@@ -122,8 +127,11 @@ export class TtsService {
 						format: ext,
 						speed: 1.0,
 					}),
+					signal: controller.signal,
 				});
 			}
+
+			clearTimeout(timeoutId);
 
 			if (!response.ok) throw new Error("tts_failed");
 			await fs.writeFile(filePath, Buffer.from(await response.arrayBuffer()));

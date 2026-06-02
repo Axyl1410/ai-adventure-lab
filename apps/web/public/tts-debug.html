@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head><meta charset="UTF-8"><title>TTS Voice Debug</title></head>
+<body>
+<h2>Danh sách giọng đọc vi-VN</h2>
+<pre id="out">Đang tải...</pre>
+<script>
+function listVoices() {
+  const voices = window.speechSynthesis.getVoices();
+  const vi = voices.filter(v => v.lang.startsWith('vi') || v.name.toLowerCase().includes('vietnam'));
+  const all = voices.map((v, i) => `[${i}] ${v.name} | lang=${v.lang} | local=${v.localService}`).join('\n');
+  const viOnly = vi.map((v, i) => `[vi-${i}] ${v.name} | lang=${v.lang}`).join('\n');
+  document.getElementById('out').textContent = 
+    '=== ALL VOICES ===\n' + all + 
+    '\n\n=== VI-VN VOICES ===\n' + (viOnly || '(không có)');
+}
+window.speechSynthesis.onvoiceschanged = listVoices;
+listVoices();
+setTimeout(listVoices, 500);
+setTimeout(listVoices, 1500);
+</script>
+</body>
+</html>

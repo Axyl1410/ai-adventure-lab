@@ -4,8 +4,9 @@ import buddyBotWarning from "../assets/mascot/buddy-bot-warning.png";
 import buddyBotCelebrating from "../assets/mascot/buddy-bot-celebrating.png";
 import buddyBotThinking from "../assets/mascot/buddy-bot-thinking.png";
 import buddyBotReading from "../assets/mascot/buddy-bot-reading.png";
+import buddyBotArtist from "../assets/mascot/buddy-bot-artist.svg";
 
-type BotState = "happy" | "thinking" | "celebrating" | "warning" | "reading";
+type BotState = "happy" | "thinking" | "celebrating" | "warning" | "reading" | "artist";
 
 const mascotImages: Record<BotState, string> = {
 	happy: buddyBotHappy,
@@ -13,6 +14,7 @@ const mascotImages: Record<BotState, string> = {
 	celebrating: buddyBotCelebrating,
 	warning: buddyBotWarning,
 	reading: buddyBotReading,
+	artist: buddyBotArtist,
 };
 
 export function BuddyBot({
