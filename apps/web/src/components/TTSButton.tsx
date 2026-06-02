@@ -49,8 +49,8 @@ export function TTSButton({
       return;
     }
 
-    // Lần đầu vào màn hình: xếp hàng tuần tự (hướng dẫn rồi câu hỏi).
-    // Khi text đổi (câu mới): hủy các câu đang chờ, chỉ đọc nội dung mới.
+    // First visit: queue TTS sequentially (instruction, then question).
+    // When text changes: drop pending items and read the new content only.
     const replacePending = hasAutoplayedRef.current;
     hasAutoplayedRef.current = true;
 

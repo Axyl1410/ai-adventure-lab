@@ -26,7 +26,7 @@ export class TtsService {
     const cacheDir = path.join(uploadRoot, "tts-cache");
     await fs.mkdir(cacheDir, { recursive: true });
 
-    // Các câu hướng dẫn trò chơi lặp đi lặp lại được tối ưu hóa tĩnh
+    // Frequently repeated game instructions use static cache files
     const staticPhrases: Record<string, string> = {
       "Đọc thẻ tình huống rồi chọn Có AI hoặc Không AI.":
         "instruction-ai-detective",
@@ -62,7 +62,7 @@ export class TtsService {
         await fs.access(staticPath);
         return { ok: true, audioUrl: `/api/uploads/tts-cache/${staticName}` };
       } catch {
-        // Nếu file tĩnh chưa được lưu, ta sẽ dùng luồng bình thường để tải và đổi tên lưu làm file tĩnh mãi mãi
+        // If the static file is missing, generate via the normal flow and save it permanently
         filename = staticName;
         filePath = staticPath;
       }

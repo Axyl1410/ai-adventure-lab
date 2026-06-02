@@ -1,0 +1,14 @@
+---
+description: pnpm 11, lefthook, Biome/Ultracite, git hooks
+globs: "{package.json,pnpm-workspace.yaml,lefthook.yml,biome.jsonc,scripts/**}"
+alwaysApply: false
+---
+
+# Tooling
+
+- pnpm 11 blocks install scripts unless listed in `pnpm-workspace.yaml` → `allowBuilds`.
+- After adding deps with postinstall (prisma, esbuild, lefthook, …): set `allowBuilds` then `pnpm install`.
+- Lint/format: `pnpm check`, `pnpm fix` (Ultracite → Biome).
+- Git hooks: `prepare` runs `node scripts/install-git-hooks.mjs` — **not** raw `lefthook install` (breaks on paths with spaces like `Archive (2)`).
+- Pre-commit is non-blocking: `pnpm fix || true` in `lefthook.yml`.
+- Skip hooks: `git commit --no-verify` or `LEFTHOOK=0`.

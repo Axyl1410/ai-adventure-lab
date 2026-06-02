@@ -37,7 +37,7 @@ export function Layout() {
 
     return () => {
       bgm.pause();
-      // FIX: cleanup event listener để tránh memory leak
+      // FIX: remove event listener on cleanup to avoid memory leak
       if (playBgm) {
         window.removeEventListener("click", playBgm);
       }

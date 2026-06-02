@@ -162,7 +162,7 @@ export function BuddyBotGame() {
       window.history.replaceState({}, document.title);
       void send(prompt);
     }
-    // send thay đổi mỗi render nhưng processedStory.current đảm bảo chỉ chạy 1 lần
+    // send changes each render but processedStory.current ensures this runs once
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [session, location.state, send]);
 

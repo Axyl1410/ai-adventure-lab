@@ -76,8 +76,8 @@ export function PromptMagicGame() {
   const selectBlock = (key: string, option: string) => {
     setSelected({ ...selected, [key]: option });
     setSparkle(true);
-    // Reset sparkle sau khi animation kết thúc
-    // FIX: không trả về cleanup (vì caller không dùng), dùng useRef để tránh timer leak
+    // Reset sparkle after the animation ends
+    // FIX: caller ignores cleanup return; useRef avoids timer leaks
     setTimeout(() => setSparkle(false), 600);
   };
 

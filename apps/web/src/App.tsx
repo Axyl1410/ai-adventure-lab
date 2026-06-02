@@ -5,8 +5,8 @@ import { ErrorBoundary } from "./components/ErrorBoundary";
 import { Layout } from "./components/Layout";
 import { HomePage } from "./pages/HomePage";
 
-// Lazy-load mỗi game để tách chunk, giảm bundle load lúc đầu
-// tfjs chỉ load khi user vào TeachableMachineGame
+// Lazy-load each game into its own chunk to shrink the initial bundle.
+// tfjs loads only when the user opens TeachableMachineGame.
 const AiDetectiveGame = lazy(() =>
   import("./games/ai-detective/AiDetectiveGame").then((m) => ({
     default: m.AiDetectiveGame,
@@ -94,7 +94,7 @@ export default function App() {
       <Route element={<Layout />}>
         <Route element={<HomePage />} path="/" />
 
-        {/* Mỗi game được bọc ErrorBoundary riêng để lỗi 1 game không crash toàn app */}
+        {/* Each game gets its own ErrorBoundary so one failure does not crash the app */}
         <Route
           element={
             <ErrorBoundary>

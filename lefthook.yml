@@ -1,5 +1,6 @@
 pre-commit:
   jobs:
+    # Auto-fix staged files; do not block commit on lint/format errors (remove || true when strict again).
     - run: pnpm dlx ultracite fix || true
       glob:
         - "**/*.js"

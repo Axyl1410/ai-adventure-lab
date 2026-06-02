@@ -1,0 +1,15 @@
+---
+description: Express API, Prisma, OpenAI, safety
+globs: apps/api/**/*.ts
+alwaysApply: false
+---
+
+# API backend
+
+- Validate inputs with Zod; shared schemas in `packages/shared`.
+- Run `safety.service.ts` before chat, prompt feedback, TTS, and image generation.
+- OpenAI and TTS calls stay in `apps/api/src/services/` — never in web.
+- Wrap async route handlers with `ah()` in `routes/index.ts`.
+- Prisma: `import { PrismaClient } from "@prisma/client"`.
+- New routes: rate limits where appropriate; teacher routes use `requireTeacher`.
+- Child-safe errors: friendly Vietnamese messages, no stack traces to clients.

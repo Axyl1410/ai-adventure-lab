@@ -143,7 +143,7 @@ export function ImageDetailBuilder({
 
   return (
     <div className="grid gap-5 rounded-3xl border border-white/50 bg-white/40 p-4 shadow-inner">
-      {/* Vẽ ai hoặc cái gì? */}
+      {/* What to draw (subject) */}
       <div className="space-y-2">
         <div className="flex items-center justify-between">
           <label className="ml-1 font-black text-muted text-sm">
@@ -190,7 +190,7 @@ export function ImageDetailBuilder({
         )}
       </div>
 
-      {/* Ở đâu? (Bối cảnh) */}
+      {/* Where (setting) */}
       <div className="space-y-2">
         <div className="flex items-center justify-between">
           <label className="ml-1 font-black text-muted text-sm">

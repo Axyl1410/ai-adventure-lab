@@ -17,7 +17,7 @@ export default defineConfig({
     },
   },
   build: {
-    // tfjs (~1.5MB) là giới hạn tự nhiên của thư viện — chỉ load khi vào Teachable Machine
+    // tfjs (~1.5MB) is the library's natural size — only loaded for Teachable Machine
     chunkSizeWarningLimit: 1600,
     rollupOptions: {
       output: {

@@ -1,0 +1,15 @@
+---
+description: React games, UI, TTS, accessibility
+globs: apps/web/**/*.{ts,tsx}
+alwaysApply: false
+---
+
+# Web frontend
+
+- New games: lazy-load in `App.tsx`, `ErrorBoundary`, `GameShell`, route under `/games/`.
+- Game modules live in `apps/web/src/games/<name>/`.
+- Use shared components: `BuddyBot`, `TTSButton`, `Feedback`, theme tokens from Tailwind config.
+- TTS: use `playTts()` from `lib/ttsPlayer.ts` — do not fire parallel speak requests.
+- Teachable Machine / webcam: browser-only; no upload of camera frames to API.
+- Buttons min ~48px; avoid flashing animations; keyboard/aria labels on interactive controls.
+- Student-facing strings in Vietnamese; keep sentences short.

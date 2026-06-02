@@ -127,7 +127,7 @@ export function TeachRobotGame() {
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [trained, setTrained] = useState(false);
   const [training, setTraining] = useState(false);
-  // FIX: useState phải ở top-level, không được đặt sau early return
+  // FIX: useState must stay at top level, not after early return
   const [index, setIndex] = useState(0);
 
   const mountedRef = useRef(true);
@@ -138,7 +138,7 @@ export function TeachRobotGame() {
     };
   }, []);
 
-  // Reset index khi đổi level
+  // Reset index when the level changes
   useEffect(() => {
     setIndex(0);
     setAnswers({});

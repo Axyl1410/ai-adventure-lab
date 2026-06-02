@@ -33,7 +33,7 @@ export async function getOrCreateSession() {
     if (existing) {
       try {
         const parsed = JSON.parse(existing) as Session;
-        // Xác thực session ID có tồn tại trong SQLite hay không
+        // Verify the session ID exists in SQLite
         const verified = await api<Session>(`/api/sessions/${parsed.id}`);
         return verified;
       } catch {
@@ -55,7 +55,7 @@ export async function getOrCreateSession() {
   try {
     return await activeSessionPromise;
   } catch (error) {
-    activeSessionPromise = null; // Reset để thử lại nếu lỗi
+    activeSessionPromise = null; // Reset so a failed attempt can retry
     throw error;
   }
 }

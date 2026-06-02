@@ -1,0 +1,14 @@
+---
+description: AI Adventure Lab core conventions (always apply)
+alwaysApply: true
+---
+
+# AI Adventure Lab — core
+
+- Read `AGENTS.md` for product scope, games, and safety.
+- Use **pnpm** (`pnpm dev`, `pnpm build`), not npm.
+- **UI copy:** Vietnamese for students/teachers. **Code comments:** English.
+- Never commit `.env` or expose `OPENAI_API_KEY` in `apps/web`.
+- Minimize diff scope; match existing patterns in neighboring files.
+- Do not collect real child PII (names, schools, addresses, phone, email, photos).
+- Project skill: `.cursor/skills/ai-adventure-lab/SKILL.md` for repo-specific setup.

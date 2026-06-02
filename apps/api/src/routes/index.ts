@@ -29,7 +29,7 @@ import { aiDetectiveQuestions, games, oopsQuestions } from "./gameData";
 
 export const routes = Router();
 
-// Bọc async handler để Express 4 tự động catch lỗi và chuyển sang error middleware
+// Wrap async handlers so Express 4 forwards errors to error middleware
 function ah(
   fn: (req: Request, res: Response, next: NextFunction) => Promise<unknown>
 ): RequestHandler {

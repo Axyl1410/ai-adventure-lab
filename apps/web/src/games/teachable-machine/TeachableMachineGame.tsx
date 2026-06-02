@@ -151,7 +151,7 @@ export function TeachableMachineGame() {
   });
 
   // Stop camera and prediction loops on unmount
-  // FIX: dùng refs để cleanup tránh stale closure, không cần stopCamera trong deps
+  // FIX: use refs for cleanup to avoid stale closures; stopCamera is not needed in deps
   useEffect(() => {
     return () => {
       if (predictIntervalRef.current) {
@@ -328,7 +328,7 @@ export function TeachableMachineGame() {
           "🎉 Học xong rồi! Robot đang dự đoán trực tiếp từ camera của em!"
         );
 
-        // FIX: sticker id phải khớp với STICKERS array trong HomePage (dùng "robot" cho ML games)
+        // FIX: sticker id must match STICKERS on HomePage ("robot" for ML games)
         unlockSticker("robot");
         if (session) {
           void saveProgress(session.id, "teachable-machine", 1, 1);

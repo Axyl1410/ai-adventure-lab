@@ -82,7 +82,7 @@ export function ImageStudioGame() {
         JSON.stringify(updatedGallery)
       );
 
-      // Unlock "Họa sĩ AI" sticker (dùng unlockSticker để dispatch event cho Sổ Sticker)
+      // Unlock the "Họa sĩ AI" sticker (unlockSticker notifies the sticker album UI)
       unlockSticker("artist");
 
       // Auto-scroll to result
