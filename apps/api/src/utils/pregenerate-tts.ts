@@ -1,8 +1,7 @@
-import path from "node:path";
 import dotenv from "dotenv";
 
 // Load env variables
-dotenv.config({ path: path.resolve(import.meta.dirname, "../../../../.env") });
+dotenv.config();
 
 import process from "node:process";
 import { ttsService } from "../services/tts.service";

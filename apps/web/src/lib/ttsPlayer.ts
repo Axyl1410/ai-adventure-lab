@@ -2,12 +2,12 @@ import { speak as apiSpeak } from "./api";
 
 export type TtsPlayState = "idle" | "loading" | "playing";
 
-type QueueItem = {
-  text: string;
+interface QueueItem {
+  reject: (error: unknown) => void;
   replacePending: boolean;
   resolve: () => void;
-  reject: (error: unknown) => void;
-};
+  text: string;
+}
 
 type StateListener = (state: TtsPlayState, activeText: string | null) => void;
 
@@ -97,7 +97,7 @@ async function checkBackend(): Promise<boolean> {
     return backendAvailable;
   }
   if (backendCheckPromise) {
-    return backendCheckPromise;
+    return await backendCheckPromise;
   }
 
   backendCheckPromise = (async () => {
@@ -392,7 +392,7 @@ async function drainQueue() {
   } finally {
     workerRunning = false;
     if (queue.length > 0) {
-      void drainQueue();
+      drainQueue();
     }
   }
 }
@@ -419,7 +419,7 @@ export function playTts(
       resolve,
       reject,
     });
-    void drainQueue();
+    drainQueue();
   });
 }
 

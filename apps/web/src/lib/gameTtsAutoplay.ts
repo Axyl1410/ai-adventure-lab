@@ -78,11 +78,11 @@ export function scheduleGameContentAutoplay(
   }
 
   const play = () => {
-    void playTts(text.trim(), { replacePending: replace });
+    playTts(text.trim(), { replacePending: replace });
   };
 
   if (instructionPromise && !instructionDone) {
-    void instructionPromise.then(play).catch(play);
+    instructionPromise.then(play).catch(play);
     return;
   }
 

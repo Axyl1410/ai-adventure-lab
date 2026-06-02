@@ -67,14 +67,14 @@ export async function saveProgress(
   maxScore: number,
   metadata = {}
 ) {
-  return api("/api/progress", {
+  return await api("/api/progress", {
     method: "POST",
     body: JSON.stringify({ sessionId, gameKey, score, maxScore, metadata }),
   });
 }
 
 export async function loadGames() {
-  return api<{
+  return await api<{
     games: GameCard[];
     data: { aiDetectiveQuestions: AiQuestion[]; oopsQuestions: OopsQuestion[] };
   }>("/api/games");
@@ -93,24 +93,27 @@ export interface OopsQuestion {
 }
 
 export async function askBuddy(sessionId: string, message: string) {
-  return api<{ answer: string }>("/api/ai/chat", {
+  return await api<{ answer: string }>("/api/ai/chat", {
     method: "POST",
     body: JSON.stringify({ sessionId, message, ageGroup: "6-8" }),
   });
 }
 
 export async function promptFeedback(sessionId: string, prompt: string) {
-  return api<PromptCoachResult>("/api/ai/prompt-feedback", {
+  return await api<PromptCoachResult>("/api/ai/prompt-feedback", {
     method: "POST",
     body: JSON.stringify({ sessionId, prompt, ageGroup: "6-8" }),
   });
 }
 
 export async function speak(text: string, voice?: string) {
-  return api<{ ok: boolean; audioUrl?: string; message?: string }>("/api/tts", {
-    method: "POST",
-    body: JSON.stringify({ text, voice }),
-  });
+  return await api<{ ok: boolean; audioUrl?: string; message?: string }>(
+    "/api/tts",
+    {
+      method: "POST",
+      body: JSON.stringify({ text, voice }),
+    }
+  );
 }
 
 export function unlockSticker(stickerId: string) {
@@ -119,7 +122,9 @@ export function unlockSticker(stickerId: string) {
   if (saved) {
     try {
       unlocked = JSON.parse(saved);
-    } catch {}
+    } catch {
+      // ignore
+    }
   }
   if (!unlocked.includes(stickerId)) {
     unlocked.push(stickerId);

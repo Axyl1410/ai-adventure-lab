@@ -1,3 +1,5 @@
+/** biome-ignore-all lint/suspicious/noExplicitAny: <explanation> */
+/** biome-ignore-all lint/performance/useTopLevelRegex: <explanation> */
 import fs from "node:fs/promises";
 import path from "node:path";
 import {
@@ -311,7 +313,7 @@ routes.get(
       orderBy: { updatedAt: "desc" },
     });
     res.json({
-      activities: activities.map((activity) => ({
+      activities: activities.map((activity: { config: string }) => ({
         ...activity,
         config: parseJson(activity.config),
       })),
@@ -399,18 +401,26 @@ routes.get(
     });
     const csv = [
       "sessionId,nickname,ageGroup,gameKey,score,maxScore,createdAt",
-      ...rows.map((row) =>
-        [
-          row.sessionId,
-          row.session.nickname,
-          row.session.ageGroup,
-          row.gameKey,
-          row.score,
-          row.maxScore,
-          row.createdAt.toISOString(),
-        ]
-          .map((value) => safeCsv(String(value)))
-          .join(",")
+      ...rows.map(
+        (row: {
+          sessionId: any;
+          session: { nickname: any; ageGroup: any };
+          gameKey: any;
+          score: any;
+          maxScore: any;
+          createdAt: { toISOString: () => any };
+        }) =>
+          [
+            row.sessionId,
+            row.session.nickname,
+            row.session.ageGroup,
+            row.gameKey,
+            row.score,
+            row.maxScore,
+            row.createdAt.toISOString(),
+          ]
+            .map((value) => safeCsv(String(value)))
+            .join(",")
       ),
     ].join("\n");
     res.setHeader("content-type", "text/csv; charset=utf-8");
@@ -427,7 +437,7 @@ routes.get(
       take: 100,
     });
     res.json({
-      images: images.map((image) => ({
+      images: images.map((image: { filePath: string }) => ({
         ...image,
         imageUrl: imageUrlFromPath(image.filePath),
       })),
