@@ -174,8 +174,8 @@ export function PromptMagicGame() {
                     <button
                       className={`big-button flex w-full items-center justify-center gap-2 border-2 px-4 py-3 font-bold text-sm transition-all duration-300 hover:scale-[1.03] hover:shadow-md sm:w-auto sm:px-5 sm:text-base ${
                         isSelected
-                          ? "scale-[1.03] border-yellowLab/60 bg-yellowLab font-black text-ink shadow-md"
-                          : "border-white/60 bg-white/90 text-ink hover:bg-white"
+                          ? "scale-[1.03] border-yellowLab bg-yellowLab font-black text-ink shadow-md ring-2 ring-yellowLab/40"
+                          : "border-skyLab/35 bg-cream/90 text-ink shadow-sm hover:border-skyLab/55 hover:bg-white"
                       }`}
                       key={option}
                       onClick={() => selectBlock(key, option)}

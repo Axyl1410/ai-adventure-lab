@@ -276,6 +276,7 @@ export function TeachRobotGame() {
                   </h2>
                   <TTSButton
                     autoPlay={true}
+                    autoPlayRole="content"
                     compact={true}
                     text={
                       current.label +

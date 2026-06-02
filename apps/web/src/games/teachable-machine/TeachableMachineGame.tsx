@@ -587,7 +587,12 @@ export function TeachableMachineGame() {
                 {status}
               </p>
               <div className="absolute right-2 bottom-2">
-                <TTSButton autoPlay={true} compact={true} text={status} />
+                <TTSButton
+                  autoPlay={true}
+                  autoPlayRole="content"
+                  compact={true}
+                  text={status}
+                />
               </div>
             </div>
           </div>

@@ -311,7 +311,12 @@ export function AiDetectiveGame() {
                 <p className="font-black text-2xl text-ink leading-relaxed md:text-3xl">
                   "{current.text}"
                 </p>
-                <TTSButton autoPlay={true} compact={true} text={current.text} />
+                <TTSButton
+                  autoPlay={true}
+                  autoPlayRole="content"
+                  compact={true}
+                  text={current.text}
+                />
               </div>
               {feedback ? (
                 <div className="space-y-5">

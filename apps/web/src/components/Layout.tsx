@@ -1,6 +1,7 @@
 import { Bot, Music, ShieldCheck, Volume2, VolumeX } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link, Outlet, useLocation } from "react-router-dom";
+import { stopAllTts } from "../lib/stopAllTts";
 
 export function Layout() {
   const location = useLocation();
@@ -9,6 +10,10 @@ export function Layout() {
   const [voiceGender, setVoiceGender] = useState<"female" | "male">("female");
   const [bgmEnabled, setBgmEnabled] = useState(false);
   const [audio, setAudio] = useState<HTMLAudioElement | null>(null);
+
+  useEffect(() => {
+    stopAllTts();
+  }, [location.pathname]);
 
   useEffect(() => {
     const savedVoice = localStorage.getItem("ai-lab-tts-gender");
@@ -128,7 +133,7 @@ export function Layout() {
             </span>
             <div className="min-w-0">
               <span className="block truncate font-black text-ink text-lg tracking-tight sm:text-2xl">
-                {isGamePage ? "AI Lab" : "Phòng Thí Nghiệm AI"}
+                Phòng Thí Nghiệm AI
               </span>
               <span className="-mt-0.5 hidden font-bold text-muted text-xs sm:block">
                 🌈 Rainbow Robot Classroom

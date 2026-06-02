@@ -170,7 +170,12 @@ export function DataSorterGame() {
                 <p className="font-black text-2xl text-ink leading-relaxed">
                   {current.text}
                 </p>
-                <TTSButton autoPlay={true} compact={true} text={current.text} />
+                <TTSButton
+                  autoPlay={true}
+                  autoPlayRole="content"
+                  compact={true}
+                  text={current.text}
+                />
               </div>
 
               {feedback ? (

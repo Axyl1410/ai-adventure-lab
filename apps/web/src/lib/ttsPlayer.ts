@@ -52,7 +52,29 @@ export function resetTtsBackendCache() {
   backendCheckPromise = null;
 }
 
+/** Rejects in-flight waitForAudioReady / playUntilEnd so drainQueue cannot hang. */
+let pendingAudioReject: ((reason: Error) => void) | null = null;
+let pendingSpeechReject: ((reason: Error) => void) | null = null;
+
+function rejectPendingAudio(reason: Error) {
+  if (pendingAudioReject) {
+    const reject = pendingAudioReject;
+    pendingAudioReject = null;
+    reject(reason);
+  }
+}
+
+function rejectPendingSpeech(reason: Error) {
+  if (pendingSpeechReject) {
+    const reject = pendingSpeechReject;
+    pendingSpeechReject = null;
+    reject(reason);
+  }
+}
+
 function cancelPlayback() {
+  rejectPendingAudio(new Error("cancelled"));
+  rejectPendingSpeech(new Error("cancelled"));
   if (activeAudio) {
     activeAudio.pause();
     activeAudio.onended = null;
@@ -174,27 +196,28 @@ function waitForAudioReady(
       return;
     }
 
-    const cleanup = () => {
+    const finish = (error?: Error) => {
+      pendingAudioReject = null;
       audio.removeEventListener("canplaythrough", onReady);
       audio.removeEventListener("error", onError);
-    };
-
-    const onReady = () => {
-      cleanup();
       if (token !== cancelToken) {
         reject(new Error("cancelled"));
         return;
       }
-      resolve();
+      if (error) {
+        reject(error);
+      } else {
+        resolve();
+      }
     };
 
-    const onError = () => {
-      cleanup();
-      reject(new Error("load_failed"));
-    };
+    pendingAudioReject = (reason) => finish(reason);
+
+    const onReady = () => finish();
+    const onError = () => finish(new Error("load_failed"));
 
     if (audio.readyState >= HTMLMediaElement.HAVE_ENOUGH_DATA) {
-      resolve();
+      finish();
       return;
     }
 
@@ -211,19 +234,33 @@ function playUntilEnd(audio: HTMLAudioElement, token: number): Promise<void> {
       return;
     }
 
-    audio.onended = () => {
+    const finish = (error?: Error) => {
+      pendingAudioReject = null;
+      audio.onended = null;
+      audio.onerror = null;
+      if (token !== cancelToken) {
+        reject(new Error("cancelled"));
+        return;
+      }
       if (token === cancelToken && activeAudio === audio) {
         activeAudio = null;
+      }
+      if (error) {
+        reject(error);
+      } else {
         resolve();
       }
     };
-    audio.onerror = () => {
-      if (token === cancelToken) {
-        reject(new Error("play_failed"));
-      }
-    };
 
-    audio.play().catch(reject);
+    pendingAudioReject = (reason) => finish(reason);
+
+    audio.onended = () => finish();
+    audio.onerror = () => finish(new Error("play_failed"));
+    audio
+      .play()
+      .catch((err) =>
+        finish(err instanceof Error ? err : new Error("play_failed"))
+      );
   });
 }
 
@@ -258,16 +295,23 @@ async function speakWithBrowser(text: string, token: number): Promise<void> {
       return;
     }
 
-    utter.onend = () => {
-      if (token === cancelToken) {
+    const finish = (error?: Error) => {
+      pendingSpeechReject = null;
+      if (token !== cancelToken) {
+        reject(new Error("cancelled"));
+        return;
+      }
+      if (error) {
+        reject(error);
+      } else {
         resolve();
       }
     };
-    utter.onerror = () => {
-      if (token === cancelToken) {
-        reject(new Error("speech_failed"));
-      }
-    };
+
+    pendingSpeechReject = (reason) => finish(reason);
+
+    utter.onend = () => finish();
+    utter.onerror = () => finish(new Error("speech_failed"));
 
     window.speechSynthesis.speak(utter);
   });
@@ -319,6 +363,7 @@ async function drainQueue() {
     return;
   }
   workerRunning = true;
+  const drainToken = cancelToken;
 
   try {
     while (queue.length > 0) {
@@ -336,16 +381,14 @@ async function drainQueue() {
           item.reject(new Error("cancelled"));
         }
       } catch (error) {
-        if (token === cancelToken) {
-          item.reject(error);
-        } else {
-          item.reject(new Error("cancelled"));
-        }
+        item.reject(token === cancelToken ? error : new Error("cancelled"));
       }
     }
 
-    cancelPlayback();
-    setState("idle", null);
+    if (cancelToken === drainToken) {
+      cancelPlayback();
+      setState("idle", null);
+    }
   } finally {
     workerRunning = false;
     if (queue.length > 0) {
@@ -385,7 +428,10 @@ export function stopTts() {
   cancelPlayback();
   rejectQueuedItems(new Error("stopped"));
   setState("idle", null);
-  workerRunning = false;
+}
+
+export function getTtsPlayState(): TtsPlayState {
+  return playState;
 }
 
 export function isTtsPlayingText(text: string) {

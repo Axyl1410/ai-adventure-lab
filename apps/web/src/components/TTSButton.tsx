@@ -1,25 +1,41 @@
 import { Loader2, Volume2 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import { useGameTtsKey } from "../context/GameTtsContext";
 import {
+  interruptTtsOnTabChange,
+  isTtsAutoplayEnabled,
+  scheduleGameContentAutoplay,
+  scheduleGameInstructionAutoplay,
+} from "../lib/gameTtsAutoplay";
+import { stopAllTts } from "../lib/stopAllTts";
+import {
+  getTtsPlayState,
   isTtsLoadingText,
   isTtsPlayingText,
   playTts,
   resetTtsBackendCache,
-  stopTts,
   subscribeTtsState,
 } from "../lib/ttsPlayer";
+
+export type TtsAutoPlayRole = "instruction" | "content" | "immediate";
 
 export function TTSButton({
   text,
   compact,
   autoPlay,
+  autoPlayRole = "immediate",
 }: {
   text: string;
   compact?: boolean;
   autoPlay?: boolean;
+  /** instruction: once per game visit; content: after instruction; immediate: on its own */
+  autoPlayRole?: TtsAutoPlayRole;
 }) {
+  const gameKey = useGameTtsKey();
   const [isPlaying, setIsPlaying] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const contentAutoplayedRef = useRef(false);
+  const immediateAutoplayedRef = useRef(false);
 
   useEffect(() => {
     const sync = () => {
@@ -40,33 +56,44 @@ export function TTSButton({
       window.removeEventListener("tts-gender-changed", onGenderChange);
   }, []);
 
-  const hasAutoplayedRef = useRef(false);
-
   useEffect(() => {
-    const autoplayEnabled =
-      localStorage.getItem("ai-lab-tts-autoplay") === "true";
-    if (!(autoPlay && autoplayEnabled && text.trim())) {
+    if (!(autoPlay && isTtsAutoplayEnabled() && text.trim())) {
       return;
     }
 
-    // First visit: queue TTS sequentially (instruction, then question).
-    // When text changes: drop pending items and read the new content only.
-    const replacePending = hasAutoplayedRef.current;
-    hasAutoplayedRef.current = true;
+    const timer = setTimeout(
+      () => {
+        if (autoPlayRole === "instruction" && gameKey) {
+          scheduleGameInstructionAutoplay(gameKey, text);
+          return;
+        }
+        if (autoPlayRole === "content") {
+          scheduleGameContentAutoplay(text, contentAutoplayedRef.current);
+          contentAutoplayedRef.current = true;
+          return;
+        }
+        void playTts(text, { replacePending: immediateAutoplayedRef.current });
+        immediateAutoplayedRef.current = true;
+      },
+      autoPlayRole === "content" ? 550 : 500
+    );
 
-    const timer = setTimeout(() => {
-      void playTts(text, { replacePending });
-    }, 500);
-
-    return () => clearTimeout(timer);
-  }, [text, autoPlay]);
+    return () => {
+      clearTimeout(timer);
+      interruptTtsOnTabChange();
+    };
+  }, [text, autoPlay, autoPlayRole, gameKey]);
 
   const onSpeak = () => {
     if (isPlaying || isLoading) {
-      stopTts();
+      stopAllTts();
       return;
     }
-    void playTts(text);
+    const busyElsewhere = getTtsPlayState() !== "idle";
+    if (busyElsewhere) {
+      stopAllTts();
+    }
+    void playTts(text, { replacePending: busyElsewhere });
   };
 
   return (
@@ -77,7 +104,6 @@ export function TTSButton({
           ? `grid h-11 w-11 shrink-0 place-items-center rounded-full text-white shadow-sm transition-all hover:scale-105 active:scale-100 ${isPlaying ? "bg-pinkLab" : "bg-skyLab"}`
           : `big-button text-white transition-all ${isPlaying ? "bg-pinkLab" : "bg-skyLab"}`
       }
-      disabled={isLoading}
       onClick={onSpeak}
       type="button"
     >

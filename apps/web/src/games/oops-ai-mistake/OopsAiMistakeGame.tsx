@@ -303,6 +303,7 @@ export function OopsAiMistakeGame() {
                   </p>
                   <TTSButton
                     autoPlay={true}
+                    autoPlayRole="content"
                     compact={true}
                     text={current.text}
                   />

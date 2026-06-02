@@ -18,7 +18,12 @@ export function HappyFeedback({ text }: { text: string }) {
         </p>
       </div>
       <div className="flex-shrink-0">
-        <TTSButton autoPlay={true} compact={true} text={text} />
+        <TTSButton
+          autoPlay={true}
+          autoPlayRole="immediate"
+          compact={true}
+          text={text}
+        />
       </div>
     </div>
   );
@@ -40,7 +45,12 @@ export function TryAgainFeedback({ text }: { text: string }) {
         </p>
       </div>
       <div className="flex-shrink-0">
-        <TTSButton autoPlay={true} compact={true} text={text} />
+        <TTSButton
+          autoPlay={true}
+          autoPlayRole="immediate"
+          compact={true}
+          text={text}
+        />
       </div>
     </div>
   );
@@ -62,7 +72,12 @@ export function SafetyRedirect({ text }: { text: string }) {
         </p>
       </div>
       <div className="flex-shrink-0">
-        <TTSButton autoPlay={true} compact={true} text={text} />
+        <TTSButton
+          autoPlay={true}
+          autoPlayRole="immediate"
+          compact={true}
+          text={text}
+        />
       </div>
     </div>
   );
