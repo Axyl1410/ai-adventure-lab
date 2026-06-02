@@ -1,8 +1,8 @@
 import type { HTMLAttributes } from "react";
 
 export function Card({
-	className = "",
-	...props
+  className = "",
+  ...props
 }: HTMLAttributes<HTMLDivElement>) {
-	return <div className={`lab-card ${className}`} {...props} />;
+  return <div className={`lab-card ${className}`} {...props} />;
 }

@@ -6,10 +6,10 @@ export const progressParamSchema = z.object({ sessionId: z.string().min(1) });
 export const imageParamSchema = z.object({ imageId: z.string().min(1) });
 
 export const explainSchema = z.object({
-	sessionId: z.string().min(1),
-	topic: z.string().trim().min(1).max(500),
+  sessionId: z.string().min(1),
+  topic: z.string().trim().min(1).max(500),
 });
 
 export const teacherPasscodeSchema = z.object({
-	passcode: z.string().min(1),
+  passcode: z.string().min(1),
 });

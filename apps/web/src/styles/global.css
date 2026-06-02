@@ -16,7 +16,9 @@
   --color-white: #ffffff;
   --color-ink: #1f2937;
   --color-muted: #6b7280;
-  font-family: Inter, Nunito, Quicksand, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family:
+    Inter, Nunito, Quicksand, ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
 html {
@@ -30,9 +32,13 @@ body {
   min-height: 100vh;
   min-height: 100dvh;
   color: var(--color-ink);
-  background-image: 
-    linear-gradient(to bottom, rgba(255, 247, 237, 0.85), rgba(255, 247, 237, 0.93)),
-    url('../assets/classroom_bg.png');
+  background-image:
+    linear-gradient(
+      to bottom,
+      rgba(255, 247, 237, 0.85),
+      rgba(255, 247, 237, 0.93)
+    ),
+    url("../assets/classroom_bg.png");
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -41,7 +47,10 @@ body {
   -webkit-tap-highlight-color: transparent;
 }
 
-button, input, select, textarea {
+button,
+input,
+select,
+textarea {
   font: inherit;
 }
 
@@ -56,8 +65,8 @@ button, input, select, textarea {
 }
 
 .big-button {
-  @apply min-h-12 rounded-2xl px-5 py-3 font-bold transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md active:translate-y-0 focus:outline-none focus:ring-4 focus:ring-skyLab/30;
   touch-action: manipulation;
+  @apply min-h-12 rounded-2xl px-5 py-3 font-bold transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md active:translate-y-0 focus:outline-none focus:ring-4 focus:ring-skyLab/30;
 }
 
 /* ===== Floating Decorations ===== */
@@ -82,22 +91,22 @@ button, input, select, textarea {
   animation: float-drift 18s ease-in-out infinite;
 }
 .floating-cloud::before {
-  content: "";
   position: absolute;
   top: -14px;
   left: 18px;
   width: 36px;
   height: 36px;
+  content: "";
   background: rgba(255, 255, 255, 0.35);
   border-radius: 50%;
 }
 .floating-cloud::after {
-  content: "";
   position: absolute;
   top: -8px;
   left: 44px;
   width: 24px;
   height: 24px;
+  content: "";
   background: rgba(255, 255, 255, 0.3);
   border-radius: 50%;
 }
@@ -106,9 +115,13 @@ button, input, select, textarea {
   position: absolute;
   width: 14px;
   height: 14px;
-  border-radius: 50%;
-  background: radial-gradient(circle at 30% 30%, rgba(167, 139, 250, 0.25), rgba(244, 114, 182, 0.15));
+  background: radial-gradient(
+    circle at 30% 30%,
+    rgba(167, 139, 250, 0.25),
+    rgba(244, 114, 182, 0.15)
+  );
   border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
   opacity: 0.4;
   animation: float-rise 12s ease-in-out infinite;
 }
@@ -116,36 +129,79 @@ button, input, select, textarea {
 /* ===== Keyframe Animations ===== */
 
 @keyframes float-twinkle {
-  0%, 100% { transform: translateY(0) scale(1); opacity: 0.25; }
-  50% { transform: translateY(-15px) scale(1.3); opacity: 0.5; }
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+    opacity: 0.25;
+  }
+  50% {
+    transform: translateY(-15px) scale(1.3);
+    opacity: 0.5;
+  }
 }
 
 @keyframes float-drift {
-  0%, 100% { transform: translateX(0) translateY(0); }
-  25% { transform: translateX(25px) translateY(-8px); }
-  50% { transform: translateX(50px) translateY(0); }
-  75% { transform: translateX(25px) translateY(8px); }
+  0%,
+  100% {
+    transform: translateX(0) translateY(0);
+  }
+  25% {
+    transform: translateX(25px) translateY(-8px);
+  }
+  50% {
+    transform: translateX(50px) translateY(0);
+  }
+  75% {
+    transform: translateX(25px) translateY(8px);
+  }
 }
 
 @keyframes float-rise {
-  0%, 100% { transform: translateY(0) scale(1); opacity: 0.3; }
-  50% { transform: translateY(-25px) scale(1.15); opacity: 0.5; }
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+    opacity: 0.3;
+  }
+  50% {
+    transform: translateY(-25px) scale(1.15);
+    opacity: 0.5;
+  }
 }
 
 @keyframes sparkle-pop {
-  0% { transform: scale(0) rotate(0deg); opacity: 0; }
-  50% { transform: scale(1.2) rotate(180deg); opacity: 1; }
-  100% { transform: scale(1) rotate(360deg); opacity: 0.8; }
+  0% {
+    transform: scale(0) rotate(0deg);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.2) rotate(180deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1) rotate(360deg);
+    opacity: 0.8;
+  }
 }
 
 @keyframes confetti-fall {
-  0% { transform: translateY(-10px) rotate(0deg); opacity: 1; }
-  100% { transform: translateY(30px) rotate(360deg); opacity: 0; }
+  0% {
+    transform: translateY(-10px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(30px) rotate(360deg);
+    opacity: 0;
+  }
 }
 
 @keyframes gentle-bounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-6px); }
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
 }
 
 .animate-sparkle {
@@ -176,8 +232,8 @@ button, input, select, textarea {
 
   .big-button {
     min-height: 48px;
-    padding-inline: 1rem;
     padding-block: 0.75rem;
+    padding-inline: 1rem;
   }
 }
 

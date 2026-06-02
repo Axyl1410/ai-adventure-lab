@@ -1,41 +1,41 @@
 export type GameKey =
-	| "ai-detective"
-	| "teach-the-robot"
-	| "teachable-machine"
-	| "prompt-magic"
-	| "oops-ai-mistake"
-	| "buddy-bot"
-	| "image-studio"
-	| "data-sorter"
-	| "ai-safety-quest";
+  | "ai-detective"
+  | "teach-the-robot"
+  | "teachable-machine"
+  | "prompt-magic"
+  | "oops-ai-mistake"
+  | "buddy-bot"
+  | "image-studio"
+  | "data-sorter"
+  | "ai-safety-quest";
 
 export interface GameCard {
-	key: GameKey;
-	title: string;
-	description: string;
-	difficulty: "Dễ" | "Vừa" | "Khám phá";
-	color: string;
-	path: string;
+  color: string;
+  description: string;
+  difficulty: "Dễ" | "Vừa" | "Khám phá";
+  key: GameKey;
+  path: string;
+  title: string;
 }
 
 export interface SafetyResult {
-	status: "safe" | "redirected" | "blocked";
-	safe: boolean;
-	reason?: string;
-	message?: string;
+  message?: string;
+  reason?: string;
+  safe: boolean;
+  status: "safe" | "redirected" | "blocked";
 }
 
 export interface PromptCoachResult {
-	score: number;
-	badges: string[];
-	feedback: string;
-	improvedPrompt: string;
+  badges: string[];
+  feedback: string;
+  improvedPrompt: string;
+  score: number;
 }
 
 export interface GeneratedImageResponse {
-	imageId: string;
-	imageUrl: string;
-	promptUsed: string;
-	safetyLevel: "safe";
-	label: "Hình này được tạo bởi AI.";
+  imageId: string;
+  imageUrl: string;
+  label: "Hình này được tạo bởi AI.";
+  promptUsed: string;
+  safetyLevel: "safe";
 }

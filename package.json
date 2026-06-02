@@ -1,12 +1,17 @@
 {
+  "dependencies": {
+    "@prisma/client": "5.22.0"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.4.15",
+    "concurrently": "^8.2.2",
+    "lefthook": "^2.1.9",
+    "prisma": "^5.22.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.6.3",
+    "ultracite": "7.8.1"
+  },
   "name": "ai-adventure-lab",
-  "private": true,
-  "version": "0.1.0",
-  "packageManager": "pnpm@11.0.9",
-  "workspaces": [
-    "apps/*",
-    "packages/*"
-  ],
   "scripts": {
     "dev": "concurrently -n api,web -c cyan,magenta \"pnpm --filter @ai-adventure/api dev\" \"pnpm --filter @ai-adventure/web dev\"",
     "build": "pnpm --filter @ai-adventure/shared build && pnpm --filter @ai-adventure/api build && pnpm --filter @ai-adventure/web build",
@@ -14,18 +19,19 @@
     "test": "pnpm --filter @ai-adventure/shared test && pnpm --filter @ai-adventure/api test",
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev",
-    "prisma:seed": "tsx prisma/seed.ts"
+    "prisma:seed": "tsx prisma/seed.ts",
+    "check": "ultracite check",
+    "fix": "ultracite fix",
+    "prepare": "lefthook install"
   },
-  "devDependencies": {
-    "concurrently": "^8.2.2",
-    "prisma": "^5.22.0",
-    "tsx": "^4.19.2",
-    "typescript": "^5.6.3"
-  },
+  "version": "0.1.0",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "private": true,
+  "packageManager": "pnpm@11.0.9",
   "prisma": {
     "seed": "tsx prisma/seed.ts"
-  },
-  "dependencies": {
-    "@prisma/client": "5.22.0"
   }
 }
