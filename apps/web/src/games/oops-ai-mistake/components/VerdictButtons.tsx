@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { CHOICES, choiceStyle } from "../choiceStyles";
 import type { Verdict } from "../types";
 

@@ -35,7 +35,7 @@ Frontend:
 - React, Vite, TypeScript, Tailwind CSS.
 - React Router.
 - Zustand hoặc React context.
-- Framer Motion, Lucide React.
+- Motion (`motion/react`), Lucide React.
 - `@tensorflow/tfjs` cho Teachable Machine.
 
 Backend:

@@ -23,7 +23,7 @@ export default defineConfig({
       output: {
         manualChunks: {
           react: ["react", "react-dom", "react-router-dom"],
-          motion: ["framer-motion"],
+          motion: ["motion/react"],
           tfjs: ["@tensorflow/tfjs"],
           icons: ["lucide-react"],
         },

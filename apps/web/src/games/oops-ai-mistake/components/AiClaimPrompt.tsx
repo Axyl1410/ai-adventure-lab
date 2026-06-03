@@ -1,5 +1,5 @@
-import { motion } from "framer-motion";
 import { AlertTriangle } from "lucide-react";
+import { motion } from "motion/react";
 import { TTSButton } from "../../../components/TTSButton";
 import type { OopsQuestion } from "../types";
 

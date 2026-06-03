@@ -1,4 +1,4 @@
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion } from "motion/react";
 import type { Ref } from "react";
 import { TTSButton } from "../../../components/TTSButton";
 import type { Item, Level } from "../types";

@@ -1,5 +1,5 @@
-import { motion } from "framer-motion";
 import { ShieldCheck, Star } from "lucide-react";
+import { motion } from "motion/react";
 import { BadgeReward } from "../../../components/Feedback";
 import type { PromptCoachResult } from "../types";
 

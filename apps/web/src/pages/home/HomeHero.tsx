@@ -1,5 +1,5 @@
-import { motion } from "framer-motion";
 import { ArrowRight, ShieldCheck, Sparkles, Trophy } from "lucide-react";
+import { motion } from "motion/react";
 import { BuddyBot } from "../../components/BuddyBot";
 import { quickStats } from "./homeData";
 

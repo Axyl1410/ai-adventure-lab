@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { CATEGORIES, categoryStyle } from "../categoryStyles";
 import type { Category } from "../types";
 

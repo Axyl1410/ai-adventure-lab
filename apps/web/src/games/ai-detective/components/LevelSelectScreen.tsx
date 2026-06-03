@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import detectiveBanner from "../../../assets/detective-banner.png";
 import type { Level } from "../types";
 

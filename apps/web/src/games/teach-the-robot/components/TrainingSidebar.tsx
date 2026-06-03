@@ -1,5 +1,5 @@
-import { motion } from "framer-motion";
 import { Bot, Cpu, HelpCircle } from "lucide-react";
+import { motion } from "motion/react";
 import {
   ConfettiSuccess,
   HappyFeedback,

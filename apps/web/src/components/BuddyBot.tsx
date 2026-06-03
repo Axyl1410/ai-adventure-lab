@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import buddyBotArtist from "../assets/mascot/buddy-bot-artist.svg";
 import buddyBotCelebrating from "../assets/mascot/buddy-bot-celebrating.png";
 import buddyBotHappy from "../assets/mascot/buddy-bot-happy.png";

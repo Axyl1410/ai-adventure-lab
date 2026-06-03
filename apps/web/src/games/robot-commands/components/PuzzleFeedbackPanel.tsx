@@ -1,5 +1,5 @@
-import { motion } from "framer-motion";
 import { Award } from "lucide-react";
+import { motion } from "motion/react";
 import { HappyFeedback, TryAgainFeedback } from "../../../components/Feedback";
 
 interface PuzzleFeedbackPanelProps {

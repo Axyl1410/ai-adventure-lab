@@ -1,4 +1,4 @@
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion } from "motion/react";
 import { ConfettiSuccess } from "../../components/Feedback";
 import { GameShell } from "../../components/GameShell";
 import { useSession } from "../../hooks/useSession";

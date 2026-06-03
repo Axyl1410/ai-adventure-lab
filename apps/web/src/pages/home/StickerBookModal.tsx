@@ -1,5 +1,5 @@
-import { AnimatePresence, motion } from "framer-motion";
 import { Trophy } from "lucide-react";
+import { AnimatePresence, motion } from "motion/react";
 import { STICKERS } from "./homeData";
 
 export function StickerBookModal({

@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import robotLab from "../../../assets/robot-lab.png";
 import type { Level } from "../types";
 
