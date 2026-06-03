@@ -1,6 +1,6 @@
 import { Sparkles, Wand2 } from "lucide-react";
-import { LoadingBuddy } from "../../../components/Feedback";
-import { TTSButton } from "../../../components/TTSButton";
+import { LoadingBuddy } from "@/components/Feedback";
+import { TTSButton } from "@/components/TTSButton";
 
 interface PromptPreviewPanelProps {
   loading: boolean;

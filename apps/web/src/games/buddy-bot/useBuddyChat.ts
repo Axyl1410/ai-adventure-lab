@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { askBuddy } from "../../lib/api";
+import { askBuddy } from "@/lib/api";
 import { getFollowUpChips } from "./chipSuggestions";
 import {
   BUDDY_ERROR_MESSAGE,
@@ -49,7 +49,7 @@ export function useBuddyChat(session: SessionLike | null) {
     if (chatRef.current) {
       chatRef.current.scrollTop = chatRef.current.scrollHeight;
     }
-  }, [messages, loading]);
+  }, []);
 
   useEffect(() => {
     const state = location.state as { storyPrompt?: string } | null;
@@ -57,14 +57,14 @@ export function useBuddyChat(session: SessionLike | null) {
       processedStory.current = true;
       const prompt = state.storyPrompt;
       window.history.replaceState({}, document.title);
-      void send(prompt);
+      send(prompt);
     }
   }, [session, location.state, send]);
 
   function handleKeyDown(e: React.KeyboardEvent) {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
-      void send();
+      send();
     }
   }
 

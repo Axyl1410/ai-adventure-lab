@@ -1,7 +1,7 @@
 import { Bot, Music, ShieldCheck, Volume2, VolumeX } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link, Outlet, useLocation } from "react-router-dom";
-import { stopAllTts } from "../lib/stopAllTts";
+import { stopAllTts } from "@/lib/stopAllTts";
 
 export function Layout() {
   const location = useLocation();

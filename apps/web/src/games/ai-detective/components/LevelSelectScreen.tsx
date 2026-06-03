@@ -1,5 +1,5 @@
 import { motion } from "motion/react";
-import detectiveBanner from "../../../assets/detective-banner.png";
+import detectiveBanner from "@/assets/detective-banner.png";
 import type { Level } from "../types";
 
 interface LevelSelectScreenProps {

@@ -1,10 +1,10 @@
 import { motion } from "motion/react";
-import buddyBotArtist from "../assets/mascot/buddy-bot-artist.svg";
-import buddyBotCelebrating from "../assets/mascot/buddy-bot-celebrating.png";
-import buddyBotHappy from "../assets/mascot/buddy-bot-happy.png";
-import buddyBotReading from "../assets/mascot/buddy-bot-reading.png";
-import buddyBotThinking from "../assets/mascot/buddy-bot-thinking.png";
-import buddyBotWarning from "../assets/mascot/buddy-bot-warning.png";
+import buddyBotArtist from "@/assets/mascot/buddy-bot-artist.svg";
+import buddyBotCelebrating from "@/assets/mascot/buddy-bot-celebrating.png";
+import buddyBotHappy from "@/assets/mascot/buddy-bot-happy.png";
+import buddyBotReading from "@/assets/mascot/buddy-bot-reading.png";
+import buddyBotThinking from "@/assets/mascot/buddy-bot-thinking.png";
+import buddyBotWarning from "@/assets/mascot/buddy-bot-warning.png";
 
 type BotState =
   | "happy"

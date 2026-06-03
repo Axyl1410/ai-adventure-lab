@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { saveProgress, unlockSticker } from "../../lib/api";
+import { saveProgress, unlockSticker } from "@/lib/api";
 import {
   AUTO_ADVANCE_MS,
   STICKER_MIN_CORRECT,

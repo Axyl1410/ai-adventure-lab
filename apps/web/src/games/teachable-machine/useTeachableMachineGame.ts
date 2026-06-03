@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { saveProgress, unlockSticker } from "../../lib/api";
+import { saveProgress, unlockSticker } from "@/lib/api";
 import { DEFAULT_CLASSES } from "./classData";
 import {
   GAME_KEY,

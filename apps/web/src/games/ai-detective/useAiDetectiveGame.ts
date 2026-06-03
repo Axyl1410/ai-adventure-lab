@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { saveProgress, unlockSticker } from "../../lib/api";
+import { saveProgress, unlockSticker } from "@/lib/api";
 import { progressGameKey, STICKER_ID, STICKER_MIN_SCORE } from "./constants";
 import { buildFeedbackText, shuffleRound } from "./detectiveUtils";
 import { getQuestionBank } from "./gameData";
@@ -53,7 +53,7 @@ export function useAiDetectiveGame(session: SessionLike | null) {
         unlockSticker(STICKER_ID);
       }
       if (session && level) {
-        void saveProgress(
+        saveProgress(
           session.id,
           progressGameKey(level),
           nextScore,

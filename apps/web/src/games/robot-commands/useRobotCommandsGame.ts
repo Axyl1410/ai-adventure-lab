@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { saveProgress, unlockSticker } from "../../lib/api";
+import { saveProgress, unlockSticker } from "@/lib/api";
 import {
   INCOMPLETE_FEEDBACK,
   NO_PICK_FEEDBACK,

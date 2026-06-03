@@ -1,5 +1,5 @@
 import { motion } from "motion/react";
-import robotLab from "../../../assets/robot-lab.png";
+import robotLab from "@/assets/robot-lab.png";
 import type { Level } from "../types";
 
 interface LevelSelectScreenProps {

@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { promptFeedback, unlockSticker } from "../../lib/api";
+import { promptFeedback, unlockSticker } from "@/lib/api";
 import { getDefaultSelected } from "./blockUtils";
 import {
   SPARKLE_DURATION_MS,

@@ -1,5 +1,5 @@
 import { ShieldCheck } from "lucide-react";
-import { TTSButton } from "../../../components/TTSButton";
+import { TTSButton } from "@/components/TTSButton";
 import type { Scenario } from "../types";
 
 interface ScenarioPromptProps {

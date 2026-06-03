@@ -1,8 +1,8 @@
 import { BookOpen, Download } from "lucide-react";
 import { motion } from "motion/react";
 import type { Ref } from "react";
-import { BuddyBot } from "../../../components/BuddyBot";
-import { SafetyRedirect } from "../../../components/Feedback";
+import { BuddyBot } from "@/components/BuddyBot";
+import { SafetyRedirect } from "@/components/Feedback";
 import type { GeneratedImage } from "../types";
 
 interface ImageShowcaseCanvasProps {

@@ -1,4 +1,4 @@
-import { TTSButton } from "../../../components/TTSButton";
+import { TTSButton } from "@/components/TTSButton";
 
 interface StatusConsoleProps {
   status: string;

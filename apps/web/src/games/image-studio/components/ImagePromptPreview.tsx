@@ -1,5 +1,5 @@
 import { HelpCircle } from "lucide-react";
-import { TTSButton } from "../../../components/TTSButton";
+import { TTSButton } from "@/components/TTSButton";
 
 interface ImagePromptPreviewProps {
   prompt: string;

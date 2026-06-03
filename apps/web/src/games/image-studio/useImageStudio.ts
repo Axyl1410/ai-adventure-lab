@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { api, unlockSticker } from "../../lib/api";
+import { api, unlockSticker } from "@/lib/api";
 import {
   DEFAULT_DETAILS,
   DEFAULT_STYLE,

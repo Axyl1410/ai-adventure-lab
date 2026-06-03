@@ -1,13 +1,13 @@
 import { Loader2, Volume2 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import { useGameTtsKey } from "../context/GameTtsContext";
+import { useGameTtsKey } from "@/context/GameTtsContext";
 import {
   interruptTtsOnTabChange,
   isTtsAutoplayEnabled,
   scheduleGameContentAutoplay,
   scheduleGameInstructionAutoplay,
-} from "../lib/gameTtsAutoplay";
-import { stopAllTts } from "../lib/stopAllTts";
+} from "@/lib/gameTtsAutoplay";
+import { stopAllTts } from "@/lib/stopAllTts";
 import {
   getTtsPlayState,
   isTtsLoadingText,
@@ -15,7 +15,7 @@ import {
   playTts,
   resetTtsBackendCache,
   subscribeTtsState,
-} from "../lib/ttsPlayer";
+} from "@/lib/ttsPlayer";
 
 export type TtsAutoPlayRole = "instruction" | "content" | "immediate";
 

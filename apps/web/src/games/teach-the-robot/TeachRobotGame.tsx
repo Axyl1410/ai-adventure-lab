@@ -1,5 +1,5 @@
-import { GameShell } from "../../components/GameShell";
-import { useSession } from "../../hooks/useSession";
+import { GameShell } from "@/components/GameShell";
+import { useSession } from "@/hooks/useSession";
 import { LabelingCard } from "./components/LabelingCard";
 import { LevelSelectScreen } from "./components/LevelSelectScreen";
 import { TrainingSidebar } from "./components/TrainingSidebar";

@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import { GameShell } from "../../components/GameShell";
-import { useSession } from "../../hooks/useSession";
+import { GameShell } from "@/components/GameShell";
+import { useSession } from "@/hooks/useSession";
 import { BuilderSidebar } from "./components/BuilderSidebar";
 import { GenerateImageButton } from "./components/GenerateImageButton";
 import { ImagePromptPreview } from "./components/ImagePromptPreview";

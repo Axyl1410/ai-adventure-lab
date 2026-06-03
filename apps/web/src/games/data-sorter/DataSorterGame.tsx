@@ -1,7 +1,7 @@
 import { AnimatePresence, motion } from "motion/react";
-import { ConfettiSuccess } from "../../components/Feedback";
-import { GameShell } from "../../components/GameShell";
-import { useSession } from "../../hooks/useSession";
+import { ConfettiSuccess } from "@/components/Feedback";
+import { GameShell } from "@/components/GameShell";
+import { useSession } from "@/hooks/useSession";
 import { CardPrompt } from "./components/CardPrompt";
 import { CategoryButtons } from "./components/CategoryButtons";
 import { SorterFeedbackPanel } from "./components/SorterFeedbackPanel";

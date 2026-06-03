@@ -1,5 +1,5 @@
 import { motion } from "motion/react";
-import oopsBanner from "../../../assets/oops-banner.png";
+import oopsBanner from "@/assets/oops-banner.png";
 import type { Level } from "../types";
 
 interface LevelSelectScreenProps {

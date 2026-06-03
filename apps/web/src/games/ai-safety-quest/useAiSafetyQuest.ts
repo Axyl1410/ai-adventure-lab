@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { saveProgress, unlockSticker } from "../../lib/api";
+import { saveProgress, unlockSticker } from "@/lib/api";
 import { PROGRESS_GAME_KEY, STICKER_ID, STICKER_MIN_SCORE } from "./constants";
 import { buildFeedbackText, shuffleDeck } from "./questUtils";
 import { ALL_SCENARIOS } from "./scenarios";
@@ -37,12 +37,7 @@ export function useAiSafetyQuest(session: SessionLike | null) {
         unlockSticker(STICKER_ID);
       }
       if (session) {
-        void saveProgress(
-          session.id,
-          PROGRESS_GAME_KEY,
-          nextScore,
-          deck.length
-        );
+        saveProgress(session.id, PROGRESS_GAME_KEY, nextScore, deck.length);
       }
     }
   }

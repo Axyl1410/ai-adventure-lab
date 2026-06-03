@@ -1,7 +1,7 @@
 import { ArrowLeft, Star } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { GameTtsProvider } from "../context/GameTtsContext";
+import { GameTtsProvider } from "@/context/GameTtsContext";
 import { BuddyBot } from "./BuddyBot";
 import { TTSButton } from "./TTSButton";
 

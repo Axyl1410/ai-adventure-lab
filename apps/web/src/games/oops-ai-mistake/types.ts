@@ -1,4 +1,4 @@
-import type { OopsQuestion } from "../../lib/api";
+import type { OopsQuestion } from "@/lib/api";
 
 export type { OopsQuestion };
 

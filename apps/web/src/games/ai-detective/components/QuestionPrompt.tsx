@@ -1,4 +1,4 @@
-import { TTSButton } from "../../../components/TTSButton";
+import { TTSButton } from "@/components/TTSButton";
 import type { DetectiveQuestion } from "../types";
 
 interface QuestionPromptProps {

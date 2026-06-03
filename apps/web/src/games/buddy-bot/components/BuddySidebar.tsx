@@ -1,4 +1,4 @@
-import { BuddyBot } from "../../../components/BuddyBot";
+import { BuddyBot } from "@/components/BuddyBot";
 
 interface BuddySidebarProps {
   loading: boolean;

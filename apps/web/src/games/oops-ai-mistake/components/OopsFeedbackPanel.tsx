@@ -1,6 +1,6 @@
 import { Award, BookOpen } from "lucide-react";
 import { motion } from "motion/react";
-import { HappyFeedback, TryAgainFeedback } from "../../../components/Feedback";
+import { HappyFeedback, TryAgainFeedback } from "@/components/Feedback";
 import { isCorrectFeedback } from "../oopsUtils";
 
 interface OopsFeedbackPanelProps {

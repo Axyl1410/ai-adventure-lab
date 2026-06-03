@@ -1,5 +1,5 @@
 import { BookOpen } from "lucide-react";
-import { TTSButton } from "../../../components/TTSButton";
+import { TTSButton } from "@/components/TTSButton";
 import { GUIDE_TTS_TEXT } from "../constants";
 import { GuideStep } from "./GuideStep";
 

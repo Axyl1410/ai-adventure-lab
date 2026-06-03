@@ -11,15 +11,15 @@ import {
   ShieldCheck,
   Wand2,
 } from "lucide-react";
-import detectiveBanner from "../../assets/detective-banner.png";
-import buddyReading from "../../assets/mascot/buddy-bot-reading.png";
-import oopsBanner from "../../assets/oops-banner.png";
-import robotLab from "../../assets/robot-lab.png";
-import stickerArtist from "../../assets/stickers/sticker-artist.png";
-import stickerDetective from "../../assets/stickers/sticker-detective.png";
-import stickerOops from "../../assets/stickers/sticker-oops.png";
-import stickerPrompt from "../../assets/stickers/sticker-prompt.png";
-import stickerRobot from "../../assets/stickers/sticker-robot.png";
+import detectiveBanner from "@/assets/detective-banner.png";
+import buddyReading from "@/assets/mascot/buddy-bot-reading.png";
+import oopsBanner from "@/assets/oops-banner.png";
+import robotLab from "@/assets/robot-lab.png";
+import stickerArtist from "@/assets/stickers/sticker-artist.png";
+import stickerDetective from "@/assets/stickers/sticker-detective.png";
+import stickerOops from "@/assets/stickers/sticker-oops.png";
+import stickerPrompt from "@/assets/stickers/sticker-prompt.png";
+import stickerRobot from "@/assets/stickers/sticker-robot.png";
 
 export type StickerConfig = {
   id: string;

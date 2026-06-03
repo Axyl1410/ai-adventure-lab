@@ -1,4 +1,4 @@
-import type { AiQuestion } from "../../lib/api";
+import type { AiQuestion } from "@/lib/api";
 
 export type Level = "easy" | "hard";
 

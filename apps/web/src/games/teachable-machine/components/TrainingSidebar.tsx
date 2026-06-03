@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { BuddyBot } from "../../../components/BuddyBot";
+import { BuddyBot } from "@/components/BuddyBot";
 import type { BuddyBotGameState } from "../types";
 import { StatusConsole } from "./StatusConsole";
 

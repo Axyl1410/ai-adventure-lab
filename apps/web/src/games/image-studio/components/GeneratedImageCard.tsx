@@ -1,6 +1,6 @@
 import { BookOpen, Download, Trash2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { TTSButton } from "../../../components/TTSButton";
+import { TTSButton } from "@/components/TTSButton";
 import { getBuddyStoryState } from "../storyPrompt";
 import type { GeneratedImage } from "../types";
 import { AiGeneratedLabel } from "./AiGeneratedLabel";

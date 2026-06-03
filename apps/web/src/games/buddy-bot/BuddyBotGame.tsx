@@ -1,5 +1,5 @@
-import { GameShell } from "../../components/GameShell";
-import { useSession } from "../../hooks/useSession";
+import { GameShell } from "@/components/GameShell";
+import { useSession } from "@/hooks/useSession";
 import { BuddySidebar } from "./components/BuddySidebar";
 import { ChatInput } from "./components/ChatInput";
 import { ChatMessageList } from "./components/ChatMessageList";
@@ -21,7 +21,7 @@ export function BuddyBotGame() {
         <div className="lab-card flex min-h-[62dvh] flex-col bg-white/80 p-3 sm:p-5 lg:min-h-[560px]">
           <SuggestedChips
             chips={chat.activeChips}
-            onChipClick={(chip) => void chat.send(chip)}
+            onChipClick={(chip) => chat.send(chip)}
           />
           <ChatMessageList
             chatRef={chat.chatRef}
@@ -33,7 +33,7 @@ export function BuddyBotGame() {
             loading={chat.loading}
             onInputChange={chat.setInput}
             onKeyDown={chat.handleKeyDown}
-            onSend={() => void chat.send()}
+            onSend={() => chat.send()}
           />
         </div>
       </section>

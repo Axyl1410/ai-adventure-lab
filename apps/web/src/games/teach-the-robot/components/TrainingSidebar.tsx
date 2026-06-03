@@ -4,7 +4,7 @@ import {
   ConfettiSuccess,
   HappyFeedback,
   TryAgainFeedback,
-} from "../../../components/Feedback";
+} from "@/components/Feedback";
 import { DEMO_PREDICTION_COPY } from "../constants";
 import type { Level } from "../types";
 

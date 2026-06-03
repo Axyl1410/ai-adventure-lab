@@ -1,5 +1,5 @@
-import { GameShell } from "../../components/GameShell";
-import { useSession } from "../../hooks/useSession";
+import { GameShell } from "@/components/GameShell";
+import { useSession } from "@/hooks/useSession";
 import { BlockPickerPanel } from "./components/BlockPickerPanel";
 import { CoachResultPanel } from "./components/CoachResultPanel";
 import { LevelSelectScreen } from "./components/LevelSelectScreen";

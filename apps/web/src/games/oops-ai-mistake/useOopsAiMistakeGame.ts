@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { saveProgress, unlockSticker } from "../../lib/api";
+import { saveProgress, unlockSticker } from "@/lib/api";
 import { progressGameKey, STICKER_ID, STICKER_MIN_SCORE } from "./constants";
 import { getQuestionBank } from "./gameData";
 import { buildFeedbackText, shuffleRound } from "./oopsUtils";

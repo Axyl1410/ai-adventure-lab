@@ -1,6 +1,6 @@
 import type { Ref } from "react";
-import { LoadingBuddy } from "../../../components/Feedback";
-import { TTSButton } from "../../../components/TTSButton";
+import { LoadingBuddy } from "@/components/Feedback";
+import { TTSButton } from "@/components/TTSButton";
 import { formatBuddyMessage } from "../formatBuddyMessage";
 import type { ChatMessage } from "../types";
 

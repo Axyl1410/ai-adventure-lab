@@ -1,5 +1,5 @@
 import { Award } from "lucide-react";
-import { HappyFeedback, TryAgainFeedback } from "../../../components/Feedback";
+import { HappyFeedback, TryAgainFeedback } from "@/components/Feedback";
 import { isCorrectFeedback } from "../questUtils";
 
 interface QuestFeedbackPanelProps {

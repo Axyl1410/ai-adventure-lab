@@ -1,6 +1,6 @@
-import { ConfettiSuccess } from "../../components/Feedback";
-import { GameShell } from "../../components/GameShell";
-import { useSession } from "../../hooks/useSession";
+import { ConfettiSuccess } from "@/components/Feedback";
+import { GameShell } from "@/components/GameShell";
+import { useSession } from "@/hooks/useSession";
 import { ClassCaptureGrid } from "./components/ClassCaptureGrid";
 import { GuideBook } from "./components/GuideBook";
 import { PredictionBars } from "./components/PredictionBars";
