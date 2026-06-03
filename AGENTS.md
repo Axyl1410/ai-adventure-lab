@@ -203,6 +203,11 @@ Sample:
 - Chọn: “Đúng”, “Sai”, “Cần kiểm tra thêm”.
 - Nhắc kiểm tra với thầy cô, sách, nguồn đáng tin cậy.
 
+### Robot Commands / Xếp Lệnh Cho Robot
+- Ghép lệnh (tiến, quay, nhặt) rồi chạy mô phỏng trên lưới 3×3 hoặc 4×4.
+- Robot làm đúng từng bước theo thứ tự; sai thứ tự hoặc đâm tường thì cần sửa.
+- Hai cấp: Cơ bản (6–8 tuổi) và Thử thách (9–11 tuổi). Không cần OpenAI.
+
 ### Buddy Bot
 - Chat tutor an toàn, tiếng Việt, câu ngắn 3–6 câu.
 - Suggested chips: “AI là gì?”, “Prompt là gì?”, “Máy học là gì?”, “Vì sao AI có thể sai?”, “Cho em một câu đố toán lớp 3.”

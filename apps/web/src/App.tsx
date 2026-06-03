@@ -52,6 +52,11 @@ const AiSafetyQuestGame = lazy(() =>
     default: m.AiSafetyQuestGame,
   }))
 );
+const RobotCommandsGame = lazy(() =>
+  import("./games/robot-commands/RobotCommandsGame").then((m) => ({
+    default: m.RobotCommandsGame,
+  }))
+);
 
 function GameLoader() {
   return (
@@ -184,6 +189,16 @@ export default function App() {
             </ErrorBoundary>
           }
           path="/games/ai-safety-quest"
+        />
+        <Route
+          element={
+            <ErrorBoundary>
+              <Suspense fallback={<GameLoader />}>
+                <RobotCommandsGame />
+              </Suspense>
+            </ErrorBoundary>
+          }
+          path="/games/robot-commands"
         />
         <Route element={<NotFoundPage />} path="*" />
       </Route>

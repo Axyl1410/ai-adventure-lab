@@ -7,7 +7,8 @@ export type GameKey =
   | "buddy-bot"
   | "image-studio"
   | "data-sorter"
-  | "ai-safety-quest";
+  | "ai-safety-quest"
+  | "robot-commands";
 
 export interface GameCard {
   color: string;

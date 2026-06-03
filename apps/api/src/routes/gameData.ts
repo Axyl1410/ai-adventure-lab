@@ -73,6 +73,14 @@ export const games: GameCard[] = [
     color: "from-lime-300 to-green-400",
     path: "/games/ai-safety-quest",
   },
+  {
+    key: "robot-commands",
+    title: "Robot Commands",
+    description: "Xếp lệnh từng bước để robot nhặt táo.",
+    difficulty: "Vừa",
+    color: "from-sky-400 to-mint-300",
+    path: "/games/robot-commands",
+  },
 ];
 
 export const aiDetectiveQuestions = [

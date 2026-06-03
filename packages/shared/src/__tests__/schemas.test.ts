@@ -96,6 +96,16 @@ describe("progressSchema", () => {
     });
     expect(result.success).toBe(false);
   });
+  it("nhận gameKey robot-commands", () => {
+    const result = progressSchema.safeParse({
+      sessionId: "ck12345678901234567890123",
+      gameKey: "robot-commands",
+      score: 3,
+      maxScore: 4,
+      metadata: { level: "easy" },
+    });
+    expect(result.success).toBe(true);
+  });
 });
 
 describe("imageGenerateSchema", () => {

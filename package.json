@@ -16,7 +16,7 @@
     "dev": "concurrently -n api,web -c cyan,magenta \"pnpm --filter @ai-adventure/api dev\" \"pnpm --filter @ai-adventure/web dev\"",
     "build": "pnpm --filter @ai-adventure/shared build && pnpm --filter @ai-adventure/api build && pnpm --filter @ai-adventure/web build",
     "typecheck": "pnpm --filter @ai-adventure/shared build && pnpm --filter @ai-adventure/api typecheck && pnpm --filter @ai-adventure/web typecheck",
-    "test": "pnpm --filter @ai-adventure/shared test && pnpm --filter @ai-adventure/api test",
+    "test": "pnpm --filter @ai-adventure/shared test && pnpm --filter @ai-adventure/api test && pnpm --filter @ai-adventure/web test",
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev",
     "prisma:seed": "tsx prisma/seed.ts",

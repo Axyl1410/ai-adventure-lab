@@ -1,6 +1,7 @@
 import type { LucideIcon } from "lucide-react";
 import {
   BadgeCheck,
+  Bot,
   BrainCircuit,
   Camera,
   Database,
@@ -71,6 +72,12 @@ export const STICKERS: StickerConfig[] = [
     name: "Họa sĩ AI",
     image: stickerArtist,
     hint: "Tạo thành công tranh trong Xưởng Tranh AI",
+  },
+  {
+    id: "commander",
+    name: "Chỉ huy robot",
+    image: stickerRobot,
+    hint: "Đạt >= 3 điểm trong Xếp Lệnh Cho Robot",
   },
 ];
 
@@ -183,11 +190,23 @@ export const gameCards: GameCardConfig[] = [
     color: "from-mintLab to-greenLab",
     imageTone: "bg-greenLab/15",
   },
+  {
+    title: "Xếp Lệnh Cho Robot",
+    desc: "Xếp lệnh từng bước để Buddy Bot nhặt táo trên lưới.",
+    badge: "Vừa",
+    time: "4 phút",
+    to: "/games/robot-commands",
+    image: robotLab,
+    alt: "Robot đi theo chuỗi lệnh em xếp",
+    icon: Bot,
+    color: "from-skyLab to-mintLab",
+    imageTone: "bg-skyLab/15",
+  },
 ];
 
 export const quickStats = [
-  { label: "Trò chơi", value: "9", tone: "bg-skyLab/15 text-sky-700" },
-  { label: "Sticker", value: "5", tone: "bg-yellowLab/25 text-orange-700" },
+  { label: "Trò chơi", value: "10", tone: "bg-skyLab/15 text-sky-700" },
+  { label: "Sticker", value: "6", tone: "bg-yellowLab/25 text-orange-700" },
   {
     label: "Không cần tài khoản",
     value: "✓",
