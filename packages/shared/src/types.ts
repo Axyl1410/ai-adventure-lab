@@ -8,7 +8,8 @@ export type GameKey =
   | "image-studio"
   | "data-sorter"
   | "ai-safety-quest"
-  | "robot-commands";
+  | "robot-commands"
+  | "ai-recommendations";
 
 export interface GameCard {
   color: string;

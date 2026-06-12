@@ -1,7 +1,7 @@
 import { ArrowRight, ShieldCheck, Sparkles, Trophy } from "lucide-react";
 import { motion } from "motion/react";
 import { BuddyBot } from "@/components/BuddyBot";
-import { quickStats } from "./homeData";
+import { quickStats, STICKERS } from "./homeData";
 
 export function HomeHero({
   unlockedCount,
@@ -66,7 +66,7 @@ export function HomeHero({
               type="button"
             >
               <Trophy className="h-5 w-5 text-orange-500" /> Sổ Sticker (
-              {unlockedCount}/5)
+              {unlockedCount}/{STICKERS.length})
             </button>
           </div>
         </motion.div>

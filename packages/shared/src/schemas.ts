@@ -17,6 +17,7 @@ export const gameKeySchema = z.enum([
   "data-sorter",
   "ai-safety-quest",
   "robot-commands",
+  "ai-recommendations",
 ]);
 export const ttsVoiceSchema = z
   .string()

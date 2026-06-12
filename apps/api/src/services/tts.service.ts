@@ -44,6 +44,8 @@ export class TtsService {
       "Trò chuyện với robot học tập Buddy Bot.": "instruction-buddy-bot",
       "Chạm lệnh để xếp hàng. Bấm Chạy thử xem Buddy Bot đi từng bước nhé!":
         "instruction-robot-commands",
+      "Xem bạn thích gì gần đây, rồi chọn Buddy Bot nên gợi ý trò nào nhé!":
+        "instruction-ai-recommendations",
     };
 
     const hash = crypto

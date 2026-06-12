@@ -9,6 +9,7 @@ import {
   MessageCircle,
   Search,
   ShieldCheck,
+  Sparkles,
   Wand2,
 } from "lucide-react";
 import detectiveBanner from "@/assets/detective-banner.png";
@@ -78,6 +79,12 @@ export const STICKERS: StickerConfig[] = [
     name: "Chỉ huy robot",
     image: stickerRobot,
     hint: "Đạt >= 3 điểm trong Xếp Lệnh Cho Robot",
+  },
+  {
+    id: "curator",
+    name: "Chuyên gia gợi ý",
+    image: stickerPrompt,
+    hint: "Đạt >= 5 điểm trong Gợi Ý Của AI",
   },
 ];
 
@@ -202,11 +209,23 @@ export const gameCards: GameCardConfig[] = [
     color: "from-skyLab to-mintLab",
     imageTone: "bg-skyLab/15",
   },
+  {
+    title: "Gợi Ý Của AI",
+    desc: "Chọn gợi ý phù hợp theo sở thích bạn — AI học từ mẫu đã thấy.",
+    badge: "Dễ",
+    time: "4 phút",
+    to: "/games/ai-recommendations",
+    image: stickerPrompt,
+    alt: "Buddy Bot gợi ý trò chơi phù hợp",
+    icon: Sparkles,
+    color: "from-purpleLab to-pinkLab",
+    imageTone: "bg-purpleLab/15",
+  },
 ];
 
 export const quickStats = [
-  { label: "Trò chơi", value: "10", tone: "bg-skyLab/15 text-sky-700" },
-  { label: "Sticker", value: "6", tone: "bg-yellowLab/25 text-orange-700" },
+  { label: "Trò chơi", value: "11", tone: "bg-skyLab/15 text-sky-700" },
+  { label: "Sticker", value: "7", tone: "bg-yellowLab/25 text-orange-700" },
   {
     label: "Không cần tài khoản",
     value: "✓",

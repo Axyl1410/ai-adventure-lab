@@ -106,6 +106,15 @@ describe("progressSchema", () => {
     });
     expect(result.success).toBe(true);
   });
+  it("nhận gameKey ai-recommendations", () => {
+    const result = progressSchema.safeParse({
+      sessionId: "ck12345678901234567890123",
+      gameKey: "ai-recommendations",
+      score: 5,
+      maxScore: 6,
+    });
+    expect(result.success).toBe(true);
+  });
 });
 
 describe("imageGenerateSchema", () => {

@@ -208,6 +208,11 @@ Sample:
 - Robot làm đúng từng bước theo thứ tự; sai thứ tự hoặc đâm tường thì cần sửa.
 - Hai cấp: Cơ bản (6–8 tuổi) và Thử thách (9–11 tuổi). Không cần OpenAI.
 
+### AI Recommendations / Gợi Ý Của AI
+- Xem bạn giả (nickname) và sở thích gần đây; chọn gợi ý trò phù hợp cho Buddy Bot.
+- Học AI gợi ý theo mẫu đã thấy, có thể lặp; không hỏi thông tin riêng tư.
+- 6 vòng / phiên, static data. Không cần OpenAI.
+
 ### Buddy Bot
 - Chat tutor an toàn, tiếng Việt, câu ngắn 3–6 câu.
 - Suggested chips: “AI là gì?”, “Prompt là gì?”, “Máy học là gì?”, “Vì sao AI có thể sai?”, “Cho em một câu đố toán lớp 3.”

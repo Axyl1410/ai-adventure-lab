@@ -81,6 +81,14 @@ export const games: GameCard[] = [
     color: "from-sky-400 to-mint-300",
     path: "/games/robot-commands",
   },
+  {
+    key: "ai-recommendations",
+    title: "AI Recommendations",
+    description: "Chọn gợi ý phù hợp theo sở thích bạn giả.",
+    difficulty: "Dễ",
+    color: "from-violet-400 to-purple-400",
+    path: "/games/ai-recommendations",
+  },
 ];
 
 export const aiDetectiveQuestions = [

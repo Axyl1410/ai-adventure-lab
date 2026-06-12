@@ -57,6 +57,11 @@ const RobotCommandsGame = lazy(() =>
     default: m.RobotCommandsGame,
   }))
 );
+const AiRecommendationsGame = lazy(() =>
+  import("./games/ai-recommendations/AiRecommendationsGame").then((m) => ({
+    default: m.AiRecommendationsGame,
+  }))
+);
 
 function GameLoader() {
   return (
@@ -199,6 +204,16 @@ export default function App() {
             </ErrorBoundary>
           }
           path="/games/robot-commands"
+        />
+        <Route
+          element={
+            <ErrorBoundary>
+              <Suspense fallback={<GameLoader />}>
+                <AiRecommendationsGame />
+              </Suspense>
+            </ErrorBoundary>
+          }
+          path="/games/ai-recommendations"
         />
         <Route element={<NotFoundPage />} path="*" />
       </Route>
