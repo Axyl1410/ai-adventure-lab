@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { GameShell } from "@/components/GameShell";
 import { useSession } from "@/hooks/useSession";
 import { BuddySidebar } from "./components/BuddySidebar";
@@ -7,14 +8,15 @@ import { SuggestedChips } from "./components/SuggestedChips";
 import { useBuddyChat } from "./useBuddyChat";
 
 export function BuddyBotGame() {
+  const { t } = useTranslation("games");
   const { session } = useSession();
   const chat = useBuddyChat(session);
 
   return (
     <GameShell
-      instruction="Trò chuyện với robot học tập Buddy Bot."
-      subtitle="Trò chuyện với robot học tập an toàn."
-      title="💬 Buddy Bot Trò Chuyện"
+      instruction={t("buddyBot.instruction")}
+      subtitle={t("buddyBot.subtitle")}
+      title={t("buddyBot.title")}
     >
       <section className="grid flex-1 gap-5 lg:grid-cols-[220px_1fr]">
         <BuddySidebar loading={chat.loading} />
@@ -33,7 +35,7 @@ export function BuddyBotGame() {
             loading={chat.loading}
             onInputChange={chat.setInput}
             onKeyDown={chat.handleKeyDown}
-            onSend={() => chat.send()}
+            onSend={() => chat.send(chat.input)}
           />
         </div>
       </section>

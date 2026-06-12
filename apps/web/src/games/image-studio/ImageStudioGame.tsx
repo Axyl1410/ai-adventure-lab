@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { GameShell } from "@/components/GameShell";
 import { useSession } from "@/hooks/useSession";
@@ -10,6 +11,7 @@ import { getBuddyStoryState } from "./storyPrompt";
 import { useImageStudio } from "./useImageStudio";
 
 export function ImageStudioGame() {
+  const { t } = useTranslation("games");
   const { session } = useSession();
   const navigate = useNavigate();
   const studio = useImageStudio(session);
@@ -25,9 +27,9 @@ export function ImageStudioGame() {
 
   return (
     <GameShell
-      instruction="Chọn các khối an toàn. Hình tạo ra luôn cần được ghi nhãn là hình AI."
-      subtitle="Viết prompt vui vẻ để tạo tranh học tập cùng Buddy Bot!"
-      title="Xưởng Tranh AI"
+      instruction={t("imageStudio.instruction")}
+      subtitle={t("imageStudio.subtitle")}
+      title={t("imageStudio.title")}
     >
       <div className="flex-1 space-y-8 pr-0 sm:space-y-10 sm:pr-1">
         <section className="grid items-start gap-5 lg:grid-cols-[380px_1fr] lg:gap-6">

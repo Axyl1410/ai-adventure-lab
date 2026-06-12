@@ -1,4 +1,5 @@
 import { lazy, Suspense } from "react";
+import { useTranslation } from "react-i18next";
 import { Link, Route, Routes } from "react-router-dom";
 import { BuddyBot } from "./components/BuddyBot";
 import { ErrorBoundary } from "./components/ErrorBoundary";
@@ -64,34 +65,37 @@ const AiRecommendationsGame = lazy(() =>
 );
 
 function GameLoader() {
+  const { t } = useTranslation("common");
+
   return (
     <div className="flex flex-1 flex-col items-center justify-center gap-4 p-8">
       <BuddyBot size={100} state="thinking" />
       <p className="animate-pulse font-black text-base text-muted">
-        Đang tải trò chơi...
+        {t("loadingGame")}
       </p>
     </div>
   );
 }
 
 function NotFoundPage() {
+  const { t } = useTranslation("common");
+
   return (
     <main className="mx-auto flex min-h-[60dvh] max-w-3xl flex-col items-center justify-center gap-5 px-6 text-center">
       <BuddyBot size={120} state="thinking" />
       <div className="lab-card bg-white/85 p-8">
         <p className="font-black text-5xl">🧭</p>
         <h1 className="mt-3 font-black text-3xl text-ink">
-          Ôi, lối này chưa có trò chơi!
+          {t("notFound.title")}
         </h1>
         <p className="mt-3 font-bold text-base text-muted">
-          Buddy Bot chưa tìm thấy trang này. Mình quay về phòng lab để chọn hoạt
-          động an toàn nhé.
+          {t("notFound.body")}
         </p>
         <Link
           className="big-button mt-6 inline-flex bg-gradient-to-r from-skyLab to-purpleLab text-white shadow-md"
           to="/"
         >
-          Về phòng lab
+          {t("notFound.back")}
         </Link>
       </div>
     </main>

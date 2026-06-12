@@ -1,23 +1,28 @@
 import { Trophy } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
-import { STICKERS } from "./homeData";
+import { useTranslation } from "react-i18next";
+import type { StickerConfig } from "./homeData";
 
 export function StickerBookModal({
   open,
+  stickers,
   unlockedStickers,
   onClose,
 }: {
   open: boolean;
+  stickers: StickerConfig[];
   unlockedStickers: string[];
   onClose: () => void;
 }) {
+  const { t } = useTranslation("home");
+
   return (
     <AnimatePresence>
       {open && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
           <motion.button
             animate={{ opacity: 1 }}
-            aria-label="Đóng sổ sticker"
+            aria-label={t("stickerModal.close")}
             className="fixed inset-0 cursor-default bg-ink/40 backdrop-blur-sm"
             exit={{ opacity: 0 }}
             initial={{ opacity: 0 }}
@@ -36,7 +41,7 @@ export function StickerBookModal({
             transition={{ type: "spring", stiffness: 260, damping: 25 }}
           >
             <button
-              aria-label="Đóng sổ sticker"
+              aria-label={t("stickerModal.close")}
               className="absolute top-4 right-4 z-20 rounded-2xl px-3 py-2 font-black text-2xl text-muted hover:bg-cream hover:text-ink focus:outline-none focus:ring-4 focus:ring-skyLab/30"
               onClick={onClose}
               type="button"
@@ -49,18 +54,17 @@ export function StickerBookModal({
                 className="flex items-center gap-2 border-cream border-b pb-3 font-black text-2xl text-ink"
                 id="sticker-book-title"
               >
-                <Trophy className="h-7 w-7 text-orange-500" /> Sổ thu thập
-                Sticker Buddy Bot
+                <Trophy className="h-7 w-7 text-orange-500" />{" "}
+                {t("stickerModal.title")}
               </h2>
               <p className="mt-2 font-bold text-muted text-sm">
-                Chơi các trò chơi và hoàn thành thử thách để thu thập trọn bộ
-                sticker Buddy Bot.
+                {t("stickerModal.description")}
               </p>
             </div>
 
             <div className="sticker-book-scroll mt-6 min-h-0 flex-1 overflow-y-auto overflow-x-hidden overscroll-contain px-0.5 md:flex-none md:overflow-visible">
               <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-5">
-                {STICKERS.map((sticker) => {
+                {stickers.map((sticker) => {
                   const isUnlocked = unlockedStickers.includes(sticker.id);
                   return (
                     <div
@@ -98,7 +102,9 @@ export function StickerBookModal({
                           {sticker.name}
                         </h3>
                         <p className="mt-1 font-semibold text-muted/80 text-xs">
-                          {isUnlocked ? "Đã mở khóa!" : sticker.hint}
+                          {isUnlocked
+                            ? t("stickerModal.unlocked")
+                            : sticker.hint}
                         </p>
                       </div>
                     </div>

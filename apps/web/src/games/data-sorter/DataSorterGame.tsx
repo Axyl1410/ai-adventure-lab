@@ -1,4 +1,5 @@
 import { AnimatePresence, motion } from "motion/react";
+import { useTranslation } from "react-i18next";
 import { ConfettiSuccess } from "@/components/Feedback";
 import { GameShell } from "@/components/GameShell";
 import { useSession } from "@/hooks/useSession";
@@ -9,16 +10,17 @@ import { DECK_SIZE } from "./constants";
 import { useDataSorterGame } from "./useDataSorterGame";
 
 export function DataSorterGame() {
+  const { t } = useTranslation("games");
   const { session } = useSession();
   const sorter = useDataSorterGame(session);
 
   return (
     <GameShell
-      instruction="Đọc từng thẻ dữ liệu rồi chọn: dữ liệu tốt, dữ liệu nhiễu hoặc thông tin riêng tư."
+      instruction={t("dataSorter.instruction")}
       maxScore={sorter.deck.length || DECK_SIZE}
       score={sorter.score}
-      subtitle="Phân loại dữ liệu để AI học an toàn."
-      title="🗂️ Data Sorter"
+      subtitle={t("dataSorter.subtitle")}
+      title={t("dataSorter.title")}
     >
       <section className="lab-card relative mx-auto max-w-4xl overflow-hidden bg-white/85 p-6 text-center">
         {sorter.done && <ConfettiSuccess />}

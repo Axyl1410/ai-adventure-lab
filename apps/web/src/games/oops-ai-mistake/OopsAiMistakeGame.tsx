@@ -1,4 +1,5 @@
 import { AnimatePresence, motion } from "motion/react";
+import { useTranslation } from "react-i18next";
 import { ConfettiSuccess } from "@/components/Feedback";
 import { GameShell } from "@/components/GameShell";
 import { useSession } from "@/hooks/useSession";
@@ -6,19 +7,20 @@ import { AiClaimPrompt } from "./components/AiClaimPrompt";
 import { LevelSelectScreen } from "./components/LevelSelectScreen";
 import { OopsFeedbackPanel } from "./components/OopsFeedbackPanel";
 import { VerdictButtons } from "./components/VerdictButtons";
-import { LEVEL_TITLE, ROUND_SIZE } from "./constants";
+import { ROUND_SIZE } from "./constants";
 import { useOopsAiMistakeGame } from "./useOopsAiMistakeGame";
 
 export function OopsAiMistakeGame() {
+  const { t } = useTranslation("games");
   const { session } = useSession();
   const game = useOopsAiMistakeGame(session);
 
   if (!game.level) {
     return (
       <GameShell
-        instruction="Chọn cấp độ chơi phù hợp với em nhé!"
-        subtitle="AI không phải lúc nào cũng đúng."
-        title="🤔 AI Có Thể Sai"
+        instruction={t("oopsAiMistake.instructionLevelSelect")}
+        subtitle={t("oopsAiMistake.subtitle")}
+        title={t("oopsAiMistake.title")}
       >
         <LevelSelectScreen onSelectLevel={game.selectLevel} />
       </GameShell>
@@ -27,11 +29,13 @@ export function OopsAiMistakeGame() {
 
   return (
     <GameShell
-      instruction="Hãy đọc câu trả lời của AI và xem có lỗi nào không nhé."
+      instruction={t("oopsAiMistake.instructionPlay")}
       maxScore={game.questions.length || ROUND_SIZE}
       score={game.score}
-      subtitle="AI không phải lúc nào cũng đúng."
-      title={`🤔 AI Có Thể Sai — ${LEVEL_TITLE[game.level]}`}
+      subtitle={t("oopsAiMistake.subtitle")}
+      title={t("oopsAiMistake.titleWithLevel", {
+        level: t(`oopsAiMistake.levels.${game.level}`),
+      })}
     >
       <section className="lab-card relative mx-auto max-w-3xl overflow-hidden bg-white/85 p-6 text-center md:p-8">
         {game.showConfetti && <ConfettiSuccess />}

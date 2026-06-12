@@ -1,4 +1,5 @@
 import { AnimatePresence, motion } from "motion/react";
+import { useTranslation } from "react-i18next";
 import { ConfettiSuccess } from "@/components/Feedback";
 import { GameShell } from "@/components/GameShell";
 import { useSession } from "@/hooks/useSession";
@@ -6,19 +7,20 @@ import { DetectiveFeedbackPanel } from "./components/DetectiveFeedbackPanel";
 import { LevelSelectScreen } from "./components/LevelSelectScreen";
 import { QuestionPrompt } from "./components/QuestionPrompt";
 import { YesNoButtons } from "./components/YesNoButtons";
-import { LEVEL_TITLE, ROUND_SIZE } from "./constants";
+import { ROUND_SIZE } from "./constants";
 import { useAiDetectiveGame } from "./useAiDetectiveGame";
 
 export function AiDetectiveGame() {
+  const { t } = useTranslation("games");
   const { session } = useSession();
   const game = useAiDetectiveGame(session);
 
   if (!game.level) {
     return (
       <GameShell
-        instruction="Chọn cấp độ chơi phù hợp với em nhé!"
-        subtitle="Đoán xem hoạt động nào có AI."
-        title="🔍 Thám Tử AI"
+        instruction={t("aiDetective.instructionLevelSelect")}
+        subtitle={t("aiDetective.subtitle")}
+        title={t("aiDetective.title")}
       >
         <LevelSelectScreen onSelectLevel={game.selectLevel} />
       </GameShell>
@@ -27,11 +29,13 @@ export function AiDetectiveGame() {
 
   return (
     <GameShell
-      instruction="Đọc thẻ tình huống rồi chọn Có AI hoặc Không AI."
+      instruction={t("aiDetective.instructionPlay")}
       maxScore={game.questions.length || ROUND_SIZE}
       score={game.score}
-      subtitle="Đoán xem hoạt động nào có AI."
-      title={`🔍 Thám Tử AI — ${LEVEL_TITLE[game.level]}`}
+      subtitle={t("aiDetective.subtitle")}
+      title={t("aiDetective.titleWithLevel", {
+        level: t(`aiDetective.levels.${game.level}`),
+      })}
     >
       <section className="lab-card relative mx-auto max-w-3xl overflow-hidden bg-white/85 p-6 text-center md:p-8">
         {game.showConfetti && <ConfettiSuccess />}

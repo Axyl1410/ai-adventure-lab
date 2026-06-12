@@ -1,4 +1,5 @@
 import { AnimatePresence, motion } from "motion/react";
+import { useTranslation } from "react-i18next";
 import { ConfettiSuccess } from "@/components/Feedback";
 import { GameShell } from "@/components/GameShell";
 import { useSession } from "@/hooks/useSession";
@@ -8,19 +9,19 @@ import { GridBoard } from "./components/GridBoard";
 import { LevelSelectScreen } from "./components/LevelSelectScreen";
 import { PuzzleFeedbackPanel } from "./components/PuzzleFeedbackPanel";
 import { RunControls } from "./components/RunControls";
-import { INSTRUCTION, LEVEL_TITLE } from "./constants";
 import { useRobotCommandsGame } from "./useRobotCommandsGame";
 
 export function RobotCommandsGame() {
+  const { t } = useTranslation("games");
   const { session } = useSession();
   const game = useRobotCommandsGame(session);
 
   if (!game.level) {
     return (
       <GameShell
-        instruction="Chọn cấp độ chơi phù hợp với em nhé!"
-        subtitle="Xếp lệnh từng bước — robot không đoán ma thuật."
-        title="Xếp Lệnh Cho Robot"
+        instruction={t("robotCommands.instructionLevelSelect")}
+        subtitle={t("robotCommands.subtitle")}
+        title={t("robotCommands.title")}
       >
         <LevelSelectScreen onSelectLevel={game.selectLevel} />
       </GameShell>
@@ -29,11 +30,13 @@ export function RobotCommandsGame() {
 
   return (
     <GameShell
-      instruction={INSTRUCTION}
+      instruction={t("robotCommands.instructionPlay")}
       maxScore={game.totalPuzzles}
       score={game.score}
-      subtitle="Xếp lệnh từng bước — robot không đoán ma thuật."
-      title={`Xếp Lệnh Cho Robot — ${LEVEL_TITLE[game.level]}`}
+      subtitle={t("robotCommands.subtitle")}
+      title={t("robotCommands.titleWithLevel", {
+        level: t(`robotCommands.levels.${game.level}`),
+      })}
     >
       <section className="lab-card relative mx-auto max-w-4xl overflow-hidden bg-white/85 p-4 text-center sm:p-6">
         {game.showConfetti && <ConfettiSuccess />}

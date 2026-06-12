@@ -1,5 +1,6 @@
 import { ArrowLeft, Star } from "lucide-react";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { GameTtsProvider } from "@/context/GameTtsContext";
 import { BuddyBot } from "./BuddyBot";
@@ -20,6 +21,7 @@ export function GameShell({
   maxScore?: number;
   children: React.ReactNode;
 }) {
+  const { t } = useTranslation("common");
   const [autoplay, setAutoplay] = useState(
     () => localStorage.getItem("ai-lab-tts-autoplay") === "true"
   );
@@ -30,18 +32,16 @@ export function GameShell({
 
   const progress = maxScore ? Math.round(((score ?? 0) / maxScore) * 100) : 0;
 
-  // Gradient color based on progress
-  const progressGradient =
-    progress < 40
-      ? "from-skyLab to-blueLab"
-      : progress < 75
-        ? "from-blueLab to-purpleLab"
-        : "from-greenLab to-mintLab";
+  let progressGradient = "from-greenLab to-mintLab";
+  if (progress < 40) {
+    progressGradient = "from-skyLab to-blueLab";
+  } else if (progress < 75) {
+    progressGradient = "from-blueLab to-purpleLab";
+  }
 
   return (
     <GameTtsProvider>
       <main className="mx-auto flex w-full max-w-6xl flex-1 flex-col px-3 py-3 sm:px-4 sm:py-3.5">
-        {/* Top Navbar */}
         <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
           <div className="grid w-full grid-cols-2 items-center gap-2 sm:flex sm:w-auto sm:flex-wrap">
             <Link
@@ -49,7 +49,7 @@ export function GameShell({
               to="/"
             >
               <ArrowLeft className="mr-1 inline h-4 w-4" />{" "}
-              <span className="truncate">Về phòng lab</span>
+              <span className="truncate">{t("gameShell.backToLab")}</span>
             </Link>
             <button
               className={`big-button min-h-11 border px-3 py-2 font-bold text-xs shadow-sm transition-all sm:px-4 sm:text-sm ${
@@ -60,21 +60,22 @@ export function GameShell({
               onClick={() => setAutoplay(!autoplay)}
               type="button"
             >
-              {autoplay ? "🔊 Đọc: Bật" : "🔇 Đọc: Tắt"}
+              {autoplay
+                ? t("gameShell.autoplayOn")
+                : t("gameShell.autoplayOff")}
             </button>
           </div>
 
-          {typeof score === "number" && (
+          {typeof score === "number" && maxScore !== undefined && (
             <div className="flex items-center gap-1.5 rounded-2xl border border-yellowLab/50 bg-yellowLab/30 px-4 py-2 font-black text-ink text-sm shadow-sm">
               <Star className="h-4 w-4 fill-orange-300 text-orange-500" />
               <span>
-                {score}/{maxScore} điểm
+                {t("gameShell.scorePoints", { score, max: maxScore })}
               </span>
             </div>
           )}
         </div>
 
-        {/* Slim & Compact Header Shell */}
         <section className="lab-card mb-4 flex flex-col gap-3 rounded-3xl border border-white/60 p-3 shadow-sm sm:p-4 md:flex-row md:items-center md:gap-4">
           <div className="flex items-center gap-3">
             <div className="h-11 w-11 flex-shrink-0 sm:h-12 sm:w-12">
@@ -107,9 +108,12 @@ export function GameShell({
           </div>
 
           <div className="flex w-full items-center justify-end gap-2 md:w-auto">
-            {maxScore && (
+            {maxScore !== undefined && (
               <span className="rounded-xl border border-white/80 bg-white/60 px-2.5 py-1 font-black text-muted text-xs">
-                📊 {score ?? 0}/{maxScore} câu
+                {t("gameShell.scoreQuestions", {
+                  score: score ?? 0,
+                  max: maxScore,
+                })}
               </span>
             )}
             <TTSButton
@@ -121,7 +125,6 @@ export function GameShell({
           </div>
         </section>
 
-        {/* Emphasized Game Workspace */}
         <div className="flex w-full flex-1 flex-col">{children}</div>
       </main>
     </GameTtsProvider>

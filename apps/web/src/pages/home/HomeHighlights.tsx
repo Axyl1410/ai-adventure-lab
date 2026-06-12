@@ -1,27 +1,30 @@
 import { BookOpen, ShieldCheck, Star } from "lucide-react";
-
-const highlights = [
-  {
-    icon: BookOpen,
-    border: "border-skyLab",
-    iconClass: "text-sky-600",
-    text: "Bài học ngắn, dễ hiểu cho học sinh tiểu học.",
-  },
-  {
-    icon: ShieldCheck,
-    border: "border-greenLab",
-    iconClass: "text-green-600",
-    text: "Không yêu cầu tên thật hay tài khoản cá nhân.",
-  },
-  {
-    icon: Star,
-    border: "border-yellowLab",
-    iconClass: "text-orange-500",
-    text: "Hoàn thành thử thách để mở sticker Buddy Bot.",
-  },
-] as const;
+import { useTranslation } from "react-i18next";
 
 export function HomeHighlights() {
+  const { t } = useTranslation("home");
+
+  const highlights = [
+    {
+      icon: BookOpen,
+      border: "border-skyLab",
+      iconClass: "text-sky-600",
+      text: t("highlights.shortLessons"),
+    },
+    {
+      icon: ShieldCheck,
+      border: "border-greenLab",
+      iconClass: "text-green-600",
+      text: t("highlights.noPii"),
+    },
+    {
+      icon: Star,
+      border: "border-yellowLab",
+      iconClass: "text-orange-500",
+      text: t("highlights.earnStickers"),
+    },
+  ] as const;
+
   return (
     <section className="mt-6 grid gap-3 sm:grid-cols-3">
       {highlights.map(({ icon: Icon, border, iconClass, text }) => (

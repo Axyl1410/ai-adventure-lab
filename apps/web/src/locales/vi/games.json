@@ -1,0 +1,87 @@
+{
+  "aiDetective": {
+    "title": "🔍 Thám Tử AI",
+    "titleWithLevel": "🔍 Thám Tử AI — {{level}}",
+    "subtitle": "Đoán xem hoạt động nào có AI.",
+    "instructionLevelSelect": "Chọn cấp độ chơi phù hợp với em nhé!",
+    "instructionPlay": "Đọc thẻ tình huống rồi chọn Có AI hoặc Không AI.",
+    "levels": {
+      "easy": "Mầm non AI",
+      "hard": "Thám tử Tập sự"
+    }
+  },
+  "teachRobot": {
+    "title": "🤖 Dạy Robot Học",
+    "titleWithLevel": "🤖 Dạy Robot — {{level}}",
+    "subtitle": "Dạy robot học bằng ví dụ.",
+    "instructionLevelSelect": "Chọn cấp độ chơi phù hợp với em nhé!",
+    "instructionPlay": "Hãy giúp robot gán nhãn cho từng vật thể bên dưới. Nhớ đọc kỹ gợi ý nhé!",
+    "levels": {
+      "easy": "Cơ bản",
+      "hard": "Thử thách"
+    }
+  },
+  "teachableMachine": {
+    "title": "📷 Huấn Luyện AI Mini",
+    "subtitle": "Tự dạy AI nhận biết hình ảnh trực tiếp trong trình duyệt.",
+    "instruction": "Camera chỉ chạy cục bộ để robot học bằng ví dụ. Ảnh không gửi lên máy chủ. 🔒"
+  },
+  "promptMagic": {
+    "title": "Prompt Magic",
+    "titleWithLevel": "Prompt Magic - Chế độ {{level}}",
+    "subtitle": "Ghép prompt để hướng dẫn AI.",
+    "instructionLevelSelect": "Chọn cấp độ rèn luyện phép thuật viết câu lệnh nhé!",
+    "instructionPlay": "Chọn từng mảnh ghép bên dưới để tạo nên một câu lệnh hoàn hảo và gửi cho Prompt Coach chấm điểm nhé!",
+    "levels": {
+      "easy": "Tập sự",
+      "hard": "Pháp sư"
+    }
+  },
+  "oopsAiMistake": {
+    "title": "🤔 AI Có Thể Sai",
+    "titleWithLevel": "🤔 AI Có Thể Sai — {{level}}",
+    "subtitle": "AI không phải lúc nào cũng đúng.",
+    "instructionLevelSelect": "Chọn cấp độ chơi phù hợp với em nhé!",
+    "instructionPlay": "Hãy đọc câu trả lời của AI và xem có lỗi nào không nhé.",
+    "levels": {
+      "easy": "Logic Thực tế",
+      "hard": "Tin giả & Ảo tưởng"
+    }
+  },
+  "buddyBot": {
+    "title": "💬 Buddy Bot Trò Chuyện",
+    "subtitle": "Trò chuyện với robot học tập an toàn.",
+    "instruction": "Trò chuyện với robot học tập Buddy Bot."
+  },
+  "imageStudio": {
+    "title": "Xưởng Tranh AI",
+    "subtitle": "Viết prompt vui vẻ để tạo tranh học tập cùng Buddy Bot!",
+    "instruction": "Chọn các khối an toàn. Hình tạo ra luôn cần được ghi nhãn là hình AI."
+  },
+  "dataSorter": {
+    "title": "🗂️ Data Sorter",
+    "subtitle": "Phân loại dữ liệu để AI học an toàn.",
+    "instruction": "Đọc từng thẻ dữ liệu rồi chọn: dữ liệu tốt, dữ liệu nhiễu hoặc thông tin riêng tư."
+  },
+  "aiSafetyQuest": {
+    "title": "🛡️ AI Safety Quest",
+    "subtitle": "Ra quyết định an toàn khi dùng AI.",
+    "instruction": "Đọc tình huống rồi chọn hành động phù hợp: nên làm, không nên hoặc hỏi người lớn."
+  },
+  "robotCommands": {
+    "title": "Xếp Lệnh Cho Robot",
+    "titleWithLevel": "Xếp Lệnh Cho Robot — {{level}}",
+    "subtitle": "Xếp lệnh từng bước — robot không đoán ma thuật.",
+    "instructionLevelSelect": "Chọn cấp độ chơi phù hợp với em nhé!",
+    "instructionPlay": "Chạm lệnh để xếp hàng. Bấm Chạy thử xem Buddy Bot đi từng bước nhé!",
+    "levels": {
+      "easy": "Cơ bản",
+      "hard": "Thử thách"
+    }
+  },
+  "aiRecommendations": {
+    "title": "Gợi Ý Của AI",
+    "subtitle": "AI gợi ý theo mẫu đã thấy — không đọc suy nghĩ.",
+    "instruction": "Xem bạn thích gì gần đây, rồi chọn Buddy Bot nên gợi ý trò nào nhé!"
+  }
+}

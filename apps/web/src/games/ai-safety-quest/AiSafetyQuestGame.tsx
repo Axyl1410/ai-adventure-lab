@@ -1,4 +1,5 @@
 import { AnimatePresence, motion } from "motion/react";
+import { useTranslation } from "react-i18next";
 import { ConfettiSuccess } from "@/components/Feedback";
 import { GameShell } from "@/components/GameShell";
 import { useSession } from "@/hooks/useSession";
@@ -9,16 +10,17 @@ import { DECK_SIZE } from "./constants";
 import { useAiSafetyQuest } from "./useAiSafetyQuest";
 
 export function AiSafetyQuestGame() {
+  const { t } = useTranslation("games");
   const { session } = useSession();
   const quest = useAiSafetyQuest(session);
 
   return (
     <GameShell
-      instruction="Đọc tình huống rồi chọn hành động phù hợp: nên làm, không nên hoặc hỏi người lớn."
+      instruction={t("aiSafetyQuest.instruction")}
       maxScore={quest.deck.length || DECK_SIZE}
       score={quest.score}
-      subtitle="Ra quyết định an toàn khi dùng AI."
-      title="🛡️ AI Safety Quest"
+      subtitle={t("aiSafetyQuest.subtitle")}
+      title={t("aiSafetyQuest.title")}
     >
       <section className="lab-card relative mx-auto max-w-4xl overflow-hidden bg-white/85 p-6 text-center">
         {quest.done && <ConfettiSuccess />}

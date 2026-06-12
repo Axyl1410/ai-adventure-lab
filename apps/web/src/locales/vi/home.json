@@ -1,0 +1,143 @@
+{
+  "hero": {
+    "tagline": "Rainbow Robot Classroom",
+    "titlePrefix": "Phòng Thí Nghiệm",
+    "titleHighlight": "AI Vui Nhộn",
+    "subtitle": "Cùng Buddy Bot khám phá AI qua trò chơi, hình ảnh, giọng nói và thử thách thông minh!",
+    "pickGame": "Chọn trò chơi",
+    "stickerBook": "Sổ Sticker ({{count}}/{{total}})",
+    "safeLearning": "Học AI an toàn",
+    "safetyReminder": "AI có thể sai. Mình cùng kiểm tra với thầy cô nhé!"
+  },
+  "stats": {
+    "games": "Trò chơi",
+    "stickers": "Sticker",
+    "noAccount": "Không cần tài khoản",
+    "noAccountValue": "✓"
+  },
+  "highlights": {
+    "shortLessons": "Bài học ngắn, dễ hiểu cho học sinh tiểu học.",
+    "noPii": "Không yêu cầu tên thật hay tài khoản cá nhân.",
+    "earnStickers": "Hoàn thành thử thách để mở sticker Buddy Bot."
+  },
+  "gamesSection": {
+    "eyebrow": "Chọn một cuộc phiêu lưu",
+    "title": "Trò chơi AI có minh họa",
+    "description": "Mỗi trò chơi có hình ảnh riêng để học sinh dễ nhận biết mục tiêu trước khi bắt đầu."
+  },
+  "stickerModal": {
+    "close": "Đóng sổ sticker",
+    "title": "Sổ thu thập Sticker Buddy Bot",
+    "description": "Chơi các trò chơi và hoàn thành thử thách để thu thập trọn bộ sticker Buddy Bot.",
+    "unlocked": "Đã mở khóa!"
+  },
+  "stickers": {
+    "detective": {
+      "name": "Thám tử nhí",
+      "hint": "Đạt >= 4 điểm trong game Thám tử AI"
+    },
+    "robot": {
+      "name": "Kỹ sư máy học",
+      "hint": "Đạt >= 5 điểm trong Dạy Robot Học hoặc hoàn thành Huấn Luyện AI Mini"
+    },
+    "oops": {
+      "name": "Thám tử phản biện",
+      "hint": "Đạt >= 3 điểm trong game AI Có Thể Sai"
+    },
+    "prompt": {
+      "name": "Pháp sư Prompt",
+      "hint": "Đạt >= 80 điểm trong game Phép thuật câu lệnh"
+    },
+    "artist": {
+      "name": "Họa sĩ AI",
+      "hint": "Tạo thành công tranh trong Xưởng Tranh AI"
+    },
+    "commander": {
+      "name": "Chỉ huy robot",
+      "hint": "Đạt >= 3 điểm trong Xếp Lệnh Cho Robot"
+    },
+    "curator": {
+      "name": "Chuyên gia gợi ý",
+      "hint": "Đạt >= 5 điểm trong Gợi Ý Của AI"
+    }
+  },
+  "gameCards": {
+    "aiDetective": {
+      "title": "Thám Tử AI",
+      "desc": "Đoán xem hoạt động nào có sử dụng trí tuệ nhân tạo.",
+      "badge": "Dễ",
+      "time": "3 phút",
+      "alt": "Buddy Bot trong vai thám tử AI"
+    },
+    "teachRobot": {
+      "title": "Dạy Robot Học",
+      "desc": "Gán nhãn ví dụ để robot học cách phân biệt đồ vật.",
+      "badge": "Dễ",
+      "time": "5 phút",
+      "alt": "Robot học từ các ví dụ"
+    },
+    "teachableMachine": {
+      "title": "Huấn Luyện AI Mini",
+      "desc": "Thử model Teachable Machine với camera trong trình duyệt.",
+      "badge": "Khám phá",
+      "time": "6 phút",
+      "alt": "Phòng lab robot cho Teachable Machine"
+    },
+    "promptMagic": {
+      "title": "Phép Thuật Câu Lệnh",
+      "desc": "Ghép các khối hướng dẫn để tạo prompt rõ ràng.",
+      "badge": "Vừa",
+      "time": "4 phút",
+      "alt": "Buddy Bot cầm cây đũa prompt"
+    },
+    "oopsAiMistake": {
+      "title": "AI Có Thể Sai",
+      "desc": "Tìm lỗi sai và học cách kiểm tra lại thông tin.",
+      "badge": "Dễ",
+      "time": "3 phút",
+      "alt": "Một tình huống AI trả lời sai cần kiểm tra"
+    },
+    "buddyBot": {
+      "title": "Buddy Bot Trò Chuyện",
+      "desc": "Hỏi đáp cùng robot học tập bằng tiếng Việt an toàn.",
+      "badge": "Khám phá",
+      "time": "Tự chọn",
+      "alt": "Buddy Bot đang đọc sách"
+    },
+    "imageStudio": {
+      "title": "Xưởng Tranh AI",
+      "desc": "Chọn chủ đề, phong cách và tạo tranh AI an toàn.",
+      "badge": "Khám phá",
+      "time": "5 phút",
+      "alt": "Buddy Bot họa sĩ tạo tranh AI"
+    },
+    "dataSorter": {
+      "title": "Xếp Loại Dữ Liệu",
+      "desc": "Phân loại dữ liệu tốt, dữ liệu nhiễu và thông tin riêng tư.",
+      "badge": "Vừa",
+      "time": "4 phút",
+      "alt": "Robot phân loại dữ liệu để học AI"
+    },
+    "aiSafetyQuest": {
+      "title": "Nhiệm Vụ An Toàn AI",
+      "desc": "Chọn hành động an toàn khi trò chuyện và tạo nội dung với AI.",
+      "badge": "Dễ",
+      "time": "4 phút",
+      "alt": "Nhiệm vụ an toàn khi dùng AI"
+    },
+    "robotCommands": {
+      "title": "Xếp Lệnh Cho Robot",
+      "desc": "Xếp lệnh từng bước để Buddy Bot nhặt táo trên lưới.",
+      "badge": "Vừa",
+      "time": "4 phút",
+      "alt": "Robot đi theo chuỗi lệnh em xếp"
+    },
+    "aiRecommendations": {
+      "title": "Gợi Ý Của AI",
+      "desc": "Chọn gợi ý phù hợp theo sở thích bạn — AI học từ mẫu đã thấy.",
+      "badge": "Dễ",
+      "time": "4 phút",
+      "alt": "Buddy Bot gợi ý trò chơi phù hợp"
+    }
+  }
+}

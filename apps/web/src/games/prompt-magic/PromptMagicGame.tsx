@@ -1,22 +1,23 @@
+import { useTranslation } from "react-i18next";
 import { GameShell } from "@/components/GameShell";
 import { useSession } from "@/hooks/useSession";
 import { BlockPickerPanel } from "./components/BlockPickerPanel";
 import { CoachResultPanel } from "./components/CoachResultPanel";
 import { LevelSelectScreen } from "./components/LevelSelectScreen";
 import { PromptPreviewPanel } from "./components/PromptPreviewPanel";
-import { LEVEL_MODE_TITLE } from "./constants";
 import { usePromptMagicGame } from "./usePromptMagicGame";
 
 export function PromptMagicGame() {
+  const { t } = useTranslation("games");
   const { session } = useSession();
   const game = usePromptMagicGame(session);
 
   if (!game.level) {
     return (
       <GameShell
-        instruction="Chọn cấp độ rèn luyện phép thuật viết câu lệnh nhé!"
-        subtitle="Ghép prompt để hướng dẫn AI."
-        title="Prompt Magic"
+        instruction={t("promptMagic.instructionLevelSelect")}
+        subtitle={t("promptMagic.subtitle")}
+        title={t("promptMagic.title")}
       >
         <LevelSelectScreen onSelectLevel={game.selectLevel} />
       </GameShell>
@@ -25,9 +26,11 @@ export function PromptMagicGame() {
 
   return (
     <GameShell
-      instruction="Chọn từng mảnh ghép bên dưới để tạo nên một câu lệnh hoàn hảo và gửi cho Prompt Coach chấm điểm nhé!"
-      subtitle="Ghép prompt để hướng dẫn AI."
-      title={`Prompt Magic - Chế độ ${LEVEL_MODE_TITLE[game.level]}`}
+      instruction={t("promptMagic.instructionPlay")}
+      subtitle={t("promptMagic.subtitle")}
+      title={t("promptMagic.titleWithLevel", {
+        level: t(`promptMagic.levels.${game.level}`),
+      })}
     >
       <section className="grid flex-1 gap-5 lg:grid-cols-[1fr_390px]">
         <BlockPickerPanel

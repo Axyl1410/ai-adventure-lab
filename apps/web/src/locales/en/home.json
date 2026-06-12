@@ -1,0 +1,143 @@
+{
+  "hero": {
+    "tagline": "Rainbow Robot Classroom",
+    "titlePrefix": "Fun AI",
+    "titleHighlight": "Adventure Lab",
+    "subtitle": "Explore AI with Buddy Bot through games, pictures, voice, and smart challenges!",
+    "pickGame": "Pick a game",
+    "stickerBook": "Sticker book ({{count}}/{{total}})",
+    "safeLearning": "Learn AI safely",
+    "safetyReminder": "AI can be wrong. Let's check with a teacher!"
+  },
+  "stats": {
+    "games": "Games",
+    "stickers": "Stickers",
+    "noAccount": "No account needed",
+    "noAccountValue": "✓"
+  },
+  "highlights": {
+    "shortLessons": "Short, easy lessons for elementary students.",
+    "noPii": "No real name or personal account required.",
+    "earnStickers": "Complete challenges to unlock Buddy Bot stickers."
+  },
+  "gamesSection": {
+    "eyebrow": "Pick an adventure",
+    "title": "AI games with pictures",
+    "description": "Each game has its own image so students know the goal before they start."
+  },
+  "stickerModal": {
+    "close": "Close sticker book",
+    "title": "Buddy Bot sticker collection",
+    "description": "Play games and finish challenges to collect the full Buddy Bot sticker set.",
+    "unlocked": "Unlocked!"
+  },
+  "stickers": {
+    "detective": {
+      "name": "Junior detective",
+      "hint": "Score >= 4 in AI Detective"
+    },
+    "robot": {
+      "name": "ML engineer",
+      "hint": "Score >= 5 in Teach the Robot or finish Mini AI Training"
+    },
+    "oops": {
+      "name": "Fact checker",
+      "hint": "Score >= 3 in AI Can Be Wrong"
+    },
+    "prompt": {
+      "name": "Prompt wizard",
+      "hint": "Score >= 80 in Prompt Magic"
+    },
+    "artist": {
+      "name": "AI artist",
+      "hint": "Create a picture in AI Image Studio"
+    },
+    "commander": {
+      "name": "Robot commander",
+      "hint": "Score >= 3 in Robot Commands"
+    },
+    "curator": {
+      "name": "Recommendation pro",
+      "hint": "Score >= 5 in AI Suggestions"
+    }
+  },
+  "gameCards": {
+    "aiDetective": {
+      "title": "AI Detective",
+      "desc": "Guess which activities use artificial intelligence.",
+      "badge": "Easy",
+      "time": "3 min",
+      "alt": "Buddy Bot as an AI detective"
+    },
+    "teachRobot": {
+      "title": "Teach the Robot",
+      "desc": "Label examples so the robot learns to tell objects apart.",
+      "badge": "Easy",
+      "time": "5 min",
+      "alt": "Robot learning from examples"
+    },
+    "teachableMachine": {
+      "title": "Mini AI Training",
+      "desc": "Try a Teachable Machine model with your browser camera.",
+      "badge": "Explore",
+      "time": "6 min",
+      "alt": "Robot lab for Teachable Machine"
+    },
+    "promptMagic": {
+      "title": "Prompt Magic",
+      "desc": "Combine blocks to write a clear prompt.",
+      "badge": "Medium",
+      "time": "4 min",
+      "alt": "Buddy Bot with a prompt wand"
+    },
+    "oopsAiMistake": {
+      "title": "AI Can Be Wrong",
+      "desc": "Spot mistakes and learn to double-check information.",
+      "badge": "Easy",
+      "time": "3 min",
+      "alt": "AI giving a wrong answer that needs checking"
+    },
+    "buddyBot": {
+      "title": "Buddy Bot Chat",
+      "desc": "Ask and learn with a safe study robot.",
+      "badge": "Explore",
+      "time": "Your pace",
+      "alt": "Buddy Bot reading a book"
+    },
+    "imageStudio": {
+      "title": "AI Image Studio",
+      "desc": "Pick theme and style to create safe AI art.",
+      "badge": "Explore",
+      "time": "5 min",
+      "alt": "Buddy Bot artist creating AI art"
+    },
+    "dataSorter": {
+      "title": "Data Sorter",
+      "desc": "Sort good data, noisy data, and private information.",
+      "badge": "Medium",
+      "time": "4 min",
+      "alt": "Robot sorting data for AI learning"
+    },
+    "aiSafetyQuest": {
+      "title": "AI Safety Quest",
+      "desc": "Choose safe actions when chatting and creating with AI.",
+      "badge": "Easy",
+      "time": "4 min",
+      "alt": "Safety mission when using AI"
+    },
+    "robotCommands": {
+      "title": "Robot Commands",
+      "desc": "Order steps so Buddy Bot picks apples on the grid.",
+      "badge": "Medium",
+      "time": "4 min",
+      "alt": "Robot following commands you arrange"
+    },
+    "aiRecommendations": {
+      "title": "AI Suggestions",
+      "desc": "Pick the right suggestion from what a friend likes — AI learns from patterns.",
+      "badge": "Easy",
+      "time": "4 min",
+      "alt": "Buddy Bot suggesting a matching game"
+    }
+  }
+}

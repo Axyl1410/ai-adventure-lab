@@ -39,9 +39,14 @@ docker compose up -d --build
 
 ## Language conventions
 
-- **Student/teacher UI copy:** Vietnamese, short, ages 6–11.
+- **Student/teacher UI copy:** Vietnamese default, English via i18n (`react-i18next`).
+- **Locale files:** `apps/web/src/locales/{vi,en}/*.json` — namespaces: `common`, `layout`, `home`, `games`.
+- **Toggle:** header VI/EN; persisted in `localStorage` key `ai-lab-locale`.
+- **New UI strings:** add keys to both `vi` and `en` JSON; use `useTranslation("namespace")` in components.
+- **Game shell copy:** `games.json` keys per game (`aiDetective`, `robotCommands`, …).
 - **Code comments:** English.
 - **Secrets:** backend-only; never in frontend or git.
+- **API/AI prompts:** still Vietnamese-first in `apps/api/src/prompts/`; pass `locale` later for Buddy Bot EN.
 
 ## pnpm 11 — build scripts
 

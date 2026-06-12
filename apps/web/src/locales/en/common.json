@@ -1,0 +1,44 @@
+{
+  "loadingGame": "Loading game...",
+  "notFound": {
+    "title": "Oops, no game here!",
+    "body": "Buddy Bot could not find this page. Let's go back to the lab and pick a safe activity!",
+    "back": "Back to lab"
+  },
+  "gameShell": {
+    "backToLab": "Back to lab",
+    "autoplayOn": "🔊 Read: On",
+    "autoplayOff": "🔇 Read: Off",
+    "scorePoints": "{{score}}/{{max}} points",
+    "scoreQuestions": "📊 {{score}}/{{max}} questions"
+  },
+  "tts": {
+    "listen": "Listen to content",
+    "loading": "Loading...",
+    "stop": "Stop",
+    "play": "Listen"
+  },
+  "feedback": {
+    "correct": "That's right!",
+    "tryAgain": "Good try — look again!",
+    "safety": "Safety rule",
+    "loading": "Buddy Bot is thinking..."
+  },
+  "error": {
+    "unexpected": "Something unexpected happened.",
+    "title": "Oops! Something went wrong 🙈",
+    "body": "Buddy Bot tripped up. Try reloading or go back home!",
+    "retry": "🔄 Try again",
+    "home": "🏠 Home"
+  },
+  "badges": {
+    "easy": "Easy",
+    "medium": "Medium",
+    "explore": "Explore"
+  },
+  "actions": {
+    "start": "Start",
+    "selectLevel": "Pick a level that's right for you!",
+    "tryAgain": "Try again"
+  }
+}

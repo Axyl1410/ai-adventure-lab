@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { ConfettiSuccess } from "@/components/Feedback";
 import { GameShell } from "@/components/GameShell";
 import { useSession } from "@/hooks/useSession";
@@ -11,14 +12,15 @@ import { WebcamPanel } from "./components/WebcamPanel";
 import { useTeachableMachineGame } from "./useTeachableMachineGame";
 
 export function TeachableMachineGame() {
+  const { t } = useTranslation("games");
   const { session } = useSession();
   const game = useTeachableMachineGame(session);
 
   return (
     <GameShell
-      instruction="Camera chỉ chạy cục bộ để robot học bằng ví dụ. Ảnh không gửi lên máy chủ. 🔒"
-      subtitle="Tự dạy AI nhận biết hình ảnh trực tiếp trong trình duyệt."
-      title="📷 Huấn Luyện AI Mini"
+      instruction={t("teachableMachine.instruction")}
+      subtitle={t("teachableMachine.subtitle")}
+      title={t("teachableMachine.title")}
     >
       {game.showConfetti && <ConfettiSuccess />}
       <section className="grid flex-1 gap-4 lg:grid-cols-[1fr_340px]">

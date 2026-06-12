@@ -1,5 +1,6 @@
 import { ArrowRight } from "lucide-react";
 import { motion } from "motion/react";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import type { GameCardConfig } from "./homeData";
 
@@ -10,6 +11,7 @@ export function GameCard({
   card: GameCardConfig;
   index: number;
 }) {
+  const { t } = useTranslation("common");
   const Icon = card.icon;
 
   return (
@@ -53,7 +55,7 @@ export function GameCard({
           className={`big-button flex w-full items-center justify-center gap-2 bg-gradient-to-r ${card.color} font-black text-ink shadow-md transition-all duration-300 hover:shadow-lg`}
           to={card.to}
         >
-          Bắt đầu{" "}
+          {t("actions.start")}{" "}
           <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
         </Link>
       </div>

@@ -1,12 +1,16 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { GameCard } from "./GameCard";
 import { HomeHero } from "./HomeHero";
 import { HomeHighlights } from "./HomeHighlights";
-import { gameCards } from "./homeData";
+import { useGameCards, useStickers } from "./homeData";
 import { StickerBookModal } from "./StickerBookModal";
 import { useUnlockedStickers } from "./useUnlockedStickers";
 
 export function HomePage() {
+  const { t } = useTranslation("home");
+  const gameCards = useGameCards();
+  const stickers = useStickers();
   const unlockedStickers = useUnlockedStickers();
   const [showStickerBook, setShowStickerBook] = useState(false);
 
@@ -14,6 +18,7 @@ export function HomePage() {
     <main className="mx-auto w-full max-w-7xl px-4 py-5 sm:py-8">
       <HomeHero
         onOpenStickerBook={() => setShowStickerBook(true)}
+        stickerTotal={stickers.length}
         unlockedCount={unlockedStickers.length}
       />
 
@@ -23,15 +28,14 @@ export function HomePage() {
         <div className="mb-4 flex flex-wrap items-end justify-between gap-3">
           <div>
             <p className="font-black text-purple-700 text-sm uppercase tracking-wide">
-              Chọn một cuộc phiêu lưu
+              {t("gamesSection.eyebrow")}
             </p>
             <h2 className="font-black text-3xl text-ink">
-              Trò chơi AI có minh họa
+              {t("gamesSection.title")}
             </h2>
           </div>
           <p className="max-w-xl font-bold text-muted text-sm leading-relaxed">
-            Mỗi trò chơi có hình ảnh riêng để học sinh dễ nhận biết mục tiêu
-            trước khi bắt đầu.
+            {t("gamesSection.description")}
           </p>
         </div>
 
@@ -45,6 +49,7 @@ export function HomePage() {
       <StickerBookModal
         onClose={() => setShowStickerBook(false)}
         open={showStickerBook}
+        stickers={stickers}
         unlockedStickers={unlockedStickers}
       />
     </main>

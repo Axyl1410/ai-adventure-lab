@@ -1,15 +1,21 @@
 import { ArrowRight, ShieldCheck, Sparkles, Trophy } from "lucide-react";
 import { motion } from "motion/react";
+import { useTranslation } from "react-i18next";
 import { BuddyBot } from "@/components/BuddyBot";
-import { quickStats, STICKERS } from "./homeData";
+import { useQuickStats } from "./homeData";
 
 export function HomeHero({
   unlockedCount,
+  stickerTotal,
   onOpenStickerBook,
 }: {
   unlockedCount: number;
+  stickerTotal: number;
   onOpenStickerBook: () => void;
 }) {
+  const { t } = useTranslation("home");
+  const quickStats = useQuickStats();
+
   return (
     <section className="relative overflow-hidden rounded-[2rem] border border-white/70 bg-white/80 p-5 shadow-soft backdrop-blur-md sm:p-7 lg:p-8">
       <div
@@ -24,18 +30,17 @@ export function HomeHero({
           transition={{ duration: 0.45 }}
         >
           <p className="inline-flex items-center gap-2 rounded-full border border-purpleLab/25 bg-purpleLab/15 px-4 py-2 font-black text-purple-700 text-sm">
-            <Sparkles className="h-4 w-4" /> Rainbow Robot Classroom
+            <Sparkles className="h-4 w-4" /> {t("hero.tagline")}
           </p>
           <div className="space-y-3">
             <h1 className="max-w-3xl font-black text-4xl text-ink leading-tight sm:text-5xl lg:text-6xl">
-              Phòng Thí Nghiệm{" "}
+              {t("hero.titlePrefix")}{" "}
               <span className="bg-gradient-to-r from-skyLab via-purpleLab to-pinkLab bg-clip-text text-transparent">
-                AI Vui Nhộn
+                {t("hero.titleHighlight")}
               </span>
             </h1>
             <p className="max-w-2xl font-bold text-base text-muted leading-relaxed sm:text-lg">
-              Cùng Buddy Bot khám phá AI qua trò chơi, hình ảnh, giọng nói và
-              thử thách thông minh!
+              {t("hero.subtitle")}
             </p>
           </div>
 
@@ -58,15 +63,18 @@ export function HomeHero({
               className="big-button inline-flex items-center gap-2 bg-gradient-to-r from-ink to-ink/90 text-white"
               href="#games"
             >
-              Chọn trò chơi <ArrowRight className="h-5 w-5" />
+              {t("hero.pickGame")} <ArrowRight className="h-5 w-5" />
             </a>
             <button
               className="big-button inline-flex items-center gap-2 border border-yellowLab/50 bg-yellowLab/25 text-ink"
               onClick={onOpenStickerBook}
               type="button"
             >
-              <Trophy className="h-5 w-5 text-orange-500" /> Sổ Sticker (
-              {unlockedCount}/{STICKERS.length})
+              <Trophy className="h-5 w-5 text-orange-500" />{" "}
+              {t("hero.stickerBook", {
+                count: unlockedCount,
+                total: stickerTotal,
+              })}
             </button>
           </div>
         </motion.div>
@@ -79,13 +87,13 @@ export function HomeHero({
         >
           <div className="absolute top-5 left-5 rounded-3xl bg-white/85 px-4 py-3 font-black text-ink text-sm shadow-sm">
             <ShieldCheck className="mr-1 inline h-4 w-4 text-green-600" />
-            Học AI an toàn
+            {t("hero.safeLearning")}
           </div>
           <div className="mx-auto flex h-[250px] items-center justify-center sm:h-[320px]">
             <BuddyBot size={240} state="happy" />
           </div>
           <div className="absolute right-5 bottom-5 max-w-[230px] rounded-3xl bg-white/90 px-4 py-3 font-black text-ink text-sm leading-snug shadow-sm">
-            AI có thể sai. Mình cùng kiểm tra với thầy cô nhé!
+            {t("hero.safetyReminder")}
           </div>
         </motion.div>
       </div>

@@ -1,21 +1,22 @@
+import { useTranslation } from "react-i18next";
 import { GameShell } from "@/components/GameShell";
 import { useSession } from "@/hooks/useSession";
 import { LabelingCard } from "./components/LabelingCard";
 import { LevelSelectScreen } from "./components/LevelSelectScreen";
 import { TrainingSidebar } from "./components/TrainingSidebar";
-import { LEVEL_TITLE } from "./constants";
 import { useTeachRobotGame } from "./useTeachRobotGame";
 
 export function TeachRobotGame() {
+  const { t } = useTranslation("games");
   const { session } = useSession();
   const game = useTeachRobotGame(session);
 
   if (!game.level) {
     return (
       <GameShell
-        instruction="Chọn cấp độ chơi phù hợp với em nhé!"
-        subtitle="Dạy robot học bằng ví dụ."
-        title="🤖 Dạy Robot Học"
+        instruction={t("teachRobot.instructionLevelSelect")}
+        subtitle={t("teachRobot.subtitle")}
+        title={t("teachRobot.title")}
       >
         <LevelSelectScreen onSelectLevel={game.selectLevel} />
       </GameShell>
@@ -24,11 +25,13 @@ export function TeachRobotGame() {
 
   return (
     <GameShell
-      instruction="Hãy giúp robot gán nhãn cho từng vật thể bên dưới. Nhớ đọc kỹ gợi ý nhé!"
+      instruction={t("teachRobot.instructionPlay")}
       maxScore={game.items.length}
       score={game.correct}
-      subtitle="Dạy robot học bằng ví dụ."
-      title={`🤖 Dạy Robot — ${LEVEL_TITLE[game.level]}`}
+      subtitle={t("teachRobot.subtitle")}
+      title={t("teachRobot.titleWithLevel", {
+        level: t(`teachRobot.levels.${game.level}`),
+      })}
     >
       <section className="grid flex-1 items-start gap-4 lg:grid-cols-[1fr_340px]">
         <LabelingCard

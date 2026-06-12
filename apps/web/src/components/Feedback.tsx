@@ -1,8 +1,11 @@
 import { CheckCircle2, ShieldAlert, Sparkles } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { BuddyBot } from "./BuddyBot";
 import { TTSButton } from "./TTSButton";
 
 export function HappyFeedback({ text }: { text: string }) {
+  const { t } = useTranslation("common");
+
   return (
     <div className="flex flex-col items-center gap-5 rounded-3xl border border-greenLab/25 bg-greenLab/15 p-5 text-center font-bold text-ink sm:flex-row sm:text-left">
       <div className="flex-shrink-0">
@@ -11,7 +14,7 @@ export function HappyFeedback({ text }: { text: string }) {
       <div className="flex-1">
         <div className="mb-1.5 flex items-center justify-center gap-1.5 font-black text-green-700 text-xl sm:justify-start">
           <CheckCircle2 className="h-6 w-6 text-green-600" />
-          <span>Đúng rồi!</span>
+          <span>{t("feedback.correct")}</span>
         </div>
         <p className="font-semibold text-base text-ink leading-relaxed">
           {text}
@@ -30,6 +33,8 @@ export function HappyFeedback({ text }: { text: string }) {
 }
 
 export function TryAgainFeedback({ text }: { text: string }) {
+  const { t } = useTranslation("common");
+
   return (
     <div className="flex flex-col items-center gap-5 rounded-3xl border border-yellowLab/30 bg-yellowLab/20 p-5 text-center font-bold text-ink sm:flex-row sm:text-left">
       <div className="flex-shrink-0">
@@ -38,7 +43,7 @@ export function TryAgainFeedback({ text }: { text: string }) {
       <div className="flex-1">
         <div className="mb-1.5 flex items-center justify-center gap-1.5 font-black text-orange-600 text-xl sm:justify-start">
           <Sparkles className="h-6 w-6 animate-pulse text-orange-500" />
-          <span>Ồ, chú ý nhé!</span>
+          <span>{t("feedback.tryAgain")}</span>
         </div>
         <p className="font-semibold text-base text-ink leading-relaxed">
           {text}
@@ -57,6 +62,8 @@ export function TryAgainFeedback({ text }: { text: string }) {
 }
 
 export function SafetyRedirect({ text }: { text: string }) {
+  const { t } = useTranslation("common");
+
   return (
     <div className="flex flex-col items-center gap-5 rounded-3xl border border-redSoft/30 bg-redSoft/15 p-5 text-center font-bold text-ink sm:flex-row sm:text-left">
       <div className="flex-shrink-0">
@@ -65,7 +72,7 @@ export function SafetyRedirect({ text }: { text: string }) {
       <div className="flex-1">
         <div className="mb-1.5 flex items-center justify-center gap-1.5 font-black text-red-600 text-xl sm:justify-start">
           <ShieldAlert className="h-6 w-6 text-red-500" />
-          <span>Nguyên tắc An toàn</span>
+          <span>{t("feedback.safety")}</span>
         </div>
         <p className="font-semibold text-base text-ink leading-relaxed">
           {text}
@@ -98,11 +105,13 @@ export function ConfettiSuccess() {
 }
 
 export function LoadingBuddy() {
+  const { t } = useTranslation("common");
+
   return (
     <div className="flex flex-col items-center justify-center gap-4 rounded-3xl border border-white/40 bg-white/60 p-6 text-center font-bold text-muted backdrop-blur-xs">
       <BuddyBot size={95} state="thinking" />
       <p className="animate-pulse font-black text-ink text-lg">
-        Buddy Bot đang suy nghĩ một chút...
+        {t("feedback.loading")}
       </p>
     </div>
   );

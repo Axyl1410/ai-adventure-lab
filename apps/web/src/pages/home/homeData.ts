@@ -12,6 +12,7 @@ import {
   Sparkles,
   Wand2,
 } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import detectiveBanner from "@/assets/detective-banner.png";
 import buddyReading from "@/assets/mascot/buddy-bot-reading.png";
 import oopsBanner from "@/assets/oops-banner.png";
@@ -22,14 +23,37 @@ import stickerOops from "@/assets/stickers/sticker-oops.png";
 import stickerPrompt from "@/assets/stickers/sticker-prompt.png";
 import stickerRobot from "@/assets/stickers/sticker-robot.png";
 
+export type StickerId =
+  | "detective"
+  | "robot"
+  | "oops"
+  | "prompt"
+  | "artist"
+  | "commander"
+  | "curator";
+
+export type GameCardId =
+  | "aiDetective"
+  | "teachRobot"
+  | "teachableMachine"
+  | "promptMagic"
+  | "oopsAiMistake"
+  | "buddyBot"
+  | "imageStudio"
+  | "dataSorter"
+  | "aiSafetyQuest"
+  | "robotCommands"
+  | "aiRecommendations";
+
 export type StickerConfig = {
-  id: string;
+  id: StickerId;
   name: string;
   image: string;
   hint: string;
 };
 
 export type GameCardConfig = {
+  id: GameCardId;
   title: string;
   desc: string;
   badge: string;
@@ -42,193 +66,179 @@ export type GameCardConfig = {
   imageTone: string;
 };
 
-/** Keep ids in sync with unlockSticker() calls in games. */
-export const STICKERS: StickerConfig[] = [
-  {
-    id: "detective",
-    name: "Thám tử nhí",
-    image: stickerDetective,
-    hint: "Đạt >= 4 điểm trong game Thám tử AI",
-  },
-  {
-    id: "robot",
-    name: "Kỹ sư máy học",
-    image: stickerRobot,
-    hint: "Đạt >= 5 điểm trong Dạy Robot Học hoặc hoàn thành Huấn Luyện AI Mini",
-  },
-  {
-    id: "oops",
-    name: "Thám tử phản biện",
-    image: stickerOops,
-    hint: "Đạt >= 3 điểm trong game AI Có Thể Sai",
-  },
-  {
-    id: "prompt",
-    name: "Pháp sư Prompt",
-    image: stickerPrompt,
-    hint: "Đạt >= 80 điểm trong game Phép thuật câu lệnh",
-  },
-  {
-    id: "artist",
-    name: "Họa sĩ AI",
-    image: stickerArtist,
-    hint: "Tạo thành công tranh trong Xưởng Tranh AI",
-  },
-  {
-    id: "commander",
-    name: "Chỉ huy robot",
-    image: stickerRobot,
-    hint: "Đạt >= 3 điểm trong Xếp Lệnh Cho Robot",
-  },
-  {
-    id: "curator",
-    name: "Chuyên gia gợi ý",
-    image: stickerPrompt,
-    hint: "Đạt >= 5 điểm trong Gợi Ý Của AI",
-  },
+/** Static sticker assets — ids must match unlockSticker() in games. */
+export const STICKER_IDS: StickerId[] = [
+  "detective",
+  "robot",
+  "oops",
+  "prompt",
+  "artist",
+  "commander",
+  "curator",
 ];
 
-export const gameCards: GameCardConfig[] = [
+const STICKER_IMAGES: Record<StickerId, string> = {
+  detective: stickerDetective,
+  robot: stickerRobot,
+  oops: stickerOops,
+  prompt: stickerPrompt,
+  artist: stickerArtist,
+  commander: stickerRobot,
+  curator: stickerPrompt,
+};
+
+const GAME_CARD_STATIC: Omit<
+  GameCardConfig,
+  "title" | "desc" | "badge" | "time" | "alt"
+>[] = [
   {
-    title: "Thám Tử AI",
-    desc: "Đoán xem hoạt động nào có sử dụng trí tuệ nhân tạo.",
-    badge: "Dễ",
-    time: "3 phút",
+    id: "aiDetective",
     to: "/games/ai-detective",
     image: detectiveBanner,
-    alt: "Buddy Bot trong vai thám tử AI",
     icon: Search,
     color: "from-skyLab to-blueLab",
     imageTone: "bg-skyLab/15",
   },
   {
-    title: "Dạy Robot Học",
-    desc: "Gán nhãn ví dụ để robot học cách phân biệt đồ vật.",
-    badge: "Dễ",
-    time: "5 phút",
+    id: "teachRobot",
     to: "/games/teach-the-robot",
     image: stickerRobot,
-    alt: "Robot học từ các ví dụ",
     icon: BrainCircuit,
     color: "from-greenLab to-mintLab",
     imageTone: "bg-greenLab/15",
   },
   {
-    title: "Huấn Luyện AI Mini",
-    desc: "Thử model Teachable Machine với camera trong trình duyệt.",
-    badge: "Khám phá",
-    time: "6 phút",
+    id: "teachableMachine",
     to: "/games/teachable-machine",
     image: robotLab,
-    alt: "Phòng lab robot cho Teachable Machine",
     icon: Camera,
     color: "from-purpleLab to-pinkLab",
     imageTone: "bg-purpleLab/15",
   },
   {
-    title: "Phép Thuật Câu Lệnh",
-    desc: "Ghép các khối hướng dẫn để tạo prompt rõ ràng.",
-    badge: "Vừa",
-    time: "4 phút",
+    id: "promptMagic",
     to: "/games/prompt-magic",
     image: stickerPrompt,
-    alt: "Buddy Bot cầm cây đũa prompt",
     icon: Wand2,
     color: "from-yellowLab to-orangeLab",
     imageTone: "bg-yellowLab/20",
   },
   {
-    title: "AI Có Thể Sai",
-    desc: "Tìm lỗi sai và học cách kiểm tra lại thông tin.",
-    badge: "Dễ",
-    time: "3 phút",
+    id: "oopsAiMistake",
     to: "/games/oops-ai-mistake",
     image: oopsBanner,
-    alt: "Một tình huống AI trả lời sai cần kiểm tra",
     icon: BadgeCheck,
     color: "from-redSoft to-orangeLab",
     imageTone: "bg-redSoft/15",
   },
   {
-    title: "Buddy Bot Trò Chuyện",
-    desc: "Hỏi đáp cùng robot học tập bằng tiếng Việt an toàn.",
-    badge: "Khám phá",
-    time: "Tự chọn",
+    id: "buddyBot",
     to: "/games/buddy-bot",
     image: buddyReading,
-    alt: "Buddy Bot đang đọc sách",
     icon: MessageCircle,
     color: "from-blueLab to-purpleLab",
     imageTone: "bg-blueLab/15",
   },
   {
-    title: "Xưởng Tranh AI",
-    desc: "Chọn chủ đề, phong cách và tạo tranh AI an toàn.",
-    badge: "Khám phá",
-    time: "5 phút",
+    id: "imageStudio",
     to: "/games/image-studio",
     image: stickerArtist,
-    alt: "Buddy Bot họa sĩ tạo tranh AI",
     icon: ImageIcon,
     color: "from-pinkLab to-yellowLab",
     imageTone: "bg-pinkLab/15",
   },
   {
-    title: "Xếp Loại Dữ Liệu",
-    desc: "Phân loại dữ liệu tốt, dữ liệu nhiễu và thông tin riêng tư.",
-    badge: "Vừa",
-    time: "4 phút",
+    id: "dataSorter",
     to: "/games/data-sorter",
     image: stickerRobot,
-    alt: "Robot phân loại dữ liệu để học AI",
     icon: Database,
     color: "from-greenLab to-skyLab",
     imageTone: "bg-greenLab/15",
   },
   {
-    title: "Nhiệm Vụ An Toàn AI",
-    desc: "Chọn hành động an toàn khi trò chuyện và tạo nội dung với AI.",
-    badge: "Dễ",
-    time: "4 phút",
+    id: "aiSafetyQuest",
     to: "/games/ai-safety-quest",
     image: oopsBanner,
-    alt: "Nhiệm vụ an toàn khi dùng AI",
     icon: ShieldCheck,
     color: "from-mintLab to-greenLab",
     imageTone: "bg-greenLab/15",
   },
   {
-    title: "Xếp Lệnh Cho Robot",
-    desc: "Xếp lệnh từng bước để Buddy Bot nhặt táo trên lưới.",
-    badge: "Vừa",
-    time: "4 phút",
+    id: "robotCommands",
     to: "/games/robot-commands",
     image: robotLab,
-    alt: "Robot đi theo chuỗi lệnh em xếp",
     icon: Bot,
     color: "from-skyLab to-mintLab",
     imageTone: "bg-skyLab/15",
   },
   {
-    title: "Gợi Ý Của AI",
-    desc: "Chọn gợi ý phù hợp theo sở thích bạn — AI học từ mẫu đã thấy.",
-    badge: "Dễ",
-    time: "4 phút",
+    id: "aiRecommendations",
     to: "/games/ai-recommendations",
     image: stickerPrompt,
-    alt: "Buddy Bot gợi ý trò chơi phù hợp",
     icon: Sparkles,
     color: "from-purpleLab to-pinkLab",
     imageTone: "bg-purpleLab/15",
   },
 ];
 
-export const quickStats = [
-  { label: "Trò chơi", value: "11", tone: "bg-skyLab/15 text-sky-700" },
-  { label: "Sticker", value: "7", tone: "bg-yellowLab/25 text-orange-700" },
-  {
-    label: "Không cần tài khoản",
-    value: "✓",
-    tone: "bg-greenLab/20 text-green-700",
-  },
-] as const;
+/** @deprecated Use useStickers() for translated copy. Kept for sticker id sync. */
+export const STICKERS = STICKER_IDS.map((id) => ({
+  id,
+  image: STICKER_IMAGES[id],
+  name: "",
+  hint: "",
+}));
+
+export function useStickers(): StickerConfig[] {
+  const { t } = useTranslation("home");
+
+  return STICKER_IDS.map((id) => ({
+    id,
+    image: STICKER_IMAGES[id],
+    name: t(`stickers.${id}.name`),
+    hint: t(`stickers.${id}.hint`),
+  }));
+}
+
+export function useGameCards(): GameCardConfig[] {
+  const { t } = useTranslation("home");
+
+  return GAME_CARD_STATIC.map((card) => ({
+    ...card,
+    title: t(`gameCards.${card.id}.title`),
+    desc: t(`gameCards.${card.id}.desc`),
+    badge: t(`gameCards.${card.id}.badge`),
+    time: t(`gameCards.${card.id}.time`),
+    alt: t(`gameCards.${card.id}.alt`),
+  }));
+}
+
+export function useQuickStats() {
+  const { t } = useTranslation("home");
+
+  return [
+    {
+      label: t("stats.games"),
+      value: String(GAME_CARD_STATIC.length),
+      tone: "bg-skyLab/15 text-sky-700",
+    },
+    {
+      label: t("stats.stickers"),
+      value: String(STICKER_IDS.length),
+      tone: "bg-yellowLab/25 text-orange-700",
+    },
+    {
+      label: t("stats.noAccount"),
+      value: t("stats.noAccountValue"),
+      tone: "bg-greenLab/20 text-green-700",
+    },
+  ] as const;
+}
+
+/** @deprecated Use useGameCards() for translated cards. */
+export const gameCards: GameCardConfig[] = [];
+
+/** @deprecated Use useQuickStats(). */
+export const quickStats = [] as const;
+
+export { STICKER_IDS as STICKER_COUNT_SOURCE };

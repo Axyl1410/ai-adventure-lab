@@ -1,0 +1,87 @@
+{
+  "aiDetective": {
+    "title": "🔍 AI Detective",
+    "titleWithLevel": "🔍 AI Detective — {{level}}",
+    "subtitle": "Guess which activities use AI.",
+    "instructionLevelSelect": "Pick a level that's right for you!",
+    "instructionPlay": "Read the situation card, then choose Has AI or No AI.",
+    "levels": {
+      "easy": "AI Sprouts",
+      "hard": "Trainee detective"
+    }
+  },
+  "teachRobot": {
+    "title": "🤖 Teach the Robot",
+    "titleWithLevel": "🤖 Teach the Robot — {{level}}",
+    "subtitle": "Teach the robot with examples.",
+    "instructionLevelSelect": "Pick a level that's right for you!",
+    "instructionPlay": "Help the robot label each object below. Read the hints carefully!",
+    "levels": {
+      "easy": "Level 1",
+      "hard": "Level 2"
+    }
+  },
+  "teachableMachine": {
+    "title": "📷 Mini AI Training",
+    "subtitle": "Teach AI to recognize images right in your browser.",
+    "instruction": "The camera runs locally so the robot learns from examples. Photos are not sent to the server. 🔒"
+  },
+  "promptMagic": {
+    "title": "Prompt Magic",
+    "titleWithLevel": "Prompt Magic — {{level}} mode",
+    "subtitle": "Build prompts to guide AI.",
+    "instructionLevelSelect": "Pick a level to practice prompt magic!",
+    "instructionPlay": "Pick blocks below to build a great prompt, then send it to Prompt Coach for a score!",
+    "levels": {
+      "easy": "Apprentice",
+      "hard": "Wizard"
+    }
+  },
+  "oopsAiMistake": {
+    "title": "🤔 AI Can Be Wrong",
+    "titleWithLevel": "🤔 AI Can Be Wrong — {{level}}",
+    "subtitle": "AI is not always correct.",
+    "instructionLevelSelect": "Pick a level that's right for you!",
+    "instructionPlay": "Read the AI's answer and see if you spot any mistakes.",
+    "levels": {
+      "easy": "Real-world logic",
+      "hard": "Fake news & myths"
+    }
+  },
+  "buddyBot": {
+    "title": "💬 Buddy Bot Chat",
+    "subtitle": "Chat safely with your study robot.",
+    "instruction": "Chat with Buddy Bot, your learning robot."
+  },
+  "imageStudio": {
+    "title": "AI Image Studio",
+    "subtitle": "Write fun prompts to make learning art with Buddy Bot!",
+    "instruction": "Pick safe blocks. Every image must be labeled as AI-made."
+  },
+  "dataSorter": {
+    "title": "🗂️ Data Sorter",
+    "subtitle": "Sort data so AI learns safely.",
+    "instruction": "Read each data card, then choose: good data, noisy data, or private info."
+  },
+  "aiSafetyQuest": {
+    "title": "🛡️ AI Safety Quest",
+    "subtitle": "Make safe choices when using AI.",
+    "instruction": "Read the scenario, then pick: do it, don't do it, or ask a grown-up."
+  },
+  "robotCommands": {
+    "title": "Robot Commands",
+    "titleWithLevel": "Robot Commands — {{level}}",
+    "subtitle": "Order steps one by one — robots don't guess magic.",
+    "instructionLevelSelect": "Pick a level that's right for you!",
+    "instructionPlay": "Tap commands to line them up. Press Run to watch Buddy Bot move step by step!",
+    "levels": {
+      "easy": "Basics",
+      "hard": "Challenge"
+    }
+  },
+  "aiRecommendations": {
+    "title": "AI Suggestions",
+    "subtitle": "AI suggests from patterns it has seen — it can't read minds.",
+    "instruction": "See what your friend likes lately, then pick what Buddy Bot should suggest!"
+  }
+}

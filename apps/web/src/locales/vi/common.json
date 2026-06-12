@@ -1,0 +1,44 @@
+{
+  "loadingGame": "Đang tải trò chơi...",
+  "notFound": {
+    "title": "Ôi, lối này chưa có trò chơi!",
+    "body": "Buddy Bot chưa tìm thấy trang này. Mình quay về phòng lab để chọn hoạt động an toàn nhé.",
+    "back": "Về phòng lab"
+  },
+  "gameShell": {
+    "backToLab": "Về phòng lab",
+    "autoplayOn": "🔊 Đọc: Bật",
+    "autoplayOff": "🔇 Đọc: Tắt",
+    "scorePoints": "{{score}}/{{max}} điểm",
+    "scoreQuestions": "📊 {{score}}/{{max}} câu"
+  },
+  "tts": {
+    "listen": "Nghe nội dung",
+    "loading": "Đang tải...",
+    "stop": "Dừng",
+    "play": "Nghe"
+  },
+  "feedback": {
+    "correct": "Đúng rồi!",
+    "tryAgain": "Ồ, chú ý nhé!",
+    "safety": "Nguyên tắc An toàn",
+    "loading": "Buddy Bot đang suy nghĩ một chút..."
+  },
+  "error": {
+    "unexpected": "Đã xảy ra lỗi không mong muốn.",
+    "title": "Ối! Có gì đó bị lỗi 🙈",
+    "body": "Buddy Bot bị vấp ngã. Em hãy thử tải lại trang hoặc quay về trang chủ nhé!",
+    "retry": "🔄 Thử lại",
+    "home": "🏠 Về trang chủ"
+  },
+  "badges": {
+    "easy": "Dễ",
+    "medium": "Vừa",
+    "explore": "Khám phá"
+  },
+  "actions": {
+    "start": "Bắt đầu",
+    "selectLevel": "Chọn cấp độ chơi phù hợp với em nhé!",
+    "tryAgain": "Thử lại"
+  }
+}

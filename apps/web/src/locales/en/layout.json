@@ -1,0 +1,15 @@
+{
+  "siteTitle": "AI Adventure Lab",
+  "siteSubtitle": "🌈 Rainbow Robot Classroom",
+  "bgmOn": "Music: On",
+  "bgmOff": "Music: Off",
+  "bgmOnTitle": "Turn off background music",
+  "bgmOffTitle": "Turn on background music",
+  "voiceFemale": "Teacher (F)",
+  "voiceMale": "Teacher (M)",
+  "studentSafe": "Safe for students",
+  "footer": "🤖 AI can be wrong. Check with your teacher! 📚",
+  "localeVi": "VI",
+  "localeEn": "EN",
+  "localeSwitch": "Change language"
+}

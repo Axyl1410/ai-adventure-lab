@@ -1,5 +1,6 @@
 import { Loader2, Volume2 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useGameTtsKey } from "@/context/GameTtsContext";
 import {
   interruptTtsOnTabChange,
@@ -31,6 +32,7 @@ export function TTSButton({
   /** instruction: once per game visit; content: after instruction; immediate: on its own */
   autoPlayRole?: TtsAutoPlayRole;
 }) {
+  const { t } = useTranslation("common");
   const gameKey = useGameTtsKey();
   const [isPlaying, setIsPlaying] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -96,9 +98,15 @@ export function TTSButton({
     void playTts(text, { replacePending: busyElsewhere });
   };
 
+  const buttonLabel = isLoading
+    ? t("tts.loading")
+    : isPlaying
+      ? t("tts.stop")
+      : t("tts.play");
+
   return (
     <button
-      aria-label="Nghe nội dung"
+      aria-label={t("tts.listen")}
       className={
         compact
           ? `grid h-11 w-11 shrink-0 place-items-center rounded-full text-white shadow-sm transition-all hover:scale-105 active:scale-100 ${isPlaying ? "bg-pinkLab" : "bg-skyLab"}`
@@ -118,7 +126,7 @@ export function TTSButton({
       ) : (
         <Volume2 className={compact ? "h-5 w-5" : "mr-2 inline h-5 w-5"} />
       )}
-      {!compact && (isLoading ? "Đang tải..." : isPlaying ? "Dừng" : "Nghe")}
+      {!compact && buttonLabel}
     </button>
   );
 }

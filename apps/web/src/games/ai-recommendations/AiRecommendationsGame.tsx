@@ -1,24 +1,27 @@
 import { AnimatePresence, motion } from "motion/react";
+import { useTranslation } from "react-i18next";
 import { ConfettiSuccess } from "@/components/Feedback";
 import { GameShell } from "@/components/GameShell";
 import { useSession } from "@/hooks/useSession";
 import { RecommendationButtons } from "./components/RecommendationButtons";
 import { RecommendationFeedbackPanel } from "./components/RecommendationFeedbackPanel";
 import { RoundPrompt } from "./components/RoundPrompt";
-import { DECK_SIZE, INSTRUCTION } from "./constants";
+import { DECK_SIZE } from "./constants";
 import { useAiRecommendationsGame } from "./useAiRecommendationsGame";
 
 export function AiRecommendationsGame() {
+  const { t: tCommon } = useTranslation("common");
+  const { t } = useTranslation("games");
   const { session } = useSession();
   const game = useAiRecommendationsGame(session);
 
   return (
     <GameShell
-      instruction={INSTRUCTION}
+      instruction={t("aiRecommendations.instruction")}
       maxScore={game.deck.length || DECK_SIZE}
       score={game.score}
-      subtitle="AI gợi ý theo mẫu đã thấy — không đọc suy nghĩ."
-      title="Gợi Ý Của AI"
+      subtitle={t("aiRecommendations.subtitle")}
+      title={t("aiRecommendations.title")}
     >
       <section className="lab-card relative mx-auto max-w-4xl overflow-hidden bg-white/85 p-6 text-center">
         {game.done && <ConfettiSuccess />}
@@ -53,7 +56,7 @@ export function AiRecommendationsGame() {
                       onClick={game.dismissFeedback}
                       type="button"
                     >
-                      Thử lại
+                      {tCommon("actions.tryAgain")}
                     </button>
                   )}
                 </div>
