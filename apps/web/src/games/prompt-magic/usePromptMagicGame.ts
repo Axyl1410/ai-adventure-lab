@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { promptFeedback, unlockSticker } from "@/lib/api";
 import { getDefaultSelected } from "./blockUtils";
 import {
@@ -14,6 +15,7 @@ interface SessionLike {
 }
 
 export function usePromptMagicGame(session: SessionLike | null) {
+  const { t, i18n } = useTranslation("gameContent");
   const [level, setLevel] = useState<Level | null>(null);
   const [selected, setSelected] = useState<SelectedBlocks>(getDefaultSelected);
   const [result, setResult] = useState<PromptCoachResult | null>(null);
@@ -25,8 +27,8 @@ export function usePromptMagicGame(session: SessionLike | null) {
     if (!level) {
       return "";
     }
-    return buildPrompt(level, selected);
-  }, [level, selected]);
+    return buildPrompt(t, level, selected);
+  }, [level, selected, t, i18n.language]);
 
   useEffect(() => {
     setResult(null);

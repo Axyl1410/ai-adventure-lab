@@ -1,18 +1,19 @@
-import type { Verdict } from "./types";
+import type { VerdictId } from "./types";
 
-export const CHOICES: Verdict[] = ["Đúng", "Sai", "Cần kiểm tra thêm"];
+export const CHOICES: VerdictId[] = ["correct", "wrong", "needs_check"];
 
-export const choiceStyle: Record<Verdict, { emoji: string; color: string }> = {
-  Đúng: {
-    emoji: "✅",
-    color: "bg-gradient-to-r from-greenLab to-mintLab text-ink",
-  },
-  Sai: {
-    emoji: "❌",
-    color: "bg-gradient-to-r from-redSoft to-pinkLab text-ink",
-  },
-  "Cần kiểm tra thêm": {
-    emoji: "🔍",
-    color: "bg-gradient-to-r from-yellowLab to-orangeLab text-ink",
-  },
-};
+export const choiceStyle: Record<VerdictId, { emoji: string; color: string }> =
+  {
+    correct: {
+      emoji: "✅",
+      color: "bg-gradient-to-r from-greenLab to-mintLab text-ink",
+    },
+    wrong: {
+      emoji: "❌",
+      color: "bg-gradient-to-r from-redSoft to-pinkLab text-ink",
+    },
+    needs_check: {
+      emoji: "🔍",
+      color: "bg-gradient-to-r from-yellowLab to-orangeLab text-ink",
+    },
+  };

@@ -55,6 +55,24 @@ describe("chatSchema", () => {
     });
     expect(result.success).toBe(false);
   });
+  it("defaults locale to vi", () => {
+    const result = chatSchema.safeParse({
+      sessionId: "ck12345678901234567890123",
+      message: "AI là gì?",
+    });
+    expect(result.success).toBe(true);
+    if (result.success) {
+      expect(result.data.locale).toBe("vi");
+    }
+  });
+  it("accepts locale en", () => {
+    const result = chatSchema.safeParse({
+      sessionId: "ck12345678901234567890123",
+      message: "What is AI?",
+      locale: "en",
+    });
+    expect(result.success).toBe(true);
+  });
 });
 
 describe("ttsSchema", () => {
@@ -120,13 +138,13 @@ describe("progressSchema", () => {
 describe("imageGenerateSchema", () => {
   const base = {
     sessionId: "ck12345678901234567890123",
-    theme: "Robot trong lớp học",
-    style: "Tranh hoạt hình",
+    theme: "classroom_robot",
+    style: "cartoon",
     details: {
       subject: "chú mèo",
       setting: "lớp học",
-      colors: ["xanh da trời"],
-      mood: "vui vẻ",
+      colors: ["sky_blue"],
+      mood: "happy",
     },
   };
   it("nhận input hợp lệ", () => {

@@ -2,7 +2,7 @@ import { WEAK_THRESHOLD } from "./constants";
 import type { Answers, Item } from "./types";
 
 export function countCorrect(items: Item[], answers: Answers): number {
-  return items.filter((item) => answers[item.label] === item.group).length;
+  return items.filter((item) => answers[item.id] === item.group).length;
 }
 
 export function getLabelProgress(labeledCount: number, total: number): number {

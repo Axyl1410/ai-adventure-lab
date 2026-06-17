@@ -1,14 +1,18 @@
-export const DEFAULT_CHIPS = [
-  "🤖 AI là gì?",
-  "📝 Prompt là gì?",
-  "🧠 Máy học là gì?",
-  "❓ Vì sao AI có thể sai?",
-  "🔢 Cho em một câu đố toán lớp 3.",
-  "🍎 Giải thích bằng ví dụ trái cây.",
-];
+export const DEFAULT_CHIP_IDS = [
+  "what_is_ai",
+  "what_is_prompt",
+  "what_is_ml",
+  "why_ai_wrong",
+  "math_quiz",
+  "fruit_example",
+] as const;
 
-export const INITIAL_ASSISTANT_MESSAGE =
-  "Chào em! 👋 Mình là Buddy Bot. Em muốn khám phá điều gì về AI nào?";
+export type BuddyChipId = string;
 
-export const BUDDY_ERROR_MESSAGE =
-  "Buddy Bot đang nghỉ một chút. Em thử lại sau nhé.";
+export type BuddyChipGroup =
+  | "default"
+  | "story"
+  | "math"
+  | "ai_topic"
+  | "prompt_topic"
+  | "fallback";

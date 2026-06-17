@@ -23,7 +23,7 @@ export function BuddyBotGame() {
         <div className="lab-card flex min-h-[62dvh] flex-col bg-white/80 p-3 sm:p-5 lg:min-h-[560px]">
           <SuggestedChips
             chips={chat.activeChips}
-            onChipClick={(chip) => chat.send(chip)}
+            onChipClick={(chip) => chat.send(chip.text)}
           />
           <ChatMessageList
             chatRef={chat.chatRef}

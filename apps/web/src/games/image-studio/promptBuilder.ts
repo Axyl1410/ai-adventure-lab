@@ -1,9 +1,37 @@
+import type { TFunction } from "i18next";
+import {
+  imageColorLabel,
+  imageMoodLabel,
+  imageStyleLabel,
+  imageThemeLabel,
+  resolveImageDetails,
+} from "@/lib/gameContent";
 import type { ImageDetails } from "./types";
 
+type ContentT = TFunction<"gameContent">;
+
 export function buildStudentPrompt(
-  theme: string,
-  style: string,
+  t: ContentT,
+  themeId: string,
+  styleId: string,
   details: ImageDetails
 ): string {
-  return `Tạo ${style.toLowerCase()} về ${details.subject} trong ${details.setting}, chủ đề ${theme}, màu ${details.colors.join(", ")}, cảm xúc ${details.mood}, ${details.includeText ? "có chữ ngắn" : "không có chữ trong ảnh"}.`;
+  const { subject, setting } = resolveImageDetails(t, details);
+  const theme = imageThemeLabel(t, themeId);
+  const style = imageStyleLabel(t, styleId);
+  const colors = details.colors.map((id) => imageColorLabel(t, id)).join(", ");
+  const mood = imageMoodLabel(t, details.mood);
+  const textOption = details.includeText
+    ? t("imageStudio.ui.promptWithText")
+    : t("imageStudio.ui.promptWithoutText");
+
+  return t("imageStudio.ui.promptTemplate", {
+    style,
+    subject,
+    setting,
+    theme,
+    colors,
+    mood,
+    textOption,
+  });
 }

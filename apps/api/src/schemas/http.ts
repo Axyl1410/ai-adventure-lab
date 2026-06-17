@@ -1,3 +1,4 @@
+import { localeSchema } from "@ai-adventure/shared";
 import { z } from "zod";
 
 export const idParamSchema = z.object({ id: z.string().min(1) });
@@ -8,6 +9,7 @@ export const imageParamSchema = z.object({ imageId: z.string().min(1) });
 export const explainSchema = z.object({
   sessionId: z.string().min(1),
   topic: z.string().trim().min(1).max(500),
+  locale: localeSchema,
 });
 
 export const teacherPasscodeSchema = z.object({

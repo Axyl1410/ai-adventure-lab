@@ -1,49 +1,55 @@
-export const suggestedSubjects = [
-  { label: "chú mèo đeo ba lô 🐱", value: "một chú mèo con đeo ba lô" },
-  { label: "robot Buddy Bot 🤖", value: "chú robot Buddy Bot vui vẻ" },
-  { label: "cá heo mỉm cười 🐬", value: "chú cá heo đang cười lớn" },
-  { label: "phi thuyền vũ trụ 🚀", value: "chiếc phi thuyền vũ trụ bay lượn" },
-  {
-    label: "khủng long tinh nghịch 🦖",
-    value: "chú khủng long con tinh nghịch",
-  },
-  { label: "gấu bông dễ thương 🧸", value: "chú gấu bông dễ thương" },
-];
+export const THEME_IDS = [
+  "cute_animals",
+  "classroom_robot",
+  "planets_space",
+  "rainbow_forest",
+  "school_supplies",
+  "fairy_tale_characters",
+  "ocean_creatures",
+  "friendly_future_city",
+] as const;
 
-export const suggestedSettings = [
-  { label: "lớp học cầu vồng 🏫", value: "trong lớp học cầu vồng" },
-  { label: "vũ trụ đầy sao 🌌", value: "ngoài vũ trụ bao la đầy sao" },
-  {
-    label: "khu rừng phép thuật 🌲",
-    value: "trong khu rừng phép thuật lấp lánh",
-  },
-  { label: "bãi biển ấm áp 🏖️", value: "trên bãi biển ngập nắng ấm áp" },
-  {
-    label: "đại dương sâu thẳm 🌊",
-    value: "dưới đại dương sâu thẳm nhiều san hô",
-  },
-  {
-    label: "công viên giải trí 🎡",
-    value: "trong công viên giải trí nhộn nhịp",
-  },
-];
+export const STYLE_IDS = [
+  "cartoon",
+  "watercolor",
+  "sticker",
+  "classroom_poster",
+  "picture_book",
+  "pixel_art",
+] as const;
 
-export const themes = [
-  "Động vật dễ thương",
-  "Robot trong lớp học",
-  "Hành tinh và vũ trụ",
-  "Khu rừng cầu vồng",
-  "Đồ vật học tập",
-  "Nhân vật truyện cổ tích không có bản quyền",
-  "Biển và sinh vật biển",
-  "Thành phố tương lai thân thiện",
-];
+export const SUBJECT_IDS = [
+  "cat_backpack",
+  "buddy_bot",
+  "smiling_dolphin",
+  "spaceship",
+  "playful_dino",
+  "cute_teddy",
+] as const;
 
-export const styles = [
-  "Tranh hoạt hình",
-  "Tranh màu nước",
-  "Sticker vui nhộn",
-  "Poster lớp học",
-  "Sách tranh thiếu nhi",
-  "Pixel art đơn giản",
-];
+export const SETTING_IDS = [
+  "rainbow_classroom",
+  "starry_universe",
+  "magic_forest",
+  "warm_beach",
+  "deep_ocean",
+  "amusement_park",
+] as const;
+
+export const COLOR_IDS = [
+  "sky_blue",
+  "yellow",
+  "pink",
+  "green",
+  "purple",
+  "orange",
+] as const;
+
+export const MOOD_IDS = ["happy", "curious", "warm", "excited"] as const;
+
+export type ImageThemeId = (typeof THEME_IDS)[number];
+export type ImageStyleId = (typeof STYLE_IDS)[number];
+export type ImageSubjectId = (typeof SUBJECT_IDS)[number];
+export type ImageSettingId = (typeof SETTING_IDS)[number];
+export type ImageColorId = (typeof COLOR_IDS)[number];
+export type ImageMoodId = (typeof MOOD_IDS)[number];

@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { TTSButton } from "@/components/TTSButton";
 import type { DetectiveQuestion } from "../types";
 
@@ -12,10 +13,15 @@ export function QuestionPrompt({
   question,
   questionsLength,
 }: QuestionPromptProps) {
+  const { t } = useTranslation("common");
+
   return (
     <>
       <p className="mb-3 font-black text-muted text-sm">
-        📋 Câu {index + 1} / {questionsLength}
+        {t("gameUi.questionLabel", {
+          current: index + 1,
+          total: questionsLength,
+        })}
       </p>
       <div className="mb-4 text-6xl">{question.emoji}</div>
       <div className="mb-8 flex items-center justify-center gap-3">

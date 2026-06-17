@@ -1,4 +1,5 @@
-import type { ImageDetails } from "../types";
+import { useTranslation } from "react-i18next";
+import type { ImageDetails, ImageStyleId, ImageThemeId } from "../types";
 import { ImageDetailBuilder } from "./ImageDetailBuilder";
 import { ImageStylePicker } from "./ImageStylePicker";
 import { ImageThemePicker } from "./ImageThemePicker";
@@ -6,10 +7,10 @@ import { ImageThemePicker } from "./ImageThemePicker";
 interface BuilderSidebarProps {
   details: ImageDetails;
   onDetailsChange: (value: ImageDetails) => void;
-  onStyleChange: (value: string) => void;
-  onThemeChange: (value: string) => void;
-  style: string;
-  theme: string;
+  onStyleChange: (value: ImageStyleId) => void;
+  onThemeChange: (value: ImageThemeId) => void;
+  style: ImageStyleId;
+  theme: ImageThemeId;
 }
 
 export function BuilderSidebar({
@@ -20,12 +21,16 @@ export function BuilderSidebar({
   style,
   theme,
 }: BuilderSidebarProps) {
+  const { t } = useTranslation("gameContent");
+
   return (
     <div className="lab-card space-y-5 p-4 sm:p-5">
       <ImageThemePicker onChange={onThemeChange} value={theme} />
       <ImageStylePicker onChange={onStyleChange} value={style} />
       <div>
-        <h2 className="mb-2 font-black text-xl">Chi tiết</h2>
+        <h2 className="mb-2 font-black text-xl">
+          {t("imageStudio.ui.detailsHeading")}
+        </h2>
         <ImageDetailBuilder details={details} setDetails={onDetailsChange} />
       </div>
     </div>

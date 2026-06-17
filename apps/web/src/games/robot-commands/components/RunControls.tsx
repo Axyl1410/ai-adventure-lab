@@ -1,4 +1,5 @@
 import { Play, RotateCcw, Sparkles } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 interface RunControlsProps {
   hasFeedback: boolean;
@@ -15,6 +16,8 @@ export function RunControls({
   onClear,
   onShowHint,
 }: RunControlsProps) {
+  const { t } = useTranslation("gameContent");
+
   return (
     <div className="flex flex-wrap items-center justify-center gap-3">
       <button
@@ -24,7 +27,7 @@ export function RunControls({
         type="button"
       >
         <Play aria-hidden className="mr-2 inline h-5 w-5" />
-        Chạy thử
+        {t("shared.buttons.run")}
       </button>
       <button
         className="big-button min-h-12 border border-white/70 bg-white/90 px-4 py-3 font-bold text-ink disabled:opacity-50"
@@ -33,7 +36,7 @@ export function RunControls({
         type="button"
       >
         <RotateCcw aria-hidden className="mr-1 inline h-4 w-4" />
-        Xóa hết
+        {t("shared.buttons.clearAll")}
       </button>
       <button
         className="big-button min-h-12 border border-yellowLab/50 bg-yellowLab/25 px-4 py-3 font-bold text-ink disabled:opacity-50"
@@ -42,7 +45,7 @@ export function RunControls({
         type="button"
       >
         <Sparkles aria-hidden className="mr-1 inline h-4 w-4" />
-        Gợi ý
+        {t("shared.buttons.hint")}
       </button>
     </div>
   );

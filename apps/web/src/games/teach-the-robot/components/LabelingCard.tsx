@@ -1,5 +1,6 @@
 import type { Ref } from "react";
-import type { Answers, GroupName, Item, Level } from "../types";
+import { useTranslation } from "react-i18next";
+import type { Answers, GroupId, Item, Level } from "../types";
 import { GroupLabelButtons } from "./GroupLabelButtons";
 import { ObjectDisplay } from "./ObjectDisplay";
 import { ObjectNavigation } from "./ObjectNavigation";
@@ -13,7 +14,7 @@ interface LabelingCardProps {
   labeledCount: number;
   labelProgress: number;
   level: Level;
-  onAssign: (itemLabel: string, group: GroupName, currentIndex: number) => void;
+  onAssign: (itemId: string, group: GroupId, currentIndex: number) => void;
   onGoNext: () => void;
   onGoPrev: () => void;
   onGoToIndex: (index: number) => void;
@@ -33,14 +34,22 @@ export function LabelingCard({
   onGoPrev,
   onGoToIndex,
 }: LabelingCardProps) {
+  const { t } = useTranslation("common");
+
   return (
     <div className="lab-card flex w-full flex-col rounded-3xl border border-white/60 bg-white/85 p-4 shadow-sm sm:p-5">
       <div className="mb-3 flex shrink-0 flex-col gap-2 border-white/40 border-b pb-3 sm:flex-row sm:items-center sm:justify-between">
         <span className="font-black text-muted text-sm">
-          📋 Vật thể {index + 1} / {items.length}
+          {t("gameUi.objectLabel", {
+            current: index + 1,
+            total: items.length,
+          })}
         </span>
         <span className="w-fit rounded-2xl border border-skyLab/30 bg-skyLab/15 px-3 py-1 font-black text-ink text-xs">
-          🎯 Đã gán nhãn: {labeledCount} / {items.length}
+          {t("gameUi.labeledCount", {
+            labeled: labeledCount,
+            total: items.length,
+          })}
         </span>
       </div>
 

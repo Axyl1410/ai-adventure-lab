@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { useTranslation } from "react-i18next";
 import { BuddyBot } from "@/components/BuddyBot";
 import type { BuddyBotGameState } from "../types";
 import { StatusConsole } from "./StatusConsole";
@@ -20,6 +21,8 @@ export function TrainingSidebar({
   summary,
   onReset,
 }: TrainingSidebarProps) {
+  const { t } = useTranslation(["games", "gameContent"]);
+
   return (
     <aside className="lab-card flex flex-col justify-between rounded-3xl border-white/70 bg-white/85 p-4 shadow-sm sm:p-5">
       <div className="flex-shrink-0 space-y-3.5">
@@ -29,10 +32,10 @@ export function TrainingSidebar({
           </div>
           <div>
             <h2 className="font-black text-ink text-lg tracking-tight">
-              Máy học Trình duyệt
+              {t("games:teachableMachine.title")}
             </h2>
             <p className="font-bold text-[10px] text-muted uppercase tracking-wider">
-              Trực quan hóa thuật toán KNN
+              {t("games:teachableMachine.subtitle")}
             </p>
           </div>
         </div>
@@ -52,7 +55,7 @@ export function TrainingSidebar({
           onClick={onReset}
           type="button"
         >
-          🔄 Xóa hết ví dụ & Làm lại
+          🔄 {t("gameContent:shared.buttons.clearAll")}
         </button>
       </div>
     </aside>

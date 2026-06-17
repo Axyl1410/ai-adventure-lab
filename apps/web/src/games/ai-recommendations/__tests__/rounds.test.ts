@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { ALL_ROUNDS } from "../rounds";
 
-const PII_KEYWORDS = ["địa chỉ", "số điện thoại", "tên trường", "tên thật"];
+const PII_LABEL_KEYS = ["ask_address", "ask_phone", "ask_school"];
 
 describe("ALL_ROUNDS", () => {
   it("has at least 8 rounds in the pool", () => {
@@ -25,9 +25,8 @@ describe("ALL_ROUNDS", () => {
         (option) => option.id === round.correctOptionId
       );
       expect(correct).toBeDefined();
-      const labelLower = correct?.label.toLowerCase() ?? "";
-      for (const keyword of PII_KEYWORDS) {
-        expect(labelLower.includes(keyword)).toBe(false);
+      for (const piiKey of PII_LABEL_KEYS) {
+        expect(correct?.labelKey).not.toBe(piiKey);
       }
     }
   });
@@ -40,7 +39,7 @@ describe("ALL_ROUNDS", () => {
     const correct = privacyRound?.options.find(
       (option) => option.id === privacyRound.correctOptionId
     );
-    expect(correct?.label.toLowerCase()).toContain("địa chỉ");
+    expect(correct?.labelKey).toBe("ask_address");
   });
 
   it("includes all three round kinds", () => {

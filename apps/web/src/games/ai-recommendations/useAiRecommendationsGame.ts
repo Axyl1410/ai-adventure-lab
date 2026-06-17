@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { saveProgress, unlockSticker } from "@/lib/api";
+import { localizeRound } from "@/lib/gameContent";
 import { PROGRESS_GAME_KEY, STICKER_ID, STICKER_MIN_SCORE } from "./constants";
 import {
   buildFeedbackText,
@@ -14,6 +16,7 @@ interface SessionLike {
 }
 
 export function useAiRecommendationsGame(session: SessionLike | null) {
+  const { t, i18n } = useTranslation("gameContent");
   const [deck, setDeck] = useState<RecommendationRound[]>([]);
   const [index, setIndex] = useState(0);
   const [score, setScore] = useState(0);
@@ -22,8 +25,9 @@ export function useAiRecommendationsGame(session: SessionLike | null) {
   const [done, setDone] = useState(false);
 
   useEffect(() => {
-    setDeck(shuffleDeck(ALL_ROUNDS));
-  }, []);
+    const base = shuffleDeck(ALL_ROUNDS);
+    setDeck(base.map((round) => localizeRound(t, round)));
+  }, [i18n.language, t]);
 
   const current = deck[index];
   const isLastRound = deck.length > 0 && index === deck.length - 1;
@@ -35,7 +39,7 @@ export function useAiRecommendationsGame(session: SessionLike | null) {
     const correct = isCorrectOption(current, optionId);
     const nextScore = score + (correct ? 1 : 0);
     setScore(nextScore);
-    setFeedback(buildFeedbackText(correct, current.explain));
+    setFeedback(buildFeedbackText(t, correct, current.explain));
     setIsSuccessFeedback(correct);
 
     if (isLastRound) {
@@ -66,7 +70,8 @@ export function useAiRecommendationsGame(session: SessionLike | null) {
   }
 
   function restart() {
-    setDeck(shuffleDeck(ALL_ROUNDS));
+    const base = shuffleDeck(ALL_ROUNDS);
+    setDeck(base.map((round) => localizeRound(t, round)));
     setIndex(0);
     setScore(0);
     setFeedback("");

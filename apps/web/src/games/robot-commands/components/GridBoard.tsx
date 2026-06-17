@@ -1,10 +1,10 @@
 import { motion } from "motion/react";
-import type { Cell, Direction, Puzzle } from "../types";
+import type { Cell, Direction, PuzzleBase } from "../types";
 
 interface GridBoardProps {
   direction: Direction;
   highlightCell: Cell | null;
-  puzzle: Puzzle;
+  puzzle: PuzzleBase;
   robotPosition: Cell;
 }
 

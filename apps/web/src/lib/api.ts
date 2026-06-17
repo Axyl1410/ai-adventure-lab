@@ -1,10 +1,23 @@
 import type { GameCard, PromptCoachResult } from "@ai-adventure/shared";
+import { LOCALE_STORAGE_KEY } from "@/lib/i18n";
 
 export interface Session {
   ageGroup: "6-8" | "9-11";
   id: string;
   mode: string;
   nickname: string;
+}
+
+const API_ERRORS = {
+  vi: "Có lỗi kết nối.",
+  en: "Connection error.",
+} as const;
+
+export function getApiLocale(): "vi" | "en" {
+  if (typeof localStorage === "undefined") {
+    return "vi";
+  }
+  return localStorage.getItem(LOCALE_STORAGE_KEY) === "en" ? "en" : "vi";
 }
 
 export async function api<T>(path: string, init?: RequestInit): Promise<T> {
@@ -17,7 +30,8 @@ export async function api<T>(path: string, init?: RequestInit): Promise<T> {
   });
   if (!response.ok) {
     const body = await response.json().catch(() => ({}));
-    throw new Error(body.error ?? "Có lỗi kết nối.");
+    const locale = getApiLocale();
+    throw new Error(body.error ?? API_ERRORS[locale]);
   }
   return response.json() as Promise<T>;
 }
@@ -87,7 +101,7 @@ export interface AiQuestion {
 }
 
 export interface OopsQuestion {
-  answer: "Đúng" | "Sai" | "Cần kiểm tra thêm";
+  answer: "correct" | "wrong" | "needs_check";
   explain: string;
   text: string;
 }
@@ -95,14 +109,24 @@ export interface OopsQuestion {
 export async function askBuddy(sessionId: string, message: string) {
   return await api<{ answer: string }>("/api/ai/chat", {
     method: "POST",
-    body: JSON.stringify({ sessionId, message, ageGroup: "6-8" }),
+    body: JSON.stringify({
+      sessionId,
+      message,
+      ageGroup: "6-8",
+      locale: getApiLocale(),
+    }),
   });
 }
 
 export async function promptFeedback(sessionId: string, prompt: string) {
   return await api<PromptCoachResult>("/api/ai/prompt-feedback", {
     method: "POST",
-    body: JSON.stringify({ sessionId, prompt, ageGroup: "6-8" }),
+    body: JSON.stringify({
+      sessionId,
+      prompt,
+      ageGroup: "6-8",
+      locale: getApiLocale(),
+    }),
   });
 }
 

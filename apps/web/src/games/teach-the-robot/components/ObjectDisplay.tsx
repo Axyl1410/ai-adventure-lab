@@ -1,5 +1,6 @@
 import { AnimatePresence, motion } from "motion/react";
 import type { Ref } from "react";
+import { useTranslation } from "react-i18next";
 import { TTSButton } from "@/components/TTSButton";
 import type { Item, Level } from "../types";
 
@@ -16,6 +17,9 @@ export function ObjectDisplay({
   index,
   level,
 }: ObjectDisplayProps) {
+  const { t } = useTranslation("gameContent");
+  const hintPrefix = t("teachRobot.levelSelect.hintPrefix");
+
   return (
     <div
       aria-atomic="true"
@@ -47,7 +51,8 @@ export function ObjectDisplay({
               autoPlayRole="content"
               compact={true}
               text={
-                current.label + (current.hint ? `. Gợi ý: ${current.hint}` : "")
+                current.label +
+                (current.hint ? `. ${hintPrefix} ${current.hint}` : "")
               }
             />
           </div>

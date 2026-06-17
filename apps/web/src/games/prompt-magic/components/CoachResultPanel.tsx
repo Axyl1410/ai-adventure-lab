@@ -1,5 +1,6 @@
 import { ShieldCheck, Star } from "lucide-react";
 import { motion } from "motion/react";
+import { useTranslation } from "react-i18next";
 import { BadgeReward } from "@/components/Feedback";
 import type { PromptCoachResult } from "../types";
 
@@ -12,6 +13,8 @@ export function CoachResultPanel({
   result,
   onResetLevel,
 }: CoachResultPanelProps) {
+  const { t } = useTranslation("gameContent");
+
   return (
     <motion.div
       animate={{ scale: 1, opacity: 1 }}
@@ -20,7 +23,9 @@ export function CoachResultPanel({
       transition={{ type: "spring", stiffness: 200, damping: 15 }}
     >
       <div className="flex items-center justify-between">
-        <span className="font-black text-ink text-lg">Kết quả đánh giá:</span>
+        <span className="font-black text-ink text-lg">
+          {t("promptMagic.levelSelect.coachResultTitle")}
+        </span>
         <motion.span
           animate={{ scale: [1, 1.12, 1] }}
           className="relative flex items-center gap-1.5 overflow-hidden rounded-2xl bg-purpleLab px-4 py-2 font-black text-md text-white shadow-md"
@@ -46,7 +51,8 @@ export function CoachResultPanel({
 
       <div className="space-y-1.5 rounded-2xl border border-skyLab/20 bg-skyLab/10 p-3">
         <p className="flex items-center gap-1 font-black text-sky-800 text-xs uppercase tracking-wider">
-          <ShieldCheck className="h-4 w-4" /> Prompt gợi ý hay hơn:
+          <ShieldCheck className="h-4 w-4" />{" "}
+          {t("promptMagic.levelSelect.improvedPromptLabel")}
         </p>
         <p className="font-bold text-ink text-sm leading-relaxed">
           "{result.improvedPrompt}"
@@ -58,7 +64,7 @@ export function CoachResultPanel({
         onClick={onResetLevel}
         type="button"
       >
-        Thay đổi chế độ ghép khối
+        {t("shared.buttons.changeBlockMode")}
       </button>
     </motion.div>
   );

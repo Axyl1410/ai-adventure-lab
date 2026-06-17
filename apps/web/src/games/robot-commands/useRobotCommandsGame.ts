@@ -1,15 +1,13 @@
 import { useCallback, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { saveProgress, unlockSticker } from "@/lib/api";
+import { localizePuzzle } from "@/lib/gameContent";
 import {
-  INCOMPLETE_FEEDBACK,
-  NO_PICK_FEEDBACK,
   PROGRESS_GAME_KEY,
   PUZZLES_PER_LEVEL,
   STEP_ANIMATION_MS,
   STICKER_ID,
   STICKER_MIN_SCORE,
-  SUCCESS_FEEDBACK,
-  wallFeedback,
 } from "./constants";
 import { getPuzzlesForLevel } from "./levels";
 import { runProgram } from "./simulator";
@@ -37,6 +35,7 @@ function sleep(ms: number): Promise<void> {
 }
 
 export function useRobotCommandsGame(session: SessionLike | null) {
+  const { t, i18n } = useTranslation("gameContent");
   const [level, setLevel] = useState<Level | null>(null);
   const [puzzles, setPuzzles] = useState<Puzzle[]>([]);
   const [puzzleIndex, setPuzzleIndex] = useState(0);
@@ -63,7 +62,9 @@ export function useRobotCommandsGame(session: SessionLike | null) {
 
   useEffect(() => {
     if (level) {
-      const nextPuzzles = getPuzzlesForLevel(level);
+      const nextPuzzles = getPuzzlesForLevel(level).map((puzzle) =>
+        localizePuzzle(t, puzzle)
+      );
       setPuzzles(nextPuzzles);
       setPuzzleIndex(0);
       setScore(0);
@@ -76,7 +77,7 @@ export function useRobotCommandsGame(session: SessionLike | null) {
         resetRobotToStart(first);
       }
     }
-  }, [level, resetRobotToStart]);
+  }, [level, i18n.language, t, resetRobotToStart]);
 
   useEffect(() => {
     if (current) {
@@ -165,7 +166,7 @@ export function useRobotCommandsGame(session: SessionLike | null) {
     if (running || feedback || !current) {
       return;
     }
-    setFeedback(current.hintVi);
+    setFeedback(current.hint);
     setIsSuccessFeedback(false);
   }
 
@@ -173,7 +174,7 @@ export function useRobotCommandsGame(session: SessionLike | null) {
     if (result.outcome === "success") {
       const nextScore = score + 1;
       setScore(nextScore);
-      setFeedback(SUCCESS_FEEDBACK);
+      setFeedback(t("shared.feedback.robotCommandsSuccess"));
       setIsSuccessFeedback(true);
 
       if (isLastPuzzle) {
@@ -196,18 +197,22 @@ export function useRobotCommandsGame(session: SessionLike | null) {
 
     if (result.outcome === "wall" && result.failIndex !== undefined) {
       setFailIndex(result.failIndex);
-      setFeedback(wallFeedback(result.failIndex + 1));
+      setFeedback(
+        t("shared.feedback.robotCommandsWall", {
+          step: result.failIndex + 1,
+        })
+      );
       setIsSuccessFeedback(false);
       return;
     }
 
     if (result.outcome === "no_pick") {
-      setFeedback(NO_PICK_FEEDBACK);
+      setFeedback(t("shared.feedback.robotCommandsNoPick"));
       setIsSuccessFeedback(false);
       return;
     }
 
-    setFeedback(INCOMPLETE_FEEDBACK);
+    setFeedback(t("shared.feedback.robotCommandsIncomplete"));
     setIsSuccessFeedback(false);
   }
 

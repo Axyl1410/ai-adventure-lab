@@ -1,11 +1,93 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import process from "node:process";
-import type { ImageGenerateInput } from "@ai-adventure/shared";
+import type {
+  ImageGenerateInput,
+  imageColors,
+  imageMoods,
+  imageStyles,
+  imageThemes,
+} from "@ai-adventure/shared";
 import OpenAi from "openai";
 import { imageStudioSystemPrompt } from "../prompts/imageStudio.system";
-import { imageRedirectMessage } from "../prompts/safety.system";
+import type { AppLocale } from "../prompts/locale";
+import {
+  getImageReadyMessage,
+  getImageRedirectMessage,
+} from "../prompts/safety.system";
 import { normalizeText, safetyService } from "./safety.service";
+
+const THEME_LABELS: Record<(typeof imageThemes)[number], string> = {
+  cute_animals: "Động vật dễ thương",
+  classroom_robot: "Robot trong lớp học",
+  planets_space: "Hành tinh và vũ trụ",
+  rainbow_forest: "Khu rừng cầu vồng",
+  school_supplies: "Đồ vật học tập",
+  fairy_tale_characters: "Nhân vật truyện cổ tích không có bản quyền",
+  ocean_creatures: "Biển và sinh vật biển",
+  friendly_future_city: "Thành phố tương lai thân thiện",
+};
+
+const STYLE_LABELS: Record<(typeof imageStyles)[number], string> = {
+  cartoon: "Tranh hoạt hình",
+  watercolor: "Tranh màu nước",
+  sticker: "Sticker vui nhộn",
+  classroom_poster: "Poster lớp học",
+  picture_book: "Sách tranh thiếu nhi",
+  pixel_art: "Pixel art đơn giản",
+};
+
+const COLOR_LABELS: Record<(typeof imageColors)[number], string> = {
+  sky_blue: "xanh da trời",
+  yellow: "vàng",
+  pink: "hồng",
+  green: "xanh lá",
+  purple: "tím",
+  orange: "cam",
+};
+
+const MOOD_LABELS: Record<(typeof imageMoods)[number], string> = {
+  happy: "vui vẻ",
+  curious: "tò mò",
+  warm: "ấm áp",
+  excited: "hào hứng",
+};
+
+const THEME_LABELS_EN: Record<(typeof imageThemes)[number], string> = {
+  cute_animals: "cute animals",
+  classroom_robot: "classroom robot",
+  planets_space: "planets and space",
+  rainbow_forest: "rainbow forest",
+  school_supplies: "school supplies",
+  fairy_tale_characters: "copyright-free fairy tale characters",
+  ocean_creatures: "ocean creatures",
+  friendly_future_city: "friendly future city",
+};
+
+const STYLE_LABELS_EN: Record<(typeof imageStyles)[number], string> = {
+  cartoon: "cartoon illustration",
+  watercolor: "watercolor painting",
+  sticker: "fun sticker",
+  classroom_poster: "classroom poster",
+  picture_book: "picture book",
+  pixel_art: "simple pixel art",
+};
+
+const COLOR_LABELS_EN: Record<(typeof imageColors)[number], string> = {
+  sky_blue: "sky blue",
+  yellow: "yellow",
+  pink: "pink",
+  green: "green",
+  purple: "purple",
+  orange: "orange",
+};
+
+const MOOD_LABELS_EN: Record<(typeof imageMoods)[number], string> = {
+  happy: "happy",
+  curious: "curious",
+  warm: "warm",
+  excited: "excited",
+};
 
 export interface BuiltImagePrompt {
   prompt: string;
@@ -16,23 +98,45 @@ export interface BuiltImagePrompt {
 
 export class ImageService {
   async buildPrompt(input: ImageGenerateInput): Promise<BuiltImagePrompt> {
-    const colors = input.details.colors.length
-      ? input.details.colors.join(", ")
-      : "màu sắc tươi sáng";
-    const textRule = input.details.includeText
-      ? "có chữ ngắn tối đa 3 từ"
-      : "không có chữ trong ảnh";
-    const prompt = normalizeText(
-      `Tạo một ${input.style.toLowerCase()} thiếu nhi, an toàn, vui vẻ, về ${input.details.subject} trong bối cảnh ${input.details.setting}. Chủ đề ${input.theme}. Màu sắc: ${colors}. Cảm xúc: ${input.details.mood}. Mục đích học tập cho học sinh ${input.ageGroup} tuổi, ${textRule}. Chỉ dùng nhân vật tưởng tượng, phong cách minh họa lớp học, nội dung tích cực.`
-    );
+    const locale: AppLocale = input.locale ?? "vi";
+    const themeLabels = locale === "en" ? THEME_LABELS_EN : THEME_LABELS;
+    const styleLabels = locale === "en" ? STYLE_LABELS_EN : STYLE_LABELS;
+    const colorLabels = locale === "en" ? COLOR_LABELS_EN : COLOR_LABELS;
+    const moodLabels = locale === "en" ? MOOD_LABELS_EN : MOOD_LABELS;
 
-    const safety = safetyService.checkImagePrompt(prompt);
+    const theme = themeLabels[input.theme];
+    const style = styleLabels[input.style];
+    const colors = input.details.colors.length
+      ? input.details.colors.map((color) => colorLabels[color]).join(", ")
+      : locale === "en"
+        ? "bright colors"
+        : "màu sắc tươi sáng";
+    const mood = moodLabels[input.details.mood];
+    const textRule =
+      locale === "en"
+        ? input.details.includeText
+          ? "with short text up to 3 words"
+          : "no text in the image"
+        : input.details.includeText
+          ? "có chữ ngắn tối đa 3 từ"
+          : "không có chữ trong ảnh";
+
+    const prompt =
+      locale === "en"
+        ? normalizeText(
+            `Create a safe, cheerful children's ${style} about ${input.details.subject} in ${input.details.setting}. Theme: ${theme}. Colors: ${colors}. Mood: ${mood}. For students aged ${input.ageGroup}, ${textRule}. Use imaginary characters only, classroom illustration style, positive content.`
+          )
+        : normalizeText(
+            `Tạo một ${style.toLowerCase()} thiếu nhi, an toàn, vui vẻ, về ${input.details.subject} trong bối cảnh ${input.details.setting}. Chủ đề ${theme}. Màu sắc: ${colors}. Cảm xúc: ${mood}. Mục đích học tập cho học sinh ${input.ageGroup} tuổi, ${textRule}. Chỉ dùng nhân vật tưởng tượng, phong cách minh họa lớp học, nội dung tích cực.`
+          );
+
+    const safety = safetyService.checkImagePrompt(prompt, locale);
     if (!safety.safe) {
       return {
         safe: false,
         prompt: "",
         reason: safety.reason ?? "unsafe",
-        studentMessage: imageRedirectMessage,
+        studentMessage: getImageRedirectMessage(locale),
       };
     }
 
@@ -40,7 +144,7 @@ export class ImageService {
       safe: true,
       prompt,
       reason: "safe_guided_blocks",
-      studentMessage: "Prompt đã sẵn sàng để tạo tranh AI an toàn.",
+      studentMessage: getImageReadyMessage(locale),
     };
   }
 
@@ -77,7 +181,11 @@ export class ImageService {
 
       if (style && isCustomProxy) {
         const s = style.toLowerCase();
-        if (s.includes("hoạt hình") || s.includes("anime")) {
+        if (
+          s.includes("cartoon") ||
+          s.includes("hoạt hình") ||
+          s.includes("anime")
+        ) {
           model = "anime";
         } else if (
           s.includes("3d") ||
@@ -86,8 +194,9 @@ export class ImageService {
         ) {
           model = "3d";
         } else if (
-          s.includes("màu nước") ||
           s.includes("watercolor") ||
+          s.includes("màu nước") ||
+          s.includes("picture_book") ||
           s.includes("sách tranh") ||
           s.includes("thiếu nhi")
         ) {

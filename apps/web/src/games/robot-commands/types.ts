@@ -14,18 +14,21 @@ export interface Cell {
   y: number;
 }
 
-export interface Puzzle {
+export interface PuzzleBase {
   allowedCommands: Command[];
   apple: Cell;
   gridSize: number;
-  hintVi: string;
   id: string;
   maxCommands: number;
   start: Cell;
   startDirection: Direction;
   starterCommands?: Command[];
-  title: string;
   walls: Cell[];
+}
+
+export interface Puzzle extends PuzzleBase {
+  hint: string;
+  title: string;
 }
 
 export interface StepSnapshot {

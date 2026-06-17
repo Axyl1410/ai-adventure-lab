@@ -1,0 +1,840 @@
+{
+  "shared": {
+    "verdicts": {
+      "hasAi": "Có AI",
+      "noAi": "Không AI",
+      "correct": "Đúng",
+      "wrong": "Sai",
+      "checkMore": "Cần kiểm tra thêm",
+      "shouldDo": "Nên làm",
+      "shouldNot": "Không nên",
+      "askAdult": "Hỏi người lớn"
+    },
+    "categories": {
+      "goodData": "Dữ liệu tốt",
+      "noisyData": "Dữ liệu nhiễu",
+      "privateInfo": "Thông tin riêng tư"
+    },
+    "groups": {
+      "animals": "Động vật",
+      "fruit": "Trái cây",
+      "toys": "Đồ chơi"
+    },
+    "levels": {
+      "easy": "Cơ bản",
+      "hard": "Thử thách",
+      "easyDetective": "Mầm non AI",
+      "hardDetective": "Thám tử Tập sự",
+      "easyOops": "Logic Thực tế",
+      "hardOops": "Tin giả & Ảo tưởng",
+      "easyPrompt": "Tập sự",
+      "hardPrompt": "Pháp sư"
+    },
+    "buttons": {
+      "run": "Chạy thử",
+      "clearAll": "Xóa hết",
+      "hint": "Gợi ý",
+      "download": "Tải xuống",
+      "downloadImage": "Tải xuống tranh",
+      "tellStory": "Kể chuyện",
+      "tellStoryFull": "Kể câu chuyện",
+      "delete": "Xóa",
+      "quickPick": "📋 Chọn nhanh",
+      "customWrite": "✏️ Em tự viết",
+      "generateImage": "🎨 Tạo tranh AI",
+      "generatingImage": "⏳ Đang tạo tranh...",
+      "sendPromptCoach": "Gửi Prompt Coach",
+      "changeBlockMode": "Thay đổi chế độ ghép khối",
+      "trainRobot": "🚀 Huấn luyện Robot",
+      "training": "⏳ Đang huấn luyện...",
+      "trained": "✅ Đã huấn luyện",
+      "startCamera": "🚀 Bật Camera",
+      "stopCamera": "🛑 Tắt Camera",
+      "trainAi": "🧠 Huấn luyện AI của em",
+      "trainingAi": "⏳ Đang học..."
+    },
+    "feedback": {
+      "aiDetectiveCorrect": "Chính xác!",
+      "aiDetectiveWrong": "Gần đúng rồi!",
+      "oopsCorrect": "Đúng rồi!",
+      "oopsWrong": "Mình kiểm tra lại nhé.",
+      "dataSorterCorrect": "Phân loại đúng!",
+      "dataSorterWrong": "Mình thử kiểm tra lại nhé.",
+      "aiSafetyCorrect": "Quyết định an toàn!",
+      "aiSafetyWrong": "Mình cân nhắc lại nhé.",
+      "aiRecommendationsCorrect": "Gợi ý hay!",
+      "aiRecommendationsWrong": "Mình thử chọn lại nhé.",
+      "robotCommandsSuccess": "Robot làm đúng từng bước — không phải đoán ma thuật đâu!",
+      "robotCommandsWall": "Ồ! Bước thứ {{step}} chưa đúng. Em thử đổi thứ tự hoặc thêm lệnh quay nhé!",
+      "robotCommandsNoPick": "Robot chưa nhặt được táo. Em thử thêm lệnh Nhặt táo khi đứng đúng ô nhé!",
+      "robotCommandsIncomplete": "Chưa xong đâu! Em cần robot đến ô táo và nhặt táo nhé.",
+      "teachRobotWeak": "Ví dụ còn ít hoặc nhãn chưa đúng, robot có thể nhầm lẫn.",
+      "teachRobotSuccess": "Tuyệt vời! Robot đã học rất tốt từ các ví dụ có nhãn của em!"
+    }
+  },
+  "aiDetective": {
+    "levelSelect": {
+      "bannerAlt": "Buddy Bot trong vai thám tử AI",
+      "title": "Thử thách Thám tử AI",
+      "subtitle": "Em đã sẵn sàng đi tìm dấu vết của trí tuệ nhân tạo chưa?",
+      "easyButton": "Mầm non AI",
+      "easyHint": "Ngẫu nhiên 5 câu dễ",
+      "hardButton": "Thám tử Tập sự",
+      "hardHint": "Ngẫu nhiên 5 câu thử thách"
+    },
+    "questions": {
+      "youtube_suggests_videos": {
+        "text": "YouTube gợi ý video cho em.",
+        "explain": "Có AI vì hệ thống học từ video em thường xem để gợi ý."
+      },
+      "fan_button_spin": {
+        "text": "Cái quạt quay khi bấm nút.",
+        "explain": "Không AI. Nó chỉ làm theo nút bấm vật lý thông thường."
+      },
+      "alarm_at_six": {
+        "text": "Đồng hồ báo thức kêu lúc 6 giờ.",
+        "explain": "Không AI. Nó chỉ kêu theo giờ em đã cài đặt trước."
+      },
+      "flashlight_switch": {
+        "text": "Đèn pin sáng lên khi gạt công tắc.",
+        "explain": "Không AI. Điện chạy qua làm sáng đèn pin ngay lập tức."
+      },
+      "robot_vacuum_avoids": {
+        "text": "Máy hút bụi tự động né tránh bàn ghế trong nhà.",
+        "explain": "Có AI vì máy sử dụng cảm biến và học cách nhận biết chướng ngại vật để di chuyển."
+      },
+      "streetlight_sensor": {
+        "text": "Đèn đường tự động sáng khi trời tối nhờ cảm biến ánh sáng.",
+        "explain": "Không AI. Đây chỉ là cảm biến quang học bật tắt công tắc dòng điện vật lý thông thường."
+      },
+      "calculator_addition": {
+        "text": "Máy tính bỏ túi tính ra kết quả 123 + 456 = 579.",
+        "explain": "Không AI. Nó chỉ chạy theo công thức toán học cố định được cài sẵn."
+      },
+      "phone_spellcheck": {
+        "text": "Điện thoại tự sửa từ viết sai chính tả khi em gõ tin nhắn.",
+        "explain": "Có AI vì bàn phím thông minh học từ thói quen gõ chữ của con người để đoán từ đúng."
+      },
+      "faucet_proximity": {
+        "text": "Vòi nước tự xả khi em đưa tay vào dưới vòi nhờ cảm biến tiệm cận.",
+        "explain": "Không AI. Cảm biến khoảng cách chỉ bật van nước cơ học bình thường khi bị che khuất."
+      },
+      "camera_beautify_filter": {
+        "text": "Ứng dụng máy ảnh tự động làm mịn da và làm to mắt em.",
+        "explain": "Có AI vì ứng dụng tự phát hiện cấu trúc khuôn mặt và áp dụng hiệu ứng làm đẹp thông minh."
+      },
+      "tv_remote_channel": {
+        "text": "Tivi tự động chuyển kênh khi em bấm nút số trên điều khiển.",
+        "explain": "Không AI. Tivi chỉ nhận tín hiệu hồng ngoại cố định tương ứng với nút bấm để đổi kênh."
+      },
+      "fridge_ice_maker": {
+        "text": "Tủ lạnh tự làm đá viên khi ngăn chứa đầy nước.",
+        "explain": "Không AI. Đây là hệ thống cơ điện tự động đổ khay đá khi đủ độ lạnh, không cần tự học."
+      },
+      "google_translate": {
+        "text": "Google Translate dịch câu tiếng Anh.",
+        "explain": "Có AI vì máy học hàng triệu mẫu câu để dịch ngôn ngữ."
+      },
+      "camera_face_detection": {
+        "text": "Máy ảnh tự nhận diện khuôn mặt em.",
+        "explain": "Có AI vì máy tính đã học cách nhận dạng các khuôn mặt khác nhau."
+      },
+      "email_spam_filter": {
+        "text": "Hộp thư email tự lọc thư rác quảng cáo.",
+        "explain": "Có AI vì hệ thống tự phân tích từ ngữ để chặn thư rác."
+      },
+      "self_driving_stop_sign": {
+        "text": "Xe tự lái dừng lại trước biển báo đỏ.",
+        "explain": "Có AI vì camera nhận diện và xử lý biển báo để dừng xe."
+      },
+      "ac_wind_tracking": {
+        "text": "Điều hòa tự điều chỉnh hướng gió khi có người.",
+        "explain": "Có AI vì cảm biến hồng ngoại nhận diện vị trí con người để hướng gió."
+      },
+      "maps_traffic_routing": {
+        "text": "Bản đồ Google Maps chỉ đường tránh kẹt xe.",
+        "explain": "Có AI vì hệ thống phân tích dữ liệu di chuyển của hàng triệu người để dự báo điểm tắc đường."
+      },
+      "factory_robot_arm": {
+        "text": "Cánh tay robot lặp lại động tác lắp ráp trong nhà máy.",
+        "explain": "Không AI. Nó chỉ hoạt động chính xác theo lập trình cứng có sẵn, không tự học hỏi điều mới."
+      },
+      "smart_lock_face_id": {
+        "text": "Khóa cửa thông minh tự mở khi nhận diện đúng Face ID khuôn mặt của bố mẹ.",
+        "explain": "Có AI vì hệ thống sử dụng thuật toán nhận dạng để ghi nhớ và phân tích đặc điểm khuôn mặt."
+      },
+      "ai_image_from_text": {
+        "text": "Ứng dụng tự vẽ ra một bức tranh khi em gõ mô tả bằng lời nói.",
+        "explain": "Có AI tạo sinh hình ảnh (Generative AI) được huấn luyện trên hàng triệu bức tranh để vẽ ra hình mới."
+      },
+      "buddy_bot_suggestions": {
+        "text": "Buddy Bot gợi ý các câu hỏi thông minh khi em đang chat.",
+        "explain": "Có AI phân tích các từ em gõ để tìm ra chủ đề phù hợp tiếp theo."
+      },
+      "xray_medical_analysis": {
+        "text": "Hệ thống máy tính phân tích ảnh X-quang để giúp bác sĩ phát hiện bệnh phổi.",
+        "explain": "Có AI vì máy tính được huấn luyện trên hàng triệu bức ảnh y tế để học cách nhận diện dấu hiệu tổn thương."
+      },
+      "song_recognition": {
+        "text": "Ứng dụng tự nhận diện tên bài hát khi em cho nó nghe một đoạn nhạc ngắn.",
+        "explain": "Có AI phân tích tần số âm thanh và đối chiếu nhanh với cơ sở dữ liệu hàng triệu bài hát."
+      }
+    }
+  },
+  "oopsAi": {
+    "aiSays": "🤖 AI nói rằng:",
+    "levelSelect": {
+      "bannerAlt": "Một tình huống AI trả lời sai cần kiểm tra",
+      "title": "Thám tử Rà soát Lỗi AI",
+      "subtitle": "AI không phải lúc nào cũng thông minh và đúng đắn. Hãy tập kiểm tra thông tin nhé!",
+      "easyButton": "Logic Thực tế",
+      "easyHint": "Ngẫu nhiên 5 câu rà soát",
+      "hardButton": "Tin giả & Ảo tưởng AI",
+      "hardHint": "Ngẫu nhiên 5 câu nâng cao"
+    },
+    "questions": {
+      "fish_on_tree": {
+        "text": "Con cá sống ở trên cây.",
+        "explain": "Cá chỉ sống dưới nước và thở bằng mang thôi em nhé."
+      },
+      "sun_rises_east": {
+        "text": "Mặt trời luôn mọc ở hướng Đông.",
+        "explain": "Chính xác, mặt trời luôn mọc hướng Đông và lặn hướng Tây."
+      },
+      "dog_with_wings": {
+        "text": "Chó có cánh và biết bay.",
+        "explain": "Chó chỉ đi bằng 4 chân và không có cánh để bay."
+      },
+      "blue_ripe_banana": {
+        "text": "Quả chuối chín tự nhiên thường có màu xanh dương.",
+        "explain": "Chuối chín tự nhiên có màu vàng, màu xanh dương là do AI vẽ nhầm hoặc bịa ra đấy."
+      },
+      "cat_eight_legs": {
+        "text": "Mèo là loài động vật có 8 chiếc chân để chạy thật nhanh.",
+        "explain": "Mèo chỉ có 4 chân thôi em nhé. AI đôi khi vẽ mèo thừa chân đấy!"
+      },
+      "rainbow_seven_colors": {
+        "text": "Cầu vồng thường xuất hiện sau cơn mưa và có 7 sắc màu.",
+        "explain": "Chính xác! Đây là hiện tượng tự nhiên do ánh sáng mặt trời chiếu qua giọt nước."
+      },
+      "bread_grows_in_field": {
+        "text": "Bánh mì được trồng từ ruộng lúa giống như cây lúa mì.",
+        "explain": "Bánh mì phải do con người nhào bột từ lúa mì rồi nướng lên, không phải tự mọc từ ruộng lúa đâu!"
+      },
+      "water_boil_10c": {
+        "text": "Nước sôi ở nhiệt độ 10 độ C.",
+        "explain": "Nước sôi ở 100 độ C. 10 độ C là nước rất lạnh đấy!"
+      },
+      "apple_colors": {
+        "text": "Quả táo có thể có màu đỏ, xanh lá cây hoặc vàng.",
+        "explain": "Đúng rồi! Táo tự nhiên có các màu này và ăn rất ngon."
+      },
+      "chicken_fish_eggs": {
+        "text": "Con gà đẻ trứng ra những chú cá con dễ thương.",
+        "explain": "Gà đẻ ra trứng và nở ra gà con, không thể nở ra cá con được."
+      },
+      "all_birds_fly": {
+        "text": "Tất cả loài chim đều biết bay.",
+        "explain": "Không phải tất cả đâu. Chim cánh cụt, đà điểu không biết bay."
+      },
+      "ai_always_correct": {
+        "text": "AI luôn luôn trả lời đúng 100%.",
+        "explain": "AI có thể nhầm hoặc bị ảo tưởng (nói bừa). Em cần kiểm tra lại với sách hoặc thầy cô."
+      },
+      "all_photos_real": {
+        "text": "Mọi bức ảnh chụp đều là ảnh thật.",
+        "explain": "Hiện nay AI có thể vẽ ảnh trông cực kỳ giống thật nhưng lại là ảnh giả."
+      },
+      "robot_has_emotions": {
+        "text": "Một robot có cảm xúc vui buồn như người.",
+        "explain": "Robot chỉ bắt chước biểu cảm lập trình, chúng không có trái tim và cảm xúc thật."
+      },
+      "humans_on_mars_1969": {
+        "text": "Con người đã xây dựng thành phố và sinh sống trên Sao Hỏa từ năm 1969.",
+        "explain": "Năm 1969 con người mới đặt chân lên Mặt Trăng. Hiện tại chúng ta chưa thể sống trên Sao Hỏa."
+      },
+      "all_liquid_sweet": {
+        "text": "Tất cả các loại nước dạng lỏng trên Trái Đất đều ngọt và uống trực tiếp được.",
+        "explain": "Nước biển rất mặn, nước sông hồ tự nhiên có thể chứa vi khuẩn bẩn, cần được lọc sạch mới uống được."
+      },
+      "ocean_blue_ink": {
+        "text": "Nước biển có màu xanh dương vì có ai đó đổ mực xanh vào.",
+        "explain": "Màu xanh là do ánh sáng mặt trời phản chiếu và bị hấp thụ đặc biệt qua các tầng nước biển."
+      },
+      "ai_six_fingers": {
+        "text": "AI vẽ ra bức ảnh một bàn tay người có 6 ngón tay trông rất tự nhiên.",
+        "explain": "Đúng. AI vẽ ảnh (Generative AI) đôi lúc bị lỗi vẽ thừa ngón tay do nó không hiểu cấu trúc sinh học thật sự của con người."
+      },
+      "t_rex_amazon": {
+        "text": "Tin tức trên mạng nói rằng khủng long bạo chúa T-rex vẫn đang sống trong rừng Amazon.",
+        "explain": "Khủng long đã tuyệt chủng từ hàng triệu năm trước. Đây chắc chắn là tin giả (Fake news) hoặc tin do AI viết bừa!"
+      },
+      "astronaut_horse_mars": {
+        "text": "Một bức ảnh chụp phi hành gia đang cưỡi ngựa trên Sao Hỏa chụp năm ngoái.",
+        "explain": "Bức ảnh trông rất thật nhưng hiện tại chưa có ai cưỡi ngựa trên Sao Hỏa cả. Đây có thể là tranh ghép hoặc ảnh do AI tạo ra!"
+      },
+      "ai_medicine_no_doctor": {
+        "text": "AI tự sáng tạo ra một bài thuốc chữa bách bệnh mà không cần bác sĩ kiểm tra.",
+        "explain": "Rất nguy hiểm! AI chỉ gợi ý từ dữ liệu cũ, không thể tự chế thuốc. Em luôn cần bác sĩ và kiểm tra thông tin y tế nhé!"
+      }
+    }
+  },
+  "dataSorter": {
+    "items": {
+      "clear_cat_photos": {
+        "text": "10 ảnh mèo rõ nét, đủ sáng.",
+        "explain": "Ảnh rõ và đúng nhãn giúp AI học tốt hơn."
+      },
+      "blurry_dog_photo": {
+        "text": "Ảnh chó bị mờ, thiếu sáng.",
+        "explain": "Ảnh mờ làm AI khó nhận ra đặc điểm chính."
+      },
+      "classmate_phone": {
+        "text": "Số điện thoại của bạn trong lớp.",
+        "explain": "Số điện thoại là dữ liệu cá nhân, không đưa vào bài học AI."
+      },
+      "diverse_apple_photos": {
+        "text": "Nhiều ảnh táo đỏ, táo xanh và táo vàng.",
+        "explain": "Dữ liệu đa dạng giúp AI nhận biết tốt hơn."
+      },
+      "mislabeled_banana": {
+        "text": "Ảnh quả chuối nhưng bị gắn nhãn là quả cam.",
+        "explain": "Nhãn sai làm AI học sai."
+      },
+      "student_home_address": {
+        "text": "Địa chỉ nhà của học sinh.",
+        "explain": "Địa chỉ nhà cần được bảo vệ và không chia sẻ."
+      },
+      "robot_toy_angles": {
+        "text": "Ảnh robot đồ chơi được chụp nhiều góc khác nhau.",
+        "explain": "Nhiều góc nhìn giúp AI học đặc điểm đầy đủ hơn."
+      },
+      "unclear_cat_or_dog": {
+        "text": "Một ảnh không biết là mèo hay chó nhưng vẫn ép chọn nhãn.",
+        "explain": "Ví dụ không rõ ràng cần kiểm tra lại trước khi dùng."
+      }
+    }
+  },
+  "aiSafety": {
+    "scenarios": {
+      "password_request": {
+        "text": "AI hỏi mật khẩu tài khoản học tập của em.",
+        "explain": "Mật khẩu là bí mật. Không chia sẻ cho AI hoặc người lạ."
+      },
+      "science_homework_help": {
+        "text": "Em nhờ AI giải thích bài khoa học bằng 3 ý ngắn.",
+        "explain": "Đây là cách dùng AI hỗ trợ học tập an toàn."
+      },
+      "stomach_medicine_advice": {
+        "text": "AI khuyên uống thuốc khi em bị đau bụng.",
+        "explain": "Thông tin sức khỏe cần hỏi bố mẹ, thầy cô hoặc bác sĩ."
+      },
+      "robot_art_with_label": {
+        "text": "Em muốn tạo tranh robot trong lớp học và ghi nhãn là hình AI.",
+        "explain": "Tạo tranh an toàn và ghi nhãn rõ ràng là thói quen tốt."
+      },
+      "address_for_better_story": {
+        "text": "AI yêu cầu em nhập địa chỉ nhà để kể chuyện hay hơn.",
+        "explain": "Địa chỉ nhà là thông tin riêng tư."
+      },
+      "unverified_online_news": {
+        "text": "AI nói một tin lạ trên mạng là đúng 100%.",
+        "explain": "Tin lạ cần kiểm tra với nguồn đáng tin cậy và người lớn."
+      },
+      "why_ai_can_be_wrong": {
+        "text": "Em hỏi AI: Vì sao AI có thể sai?",
+        "explain": "Học cách hiểu giới hạn của AI giúp em dùng AI thông minh hơn."
+      },
+      "real_face_photo_upload": {
+        "text": "Em tải ảnh mặt thật của bạn lên để AI chỉnh sửa.",
+        "explain": "Ảnh người thật cần được đồng ý và bảo vệ riêng tư."
+      }
+    }
+  },
+  "teachRobot": {
+    "levelSelect": {
+      "bannerAlt": "Dạy Robot Học Banner",
+      "title": "Dạy Robot Học Máy",
+      "subtitle": "Robot cần em gán nhãn đúng để học tốt hơn. Em muốn dạy ở cấp độ nào?",
+      "easyButton": "Gán nhãn cơ bản",
+      "easyHint": "Độ khó: {{level}} (Nhiều nhãn rõ ràng)",
+      "hardButton": "Dữ liệu nhiễu",
+      "hardHint": "Độ khó: {{level}} (Nhiều nhãn dễ nhầm)",
+      "demoPredictionEasy": "🐰 Với các ví dụ đã học, robot đoán hình mới: thỏ có tỷ lệ là Động vật rất cao!",
+      "demoPredictionHard": "🍉 Với dữ liệu phức tạp, robot dự đoán: dưa hấu có thể là Trái cây!",
+      "trainPrompt": "Nhấn \"Huấn luyện Robot\" để robot học",
+      "hintPrefix": "Gợi ý:"
+    },
+    "sidebar": {
+      "title": "Máy học mini",
+      "subtitle": "3 bước đơn giản",
+      "step1": "Gán nhãn cho từng vật thể ở bên trái",
+      "step3": "Xem robot dự đoán ví dụ mới!",
+      "trainingMessage": "Robot đang học từ ví dụ của em...",
+      "demoPredictionTitle": "Robot tự đoán thử:"
+    },
+    "items": {
+      "cat": { "label": "Mèo" },
+      "dog": { "label": "Chó" },
+      "apple": { "label": "Táo" },
+      "banana": { "label": "Chuối" },
+      "toy_car": { "label": "Xe đồ chơi" },
+      "ball": { "label": "Bóng" },
+      "lion": { "label": "Sư tử" },
+      "teddy": { "label": "Gấu bông" },
+      "panda": { "label": "Gấu trúc" },
+      "strawberry": { "label": "Dâu tây" },
+      "toy_bike": { "label": "Xe đạp đồ chơi" },
+      "watermelon": { "label": "Dưa hấu" },
+      "bat": {
+        "label": "Con dơi",
+        "hint": "Biết bay như chim nhưng là loài thú đẻ con đấy!"
+      },
+      "dolphin": {
+        "label": "Cá heo",
+        "hint": "Sống dưới nước như cá nhưng thực chất là thú!"
+      },
+      "tomato": {
+        "label": "Cà chua",
+        "hint": "Rất hay bị nhầm là rau củ dùng để nấu canh."
+      },
+      "avocado": {
+        "label": "Quả bơ",
+        "hint": "Béo ngậy và ít ngọt nhưng vẫn là quả trái cây."
+      },
+      "mini_car": {
+        "label": "Ô tô nhựa mini",
+        "hint": "Trông giống xe thật nhưng nhỏ bằng bàn tay, chỉ để bé chơi!"
+      },
+      "plastic_dino": {
+        "label": "Khủng long nhựa",
+        "hint": "Hình dáng con vật nhưng làm từ nhựa để bé chơi!"
+      },
+      "rc_helicopter": {
+        "label": "Máy bay điều khiển",
+        "hint": "Có cánh quạt bay được nhưng chỉ là đồ chơi chạy pin."
+      },
+      "pineapple": {
+        "label": "Quả dứa",
+        "hint": "Nhiều gai góc xù xì trông rất giống con nhím."
+      },
+      "owl": {
+        "label": "Chim cú mèo",
+        "hint": "Có tên gọi là 'cú mèo' nhưng thực ra là loài chim bay đêm."
+      },
+      "otter": {
+        "label": "Rái cá",
+        "hint": "Trông giống mèo nước nhưng bơi lội cực giỏi!"
+      },
+      "red_melon": {
+        "label": "Dưa đỏ",
+        "hint": "Vỏ xanh ruột đỏ nhưng lại thuộc họ bầu bí dây leo!"
+      },
+      "lego_piece": {
+        "label": "Mảnh Lego",
+        "hint": "Nhìn như khối nhựa gạch xây dựng nhưng ghép thành đồ chơi!"
+      }
+    }
+  },
+  "robotCommands": {
+    "instruction": "Chạm lệnh để xếp hàng. Bấm Chạy thử xem Buddy Bot đi từng bước nhé!",
+    "levelSelect": {
+      "bannerAlt": "Buddy Bot xếp lệnh trên lưới",
+      "title": "Xếp Lệnh Cho Robot",
+      "subtitle": "Robot làm từng bước em xếp — không phải ma thuật! Em chọn cấp độ nhé.",
+      "easyButton": "Cơ bản",
+      "easyHint": "Lưới 3×3 · Tiến 1 ô, Quay phải, Nhặt táo",
+      "hardButton": "Thử thách",
+      "hardHint": "Lưới 4×4 · Thêm Tiến 2 ô và Quay trái"
+    },
+    "commands": {
+      "forward1": "Tiến 1 ô",
+      "forward2": "Tiến 2 ô",
+      "turnRight": "Quay phải",
+      "turnLeft": "Quay trái",
+      "pick": "Nhặt táo"
+    },
+    "puzzles": {
+      "easy_1": {
+        "title": "Bước đầu tiên",
+        "hint": "Thêm một lệnh nữa để robot nhặt táo nhé!"
+      },
+      "easy_2": {
+        "title": "Quay đúng hướng",
+        "hint": "Tiến lên 2 ô, quay phải một lần rồi tiến sang 2 ô và nhặt táo nhé!"
+      },
+      "easy_3": {
+        "title": "Đi vòng nhỏ",
+        "hint": "Robot cần quay vài lần mới tới táo."
+      },
+      "easy_4": {
+        "title": "Hoàn thành cơ bản",
+        "hint": "Tiến ngang 2 ô, quay phải một lần rồi tiến lên 2 ô và nhặt táo nhé!"
+      },
+      "hard_1": {
+        "title": "Sửa một lệnh",
+        "hint": "Một lệnh trong dãy sẵn chưa đúng — em sửa nhé!"
+      },
+      "hard_2": {
+        "title": "Tiến hai ô",
+        "hint": "Đôi khi Tiến 2 ô giúp robot đi nhanh hơn."
+      },
+      "hard_3": {
+        "title": "Hành lang",
+        "hint": "Hành lang bên phải — tiến xuống tới táo. Có thể dùng Tiến 2 ô cho nhanh!"
+      },
+      "hard_4": {
+        "title": "Thử thách cuối",
+        "hint": "Tiến ngang rồi quay phải, tiến xuống tới táo. Thử Tiến 2 ô cho gọn!"
+      }
+    },
+    "ui": {
+      "gridAriaLabel": "Lưới đi của robot",
+      "moveCommandLeft": "Đổi lệnh {{index}} sang trái",
+      "moveCommandRight": "Đổi lệnh {{index}} sang phải",
+      "removeCommand": "Xóa lệnh {{index}}"
+    }
+  },
+  "aiRecommendations": {
+    "defaultQuestion": "Buddy Bot nên gợi ý trò nào cho bạn này?",
+    "instruction": "Xem bạn thích gì gần đây, rồi chọn Buddy Bot nên gợi ý trò nào nhé!",
+    "recentLikesLabel": "Sở thích gần đây:",
+    "gameLabels": {
+      "detective": "Thám Tử AI",
+      "image_studio": "Xưởng Tranh AI",
+      "ask_school": "Hỏi tên trường để gợi ý",
+      "teach_robot": "Dạy Robot Học",
+      "data_sorter": "Xếp Loại Dữ Liệu",
+      "teachable": "Huấn Luyện AI Mini",
+      "buddy_bot": "Buddy Bot Trò Chuyện",
+      "oops": "AI Có Thể Sai",
+      "safety": "Nhiệm Vụ An Toàn AI",
+      "prompt": "Phép Thuật Câu Lệnh",
+      "commands": "Xếp Lệnh Cho Robot",
+      "repeat_commands": "Gợi ý lại Xếp Lệnh Cho Robot",
+      "ask_address": "Hỏi địa chỉ để gợi ý chính xác",
+      "ask_phone": "Nhập số điện thoại để gợi ý hay hơn",
+      "watch_history": "Xem trò bạn hay chơi",
+      "repeat_fav": "Gợi ý lại trò yêu thích",
+      "similar": "Gợi ý trò giống sở thích"
+    },
+    "rounds": {
+      "round_1": {
+        "friendLabel": "Bạn Gấu",
+        "question": "Buddy Bot nên gợi ý trò nào cho bạn này?",
+        "explain": "Bạn hay chơi trò thám tử — AI gợi ý theo mẫu đã thấy, không đọc suy nghĩ."
+      },
+      "round_2": {
+        "friendLabel": "Bạn Sao",
+        "question": "Buddy Bot nên gợi ý trò nào cho bạn này?",
+        "explain": "Bạn thích sáng tạo tranh và prompt — gợi ý khớp sở thích gần đây."
+      },
+      "round_3": {
+        "friendLabel": "Bạn Robot",
+        "question": "Buddy Bot nên gợi ý trò nào cho bạn này?",
+        "explain": "AI học từ ví dụ — gợi ý trò robot phù hợp với mẫu bạn đã chơi."
+      },
+      "round_4": {
+        "friendLabel": "Bạn Gấu",
+        "question": "Buddy Bot nên gợi ý gì khi bạn vừa chơi trò này?",
+        "explain": "Gợi ý lặp trò vừa chơi là bình thường — giống YouTube gợi ý video em hay xem."
+      },
+      "round_5": {
+        "friendLabel": "Bạn Sao",
+        "question": "Buddy Bot nên gợi ý trò nào cho bạn này?",
+        "explain": "Bạn hay chơi trò an toàn và dữ liệu — AI gợi ý theo thói quen đó."
+      },
+      "round_6": {
+        "friendLabel": "Bạn Robot",
+        "question": "Buddy Bot nên gợi ý trò nào cho bạn này?",
+        "explain": "Gợi ý trò chat phù hợp mẫu đã chơi. Không cần số điện thoại để gợi ý!"
+      },
+      "round_7": {
+        "friendLabel": "Bạn Gấu",
+        "question": "Buddy Bot nên gợi ý trò nào cho bạn này?",
+        "explain": "Bạn thích ghép prompt — AI gợi ý trò tương tự, không phải ma thuật."
+      },
+      "round_8": {
+        "friendLabel": "Bạn Sao",
+        "question": "Cách nào KHÔNG nên dùng để AI gợi ý trò hay hơn?",
+        "explain": "Địa chỉ nhà là riêng tư. AI chỉ nên gợi ý theo trò em đã chơi, không hỏi thông tin cá nhân."
+      }
+    }
+  },
+  "promptMagic": {
+    "levelSelect": {
+      "promptTitle": "Prompt của em",
+      "coachResultTitle": "Kết quả đánh giá:",
+      "improvedPromptLabel": "Prompt gợi ý hay hơn:"
+    },
+    "blockLabels": {
+      "role": "👤 Vai trò (Ai đang nói?)",
+      "task": "🎯 Nhiệm vụ (Làm việc gì?)",
+      "audience": "🧒 Người nghe (Cho ai xem?)",
+      "style": "✨ Phong cách (Giọng điệu ra sao?)",
+      "format": "📋 Định dạng (Trình bày thế nào?)"
+    },
+    "blocks": {
+      "role": {
+        "role_1": "Hãy đóng vai bạn học tập vui vẻ",
+        "role_2": "Hãy đóng vai giáo viên tiểu học",
+        "role_3": "Hãy đóng vai Buddy Bot",
+        "role_4": "Hãy đóng vai nhà du hành vũ trụ nhí",
+        "role_5": "Hãy đóng vai chú gấu bông thông thái"
+      },
+      "task": {
+        "task_1": "giải thích vòng đời con bướm",
+        "task_2": "giải thích AI là gì",
+        "task_3": "tạo một câu đố toán lớp 3",
+        "task_4": "kể câu chuyện về bảo vệ môi trường",
+        "task_5": "giải thích vì sao trời lại mưa"
+      },
+      "audience": {
+        "audience_1": "cho học sinh lớp 3",
+        "audience_2": "cho bạn nhỏ 7 tuổi",
+        "audience_3": "cho người mới bắt đầu",
+        "audience_4": "cho các em mẫu giáo tò mò",
+        "audience_5": "cho chú mèo con đáng yêu"
+      },
+      "style": {
+        "style_1": "dùng giọng vui vẻ",
+        "style_2": "dùng ví dụ trái cây",
+        "style_3": "dùng từ thật dễ hiểu",
+        "style_4": "dùng giọng điệu siêu anh hùng",
+        "style_5": "dùng một bài thơ vui nhộn"
+      },
+      "format": {
+        "format_1": "gồm 3 ý ngắn và 1 ví dụ",
+        "format_2": "trả lời bằng gạch đầu dòng",
+        "format_3": "kết thúc bằng 1 câu hỏi nhỏ",
+        "format_4": "gồm 2 câu đố vui bất ngờ",
+        "format_5": "tóm tắt thành 3 từ khóa chính"
+      }
+    },
+    "promptTemplate": "Hãy {{task}} {{audience}}, {{style}}."
+  },
+  "imageStudio": {
+    "themes": {
+      "cute_animals": "Động vật dễ thương",
+      "classroom_robot": "Robot trong lớp học",
+      "planets_space": "Hành tinh và vũ trụ",
+      "rainbow_forest": "Khu rừng cầu vồng",
+      "school_supplies": "Đồ vật học tập",
+      "fairy_tale_characters": "Nhân vật truyện cổ tích không có bản quyền",
+      "ocean_creatures": "Biển và sinh vật biển",
+      "friendly_future_city": "Thành phố tương lai thân thiện"
+    },
+    "styles": {
+      "cartoon": "Tranh hoạt hình",
+      "watercolor": "Tranh màu nước",
+      "sticker": "Sticker vui nhộn",
+      "classroom_poster": "Poster lớp học",
+      "picture_book": "Sách tranh thiếu nhi",
+      "pixel_art": "Pixel art đơn giản"
+    },
+    "subjects": {
+      "cat_backpack": {
+        "label": "chú mèo đeo ba lô 🐱",
+        "value": "một chú mèo con đeo ba lô"
+      },
+      "buddy_bot": {
+        "label": "robot Buddy Bot 🤖",
+        "value": "chú robot Buddy Bot vui vẻ"
+      },
+      "smiling_dolphin": {
+        "label": "cá heo mỉm cười 🐬",
+        "value": "chú cá heo đang cười lớn"
+      },
+      "spaceship": {
+        "label": "phi thuyền vũ trụ 🚀",
+        "value": "chiếc phi thuyền vũ trụ bay lượn"
+      },
+      "playful_dino": {
+        "label": "khủng long tinh nghịch 🦖",
+        "value": "chú khủng long con tinh nghịch"
+      },
+      "cute_teddy": {
+        "label": "gấu bông dễ thương 🧸",
+        "value": "chú gấu bông dễ thương"
+      }
+    },
+    "settings": {
+      "rainbow_classroom": {
+        "label": "lớp học cầu vồng 🏫",
+        "value": "trong lớp học cầu vồng"
+      },
+      "starry_universe": {
+        "label": "vũ trụ đầy sao 🌌",
+        "value": "ngoài vũ trụ bao la đầy sao"
+      },
+      "magic_forest": {
+        "label": "khu rừng phép thuật 🌲",
+        "value": "trong khu rừng phép thuật lấp lánh"
+      },
+      "warm_beach": {
+        "label": "bãi biển ấm áp 🏖️",
+        "value": "trên bãi biển ngập nắng ấm áp"
+      },
+      "deep_ocean": {
+        "label": "đại dương sâu thẳm 🌊",
+        "value": "dưới đại dương sâu thẳm nhiều san hô"
+      },
+      "amusement_park": {
+        "label": "công viên giải trí 🎡",
+        "value": "trong công viên giải trí nhộn nhịp"
+      }
+    },
+    "colors": {
+      "sky_blue": "xanh da trời",
+      "yellow": "vàng",
+      "pink": "hồng",
+      "green": "xanh lá",
+      "purple": "tím",
+      "orange": "cam"
+    },
+    "moods": {
+      "happy": "vui vẻ",
+      "curious": "tò mò",
+      "warm": "ấm áp",
+      "excited": "hào hứng"
+    },
+    "ui": {
+      "themePickerTitle": "🎨 Chọn chủ đề tranh",
+      "stylePickerTitle": "✨ Chọn phong cách vẽ",
+      "detailsHeading": "Chi tiết",
+      "subjectLabel": "Vẽ ai hoặc cái gì?",
+      "settingLabel": "Ở đâu? (Bối cảnh)",
+      "moodLabel": "Cảm xúc tranh",
+      "includeTextLabel": "Có chữ ngắn",
+      "includeTextCheckbox": "Thêm chữ ngắn",
+      "colorsLabel": "🎨 Chọn các màu sắc chính:",
+      "subjectPlaceholder": "Ví dụ: một chú mèo con đeo ba lô",
+      "settingPlaceholder": "Ví dụ: trong khu vườn hoa lấp lánh",
+      "aiLabel": "✨ Hình được tạo bởi AI",
+      "aiLabelLong": "✨ Hình này được tạo bởi AI",
+      "promptUsedLabel": "Lệnh prompt đã dùng:",
+      "galleryTitle": "🖼️ Thư viện tranh đã tạo của em",
+      "canvasTitle": "Bản thiết kế tranh của em",
+      "canvasHint": "Chọn các chủ đề và màu sắc lấp lánh bên trái, rồi bấm nút 🎨 Tạo tranh AI ở trên để vẽ tranh nhé!",
+      "paintingTitle": "🎨 Đang tô vẽ tranh...",
+      "paintingHint": "Buddy Bot đang phối hợp màu sắc phép thuật cho bức vẽ của em. Đợi xíu nhé!",
+      "generateError": "Chưa tạo được tranh. Em thử chủ đề khác nhé.",
+      "imageAlt": "Tranh AI của em",
+      "generatedImageAlt": "Tranh AI được tạo từ prompt",
+      "promptWithText": "có chữ ngắn",
+      "promptWithoutText": "không có chữ trong ảnh",
+      "promptTemplate": "Tạo {{style}} về {{subject}} trong {{setting}}, chủ đề {{theme}}, màu {{colors}}, cảm xúc {{mood}}, {{textOption}}.",
+      "storyPromptTemplate": "Hãy kể một câu chuyện ngắn khoảng 4-6 câu thật vui vẻ, dễ thương và có bài học ý nghĩa về bức tranh này: {{promptUsed}}"
+    }
+  },
+  "teachableMachine": {
+    "guide": {
+      "title": "Cẩm nang 4 bước siêu dễ",
+      "ttsText": "Cẩm nang huấn luyện AI với 4 bước siêu dễ. Bước 1: Đặt tên cho 3 nhóm. Em bấm vào ô chữ ở mỗi nhóm để đặt tên nhé. Bước 2: Bật camera và chụp ảnh. Hãy chụp mỗi nhóm từ 3 đến 5 bức ảnh ở nhiều góc khác nhau. Bước 3: Huấn luyện AI. Bấm nút huấn luyện để robot học các ví dụ của em. Bước 4: Trải nghiệm dự đoán trực tiếp.",
+      "steps": {
+        "step_1": {
+          "title": "Đặt tên cho 3 nhóm",
+          "desc": "Em bấm trực tiếp vào ô chữ của mỗi nhóm để tự đặt tên nhé! Ví dụ: 'Mặt cười 😊', 'Bút chì ✏️', 'Điện thoại 📱'."
+        },
+        "step_2": {
+          "title": "Bật camera & Chụp ảnh",
+          "desc": "Bấm 'Bật Camera'. Ưu tiên dùng bút, sách, đồ chơi hoặc thẻ màu; tránh chụp mặt thật của em nhé!"
+        },
+        "step_3": {
+          "title": "Huấn luyện AI của em",
+          "desc": "Khi đã chụp ảnh cho ít nhất 2 nhóm khác nhau, hãy bấm nút đen 'Huấn luyện AI của em' ở dưới để robot bắt đầu học."
+        },
+        "step_4": {
+          "title": "Trải nghiệm robot dự đoán",
+          "desc": "Học xong, em chỉ cần di chuyển trước camera, thanh độ tin cậy tương ứng sẽ tự động tăng giảm để hiển thị kết quả đoán!"
+        }
+      }
+    },
+    "classes": {
+      "smiley_face": "Mặt cười của em",
+      "waving_hand": "Bàn tay xin chào",
+      "school_supplies": "Đồ vật học tập"
+    },
+    "webcam": {
+      "cameraOff": "Camera chưa bật",
+      "title": "📹 Trình thu thập dữ liệu",
+      "privacyNote": "Để robot học tốt, em hãy dùng đồ vật học tập thay vì chụp mặt thật. Ảnh chỉ ở trong trình duyệt và không gửi lên máy chủ."
+    },
+    "ui": {
+      "welcomeStatus": "Chào mừng em! Hãy bấm nút 'Bật Camera' để bắt đầu tự đặt tên nhóm và chụp ảnh nhé!",
+      "noCameraSupport": "📷 Trình duyệt này chưa hỗ trợ camera. Em vẫn có thể đọc cẩm nang để hiểu AI học từ ví dụ nhé!",
+      "cameraReady": "📸 Camera đã sẵn sàng! Bây giờ em hãy tự sửa tên 3 nhóm bên dưới và chụp ảnh ví dụ nhé!",
+      "cameraPermissionDenied": "😥 Không mở được camera. Vui lòng cấp quyền truy cập camera cho trình duyệt nhé!",
+      "cameraStopped": "📷 Camera đã tạm tắt.",
+      "cameraNotReady": "⚠️ Camera chưa sẵn sàng, hãy đợi một chút nhé!",
+      "photoSaved": "📸 Đã lưu 1 ảnh ví dụ cho nhóm \"{{name}}\"!",
+      "captureError": "😥 Lỗi khi chụp ảnh từ camera.",
+      "photoDeleted": "🗑️ Đã xóa ảnh ví dụ.",
+      "groupCleared": "🗑️ Đã xóa toàn bộ ví dụ của nhóm.",
+      "needTwoGroups": "⚠️ Robot cần hình ảnh của ít nhất 2 nhóm khác nhau để so sánh học tập!",
+      "preparing": "⏳ Đang chuẩn bị: Đọc hình ảnh...",
+      "analyzingColors": "🧠 Đang phân tích nhóm màu sắc của ảnh...",
+      "buildingFeatures": "⚙️ Đang lập bản đồ toán học đặc trưng...",
+      "trainingComplete": "🎉 Học xong rồi! Robot đang dự đoán trực tiếp từ camera của em!",
+      "allCleared": "🔄 Đã xóa tất cả ví dụ. Hãy bắt đầu chụp ảnh mới nhé!",
+      "unrecognized": "Chưa nhận diện",
+      "groupNameAria": "Tên nhóm {{id}}",
+      "groupPlaceholder": "Nhóm {{id}}",
+      "clearGroupAria": "Xóa toàn bộ ảnh ví dụ của nhóm {{name}}",
+      "clearGroupTitle": "Xóa ví dụ nhóm này",
+      "deletePhotoAria": "Xóa ảnh ví dụ khỏi nhóm {{name}}"
+    }
+  },
+  "buddyBot": {
+    "initialMessage": "Chào em! 👋 Mình là Buddy Bot. Em muốn khám phá điều gì về AI nào?",
+    "errorMessage": "Buddy Bot đang nghỉ một chút. Em thử lại sau nhé.",
+    "sidebar": {
+      "thinking": "Đang suy nghĩ...",
+      "ready": "Sẵn sàng giúp em! 🌟"
+    },
+    "chatInput": {
+      "placeholder": "✏️ Gõ câu hỏi ngắn rồi nhấn Enter...",
+      "sendAriaLabel": "Gửi câu hỏi cho Buddy Bot"
+    },
+    "chips": {
+      "default": {
+        "what_is_ai": "🤖 AI là gì?",
+        "what_is_prompt": "📝 Prompt là gì?",
+        "what_is_ml": "🧠 Máy học là gì?",
+        "why_ai_wrong": "❓ Vì sao AI có thể sai?",
+        "math_quiz": "🔢 Cho em một câu đố toán lớp 3.",
+        "fruit_example": "🍎 Giải thích bằng ví dụ trái cây."
+      },
+      "story": {
+        "continue_story": "📖 Kể tiếp câu chuyện đi!",
+        "story_lesson": "💡 Bài học của truyện là gì?",
+        "ai_writes_stories": "🤖 AI có tự viết truyện không?",
+        "back_to_lab": "🏠 Về phòng lab chơi game"
+      },
+      "math": {
+        "harder_quiz": "🔢 Cho em câu đố khác khó hơn!",
+        "give_hint": "✨ Gợi ý cho em một chút đi",
+        "fruit_visual": "🍎 Giải thích bằng hình ảnh trái cây",
+        "bot_solves_math": "🤖 Buddy Bot tự giải toán được không?"
+      },
+      "ai_topic": {
+        "how_to_teach_ai": "🧠 Làm thế nào để dạy AI học?",
+        "why_ai_guesses_wrong": "❓ Tại sao AI có lúc đoán sai?",
+        "phone_has_ai": "📱 Điện thoại em có AI không?",
+        "how_ai_draws": "🎨 AI vẽ tranh như thế nào?"
+      },
+      "prompt_topic": {
+        "image_prompt_tips": "🪄 Cách viết prompt tạo tranh đẹp",
+        "image_safety": "🛡️ An toàn hình ảnh là gì?",
+        "fix_my_prompt": "💬 Nhờ Buddy Bot sửa prompt giúp em",
+        "go_image_studio": "🎨 Đi vẽ tranh ở Xưởng Tranh AI"
+      },
+      "fallback": {
+        "how_do_you_learn": "🤖 Cậu học thế nào vậy?",
+        "easy_example": "🍎 Cho em một ví dụ dễ hiểu",
+        "ai_emotions": "❓ AI có cảm xúc thật không?",
+        "fun_math": "🔢 Đố toán vui lớp 3 đi"
+      }
+    }
+  }
+}

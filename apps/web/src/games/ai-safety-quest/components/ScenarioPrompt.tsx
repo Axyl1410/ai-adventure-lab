@@ -1,4 +1,5 @@
 import { ShieldCheck } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { TTSButton } from "@/components/TTSButton";
 import type { Scenario } from "../types";
 
@@ -13,10 +14,15 @@ export function ScenarioPrompt({
   index,
   scenario,
 }: ScenarioPromptProps) {
+  const { t } = useTranslation("common");
+
   return (
     <>
       <p className="mb-3 font-black text-muted text-sm">
-        🛡️ Nhiệm vụ {index + 1} / {deckLength}
+        {t("gameUi.missionLabel", {
+          current: index + 1,
+          total: deckLength,
+        })}
       </p>
       <div className="mx-auto mb-5 grid h-24 w-24 place-items-center rounded-full bg-greenLab/15 text-6xl shadow-sm">
         {scenario.emoji}

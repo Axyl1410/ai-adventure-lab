@@ -1,5 +1,6 @@
 import { Award } from "lucide-react";
 import { motion } from "motion/react";
+import { useTranslation } from "react-i18next";
 import { HappyFeedback, TryAgainFeedback } from "@/components/Feedback";
 
 interface PuzzleFeedbackPanelProps {
@@ -21,6 +22,8 @@ export function PuzzleFeedbackPanel({
   score,
   totalPuzzles,
 }: PuzzleFeedbackPanelProps) {
+  const { t } = useTranslation("common");
+
   return (
     <div className="space-y-5">
       {isSuccess ? (
@@ -38,7 +41,10 @@ export function PuzzleFeedbackPanel({
           >
             <Award className="h-7 w-7 fill-orange-200 text-orange-500" />
             <span>
-              Hoàn thành: {score}/{totalPuzzles} điểm!
+              {t("gameUi.completeScorePlain", {
+                score,
+                total: totalPuzzles,
+              })}
             </span>
           </motion.div>
           <button
@@ -46,7 +52,7 @@ export function PuzzleFeedbackPanel({
             onClick={onClearLevel}
             type="button"
           >
-            Chơi lại hoặc chọn cấp độ khác
+            {t("actions.playAgainOrLevel")}
           </button>
         </div>
       ) : null}
@@ -57,7 +63,7 @@ export function PuzzleFeedbackPanel({
           type="button"
           whileHover={{ scale: 1.03 }}
         >
-          Màn tiếp theo
+          {t("gameUi.nextPuzzle")}
         </motion.button>
       ) : null}
     </div>

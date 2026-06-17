@@ -1,7 +1,12 @@
-import type { AiQuestion } from "@/lib/api";
-
 export type Level = "easy" | "hard";
 
-export interface DetectiveQuestion extends AiQuestion {
+export interface DetectiveQuestionBase {
+  answer: boolean;
   emoji: string;
+  id: string;
+}
+
+export interface DetectiveQuestion extends DetectiveQuestionBase {
+  explain: string;
+  text: string;
 }

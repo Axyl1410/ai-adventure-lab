@@ -8,6 +8,7 @@ export interface Example {
 export interface ClassConfig {
   accentColor: string;
   borderColor: string;
+  classKey: string;
   color: string;
   emoji: string;
   id: number;

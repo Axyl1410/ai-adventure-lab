@@ -1,7 +1,13 @@
-import type { OopsQuestion } from "@/lib/api";
-
-export type { OopsQuestion };
+export type VerdictId = "correct" | "wrong" | "needs_check";
 
 export type Level = "easy" | "hard";
 
-export type Verdict = OopsQuestion["answer"];
+export interface OopsQuestionBase {
+  answer: VerdictId;
+  id: string;
+}
+
+export interface OopsQuestion extends OopsQuestionBase {
+  explain: string;
+  text: string;
+}

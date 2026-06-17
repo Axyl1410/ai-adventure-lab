@@ -1,5 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { saveProgress, unlockSticker } from "@/lib/api";
+import { localizeTeachItem } from "@/lib/gameContent";
 import {
   AUTO_ADVANCE_MS,
   STICKER_MIN_CORRECT,
@@ -7,7 +9,7 @@ import {
 } from "./constants";
 import { getItemsForLevel } from "./gameData";
 import { countCorrect, getLabelProgress, isWeakModel } from "./scoring";
-import type { Answers, GroupName, Item, Level } from "./types";
+import type { Answers, GroupId, Item, Level } from "./types";
 
 interface SessionLike {
   id: string;
@@ -18,6 +20,7 @@ function createInitialAnswers(): Answers {
 }
 
 export function useTeachRobotGame(session: SessionLike | null) {
+  const { t, i18n } = useTranslation("gameContent");
   const [level, setLevel] = useState<Level | null>(null);
   const [answers, setAnswers] = useState<Answers>(createInitialAnswers);
   const [trained, setTrained] = useState(false);
@@ -29,7 +32,12 @@ export function useTeachRobotGame(session: SessionLike | null) {
   const trainTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const advanceTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const items = useMemo(() => (level ? getItemsForLevel(level) : []), [level]);
+  const items = useMemo(() => {
+    if (!level) {
+      return [];
+    }
+    return getItemsForLevel(level).map((item) => localizeTeachItem(t, item));
+  }, [level, i18n.language, t]);
 
   const current: Item | undefined = items[index];
   const labeledCount = Object.keys(answers).length;
@@ -99,8 +107,8 @@ export function useTeachRobotGame(session: SessionLike | null) {
   }, [items.length]);
 
   const assignLabel = useCallback(
-    (itemLabel: string, group: GroupName, currentIndex: number) => {
-      setAnswers((prev) => ({ ...prev, [itemLabel]: group }));
+    (itemId: string, group: GroupId, currentIndex: number) => {
+      setAnswers((prev) => ({ ...prev, [itemId]: group }));
 
       if (currentIndex < items.length - 1) {
         if (advanceTimeoutRef.current) {

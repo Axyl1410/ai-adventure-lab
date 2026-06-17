@@ -1,5 +1,6 @@
 import { AlertTriangle } from "lucide-react";
 import { motion } from "motion/react";
+import { useTranslation } from "react-i18next";
 import { TTSButton } from "@/components/TTSButton";
 import type { OopsQuestion } from "../types";
 
@@ -14,10 +15,16 @@ export function AiClaimPrompt({
   question,
   questionsLength,
 }: AiClaimPromptProps) {
+  const { t: tCommon } = useTranslation("common");
+  const { t } = useTranslation("gameContent");
+
   return (
     <>
       <p className="mb-3 font-black text-muted text-sm">
-        📋 Câu {index + 1} / {questionsLength}
+        {tCommon("gameUi.questionLabel", {
+          current: index + 1,
+          total: questionsLength,
+        })}
       </p>
       <div className="mb-4 flex justify-center">
         <motion.div
@@ -28,7 +35,9 @@ export function AiClaimPrompt({
         </motion.div>
       </div>
       <div className="mb-6 rounded-2xl border border-yellowLab/30 bg-cream/80 p-5">
-        <p className="mb-2 font-black text-muted text-sm">🤖 AI nói rằng:</p>
+        <p className="mb-2 font-black text-muted text-sm">
+          {t("oopsAi.aiSays")}
+        </p>
         <div className="flex items-center justify-center gap-3">
           <p className="font-black text-2xl text-ink leading-relaxed md:text-3xl">
             "{question.text}"

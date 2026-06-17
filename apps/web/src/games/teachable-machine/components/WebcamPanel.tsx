@@ -1,5 +1,6 @@
 import { Camera } from "lucide-react";
 import type { Ref } from "react";
+import { useTranslation } from "react-i18next";
 
 interface WebcamPanelProps {
   cameraActive: boolean;
@@ -14,13 +15,15 @@ export function WebcamPanel({
   onStart,
   onStop,
 }: WebcamPanelProps) {
+  const { t } = useTranslation("gameContent");
+
   return (
     <div className="flex flex-shrink-0 flex-col items-center gap-4 rounded-2xl border border-yellowLab/10 bg-cream/40 p-3 sm:flex-row">
       <div className="relative flex aspect-video w-full items-center justify-center overflow-hidden rounded-xl bg-ink shadow-inner sm:aspect-square sm:w-44">
         {!cameraActive && (
           <div className="absolute inset-0 flex flex-col items-center justify-center p-2 text-center text-white/50 text-xs">
             <Camera className="mb-1.5 h-8 w-8 animate-pulse" />
-            <span>Camera chưa bật</span>
+            <span>{t("teachableMachine.webcam.cameraOff")}</span>
           </div>
         )}
         <video
@@ -34,11 +37,10 @@ export function WebcamPanel({
 
       <div className="w-full flex-1 space-y-2 text-center sm:text-left">
         <h3 className="flex items-center justify-center gap-1.5 font-black text-ink text-sm sm:justify-start">
-          📹 Trình thu thập dữ liệu
+          {t("teachableMachine.webcam.title")}
         </h3>
         <p className="font-bold text-[11px] text-muted leading-relaxed">
-          Để robot học tốt, em hãy dùng đồ vật học tập thay vì chụp mặt thật.
-          Ảnh chỉ ở trong trình duyệt và không gửi lên máy chủ.
+          {t("teachableMachine.webcam.privacyNote")}
         </p>
         <div className="flex justify-center gap-2 pt-1 sm:justify-start">
           {cameraActive ? (
@@ -47,7 +49,7 @@ export function WebcamPanel({
               onClick={onStop}
               type="button"
             >
-              🛑 Tắt Camera
+              {t("shared.buttons.stopCamera")}
             </button>
           ) : (
             <button
@@ -55,7 +57,7 @@ export function WebcamPanel({
               onClick={() => void onStart()}
               type="button"
             >
-              🚀 Bật Camera
+              {t("shared.buttons.startCamera")}
             </button>
           )}
         </div>

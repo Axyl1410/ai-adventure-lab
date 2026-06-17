@@ -12,16 +12,17 @@ import { RunControls } from "./components/RunControls";
 import { useRobotCommandsGame } from "./useRobotCommandsGame";
 
 export function RobotCommandsGame() {
-  const { t } = useTranslation("games");
+  const { t: tGames } = useTranslation("games");
+  const { t: tCommon } = useTranslation("common");
   const { session } = useSession();
   const game = useRobotCommandsGame(session);
 
   if (!game.level) {
     return (
       <GameShell
-        instruction={t("robotCommands.instructionLevelSelect")}
-        subtitle={t("robotCommands.subtitle")}
-        title={t("robotCommands.title")}
+        instruction={tGames("robotCommands.instructionLevelSelect")}
+        subtitle={tGames("robotCommands.subtitle")}
+        title={tGames("robotCommands.title")}
       >
         <LevelSelectScreen onSelectLevel={game.selectLevel} />
       </GameShell>
@@ -30,12 +31,12 @@ export function RobotCommandsGame() {
 
   return (
     <GameShell
-      instruction={t("robotCommands.instructionPlay")}
+      instruction={tGames("robotCommands.instructionPlay")}
       maxScore={game.totalPuzzles}
       score={game.score}
-      subtitle={t("robotCommands.subtitle")}
-      title={t("robotCommands.titleWithLevel", {
-        level: t(`robotCommands.levels.${game.level}`),
+      subtitle={tGames("robotCommands.subtitle")}
+      title={tGames("robotCommands.titleWithLevel", {
+        level: tGames(`robotCommands.levels.${game.level}`),
       })}
     >
       <section className="lab-card relative mx-auto max-w-4xl overflow-hidden bg-white/85 p-4 text-center sm:p-6">
@@ -49,11 +50,14 @@ export function RobotCommandsGame() {
               key={game.current.id}
             >
               <p className="mb-1 font-black text-ink text-lg">
-                Màn {game.puzzleIndex + 1}/{game.totalPuzzles}:{" "}
-                {game.current.title}
+                {tCommon("gameUi.roundLabel", {
+                  current: game.puzzleIndex + 1,
+                  total: game.totalPuzzles,
+                  title: game.current.title,
+                })}
               </p>
               <p className="mb-4 font-semibold text-muted text-sm">
-                {game.current.hintVi}
+                {game.current.hint}
               </p>
 
               <div className="grid gap-6 lg:grid-cols-2 lg:items-start">
@@ -109,7 +113,7 @@ export function RobotCommandsGame() {
                       onClick={game.dismissFeedback}
                       type="button"
                     >
-                      Thử lại
+                      {tCommon("actions.tryAgain")}
                     </button>
                   )}
                 </div>

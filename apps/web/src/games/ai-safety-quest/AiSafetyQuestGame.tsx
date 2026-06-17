@@ -43,6 +43,7 @@ export function AiSafetyQuestGame() {
                   deckLength={quest.deck.length}
                   done={quest.done}
                   feedback={quest.feedback}
+                  feedbackCorrect={quest.feedbackCorrect}
                   onNext={quest.goNext}
                   onRestart={quest.restart}
                   score={quest.score}

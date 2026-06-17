@@ -1,6 +1,8 @@
+import type { AppLocale } from "../prompts/locale";
 import {
-  imageRedirectMessage,
-  safeRedirectMessage,
+  getImageRedirectMessage,
+  getPersonalDataMessage,
+  getSafeRedirectMessage,
 } from "../prompts/safety.system";
 
 const personalPatterns = [
@@ -66,14 +68,14 @@ export function normalizeText(value: string) {
 }
 
 export class SafetyService {
-  checkText(text: string): SafetyCheck {
+  checkText(text: string, locale: AppLocale = "vi"): SafetyCheck {
     const normalized = normalizeText(text).toLowerCase();
     if (!normalized) {
       return {
         safe: false,
         status: "blocked",
         reason: "empty",
-        message: safeRedirectMessage,
+        message: getSafeRedirectMessage(locale),
       };
     }
     if (personalPatterns.some((pattern) => pattern.test(normalized))) {
@@ -81,8 +83,7 @@ export class SafetyService {
         safe: false,
         status: "redirected",
         reason: "personal_data",
-        message:
-          "Mình không cần thông tin cá nhân đâu. Em hãy dùng biệt danh và quay lại bài học nhé!",
+        message: getPersonalDataMessage(locale),
       };
     }
     const matched = unsafeWords.find((word) => normalized.includes(word));
@@ -91,20 +92,20 @@ export class SafetyService {
         safe: false,
         status: "redirected",
         reason: `unsafe_keyword:${matched}`,
-        message: safeRedirectMessage,
+        message: getSafeRedirectMessage(locale),
       };
     }
     return { safe: true, status: "safe" };
   }
 
-  checkImagePrompt(text: string): SafetyCheck {
+  checkImagePrompt(text: string, locale: AppLocale = "vi"): SafetyCheck {
     const normalized = normalizeText(text).toLowerCase();
     if (personalPatterns.some((pattern) => pattern.test(normalized))) {
       return {
         safe: false,
         status: "redirected",
         reason: "image_personal_data",
-        message: imageRedirectMessage,
+        message: getImageRedirectMessage(locale),
       };
     }
     const matched = imageUnsafeWords.find((word) => normalized.includes(word));
@@ -113,7 +114,7 @@ export class SafetyService {
         safe: false,
         status: "redirected",
         reason: `image_unsafe_keyword:${matched}`,
-        message: imageRedirectMessage,
+        message: getImageRedirectMessage(locale),
       };
     }
     return { safe: true, status: "safe" };

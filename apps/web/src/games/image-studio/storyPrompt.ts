@@ -1,7 +1,11 @@
-export function buildStoryPrompt(promptUsed: string): string {
-  return `Hãy kể một câu chuyện ngắn khoảng 4-6 câu thật vui vẻ, dễ thương và có bài học ý nghĩa về bức tranh này: ${promptUsed}`;
+import type { TFunction } from "i18next";
+
+type ContentT = TFunction<"gameContent">;
+
+export function buildStoryPrompt(t: ContentT, promptUsed: string): string {
+  return t("imageStudio.ui.storyPromptTemplate", { promptUsed });
 }
 
-export function getBuddyStoryState(promptUsed: string) {
-  return { storyPrompt: buildStoryPrompt(promptUsed) };
+export function getBuddyStoryState(t: ContentT, promptUsed: string) {
+  return { storyPrompt: buildStoryPrompt(t, promptUsed) };
 }

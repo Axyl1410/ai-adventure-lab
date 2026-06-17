@@ -1,4 +1,5 @@
 import { Cpu } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 interface TrainingFooterProps {
   canTrain: boolean;
@@ -13,11 +14,12 @@ export function TrainingFooter({
   canTrain,
   onTrain,
 }: TrainingFooterProps) {
+  const { t } = useTranslation("gameContent");
+
   return (
     <div className="flex flex-col gap-3 border-white/40 border-t pt-3 sm:flex-row sm:items-center sm:justify-between">
       <span className="rounded-xl border border-white/80 bg-white/60 px-3 py-1.5 font-bold text-[11px] text-muted shadow-xs">
-        📊 Tổng số ảnh đã thu thập:{" "}
-        <span className="font-black text-purpleLab">{totalExamples} ảnh</span>
+        📊 {totalExamples}
       </span>
 
       <button
@@ -27,7 +29,9 @@ export function TrainingFooter({
         type="button"
       >
         <Cpu className="h-4 w-4" />
-        {isTraining ? "⏳ Đang học..." : "🧠 Huấn luyện AI của em"}
+        {isTraining
+          ? t("shared.buttons.trainingAi")
+          : t("shared.buttons.trainAi")}
       </button>
     </div>
   );

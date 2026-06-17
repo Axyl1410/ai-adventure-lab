@@ -57,6 +57,7 @@ export function OopsAiMistakeGame() {
               {game.feedback ? (
                 <OopsFeedbackPanel
                   feedback={game.feedback}
+                  feedbackCorrect={game.feedbackCorrect}
                   isLastQuestion={game.isLastQuestion}
                   onClearLevel={game.clearLevel}
                   onNext={game.goNext}

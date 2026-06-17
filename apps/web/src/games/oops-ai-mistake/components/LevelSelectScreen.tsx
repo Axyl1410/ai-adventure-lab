@@ -1,4 +1,5 @@
 import { motion } from "motion/react";
+import { useTranslation } from "react-i18next";
 import oopsBanner from "@/assets/oops-banner.png";
 import type { Level } from "../types";
 
@@ -7,19 +8,22 @@ interface LevelSelectScreenProps {
 }
 
 export function LevelSelectScreen({ onSelectLevel }: LevelSelectScreenProps) {
+  const { t } = useTranslation("gameContent");
+
   return (
     <div className="lab-card mx-auto max-w-2xl space-y-6 bg-white/80 p-8 text-center">
       <div className="mb-2 flex max-h-48 w-full items-center justify-center overflow-hidden rounded-2xl bg-redSoft/15 shadow-md">
         <img
-          alt="AI Có Thể Sai Banner"
+          alt={t("oopsAi.levelSelect.bannerAlt")}
           className="h-full max-h-48 w-full object-cover"
           src={oopsBanner}
         />
       </div>
-      <h2 className="font-black text-3xl text-ink">Thám tử Rà soát Lỗi AI</h2>
+      <h2 className="font-black text-3xl text-ink">
+        {t("oopsAi.levelSelect.title")}
+      </h2>
       <p className="font-bold text-lg text-muted">
-        AI không phải lúc nào cũng thông minh và đúng đắn. Hãy tập kiểm tra
-        thông tin nhé!
+        {t("oopsAi.levelSelect.subtitle")}
       </p>
       <div className="grid gap-4 sm:grid-cols-2">
         <motion.button
@@ -29,9 +33,10 @@ export function LevelSelectScreen({ onSelectLevel }: LevelSelectScreenProps) {
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.97 }}
         >
-          <span className="mr-2 text-2xl">🌱</span> Logic Thực tế
+          <span className="mr-2 text-2xl">🌱</span>{" "}
+          {t("oopsAi.levelSelect.easyButton")}
           <span className="mt-1 block font-semibold text-ink/60 text-xs">
-            Ngẫu nhiên 5 câu rà soát
+            {t("oopsAi.levelSelect.easyHint")}
           </span>
         </motion.button>
         <motion.button
@@ -41,9 +46,10 @@ export function LevelSelectScreen({ onSelectLevel }: LevelSelectScreenProps) {
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.97 }}
         >
-          <span className="mr-2 text-2xl">🔥</span> Tin giả & Ảo tưởng AI
+          <span className="mr-2 text-2xl">🔥</span>{" "}
+          {t("oopsAi.levelSelect.hardButton")}
           <span className="mt-1 block font-semibold text-white/70 text-xs">
-            Ngẫu nhiên 5 câu nâng cao
+            {t("oopsAi.levelSelect.hardHint")}
           </span>
         </motion.button>
       </div>

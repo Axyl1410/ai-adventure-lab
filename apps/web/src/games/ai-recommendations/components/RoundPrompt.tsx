@@ -1,4 +1,5 @@
 import { Sparkles } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { TTSButton } from "@/components/TTSButton";
 import type { RecommendationRound } from "../types";
 import { FriendLikesChips } from "./FriendLikesChips";
@@ -10,12 +11,16 @@ interface RoundPromptProps {
 }
 
 export function RoundPrompt({ deckLength, index, round }: RoundPromptProps) {
+  const { t: tCommon } = useTranslation("common");
   const ttsText = `${round.friendLabel} ${round.recentLikes.map((like) => like.label).join(", ")}. ${round.question}`;
 
   return (
     <>
       <p className="mb-3 font-black text-muted text-sm">
-        Gợi ý {index + 1} / {deckLength}
+        {tCommon("gameUi.recommendationLabel", {
+          current: index + 1,
+          total: deckLength,
+        })}
       </p>
       <div className="mx-auto mb-3 grid h-20 w-20 place-items-center rounded-full bg-purpleLab/15 text-5xl shadow-sm">
         {round.friendEmoji}

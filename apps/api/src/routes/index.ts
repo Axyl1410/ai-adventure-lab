@@ -17,6 +17,7 @@ import { prisma } from "../db/client";
 import { imageRateLimit } from "../middleware/rateLimits";
 import { requireTeacher } from "../middleware/teacherAuth";
 import { validateBody, validateParams } from "../middleware/validate";
+import { getSafeTopicSwitchMessage } from "../prompts/safety.system";
 import {
   explainSchema,
   idParamSchema,
@@ -111,8 +112,10 @@ routes.post(
   "/ai/chat",
   validateBody(chatSchema),
   ah(async (req, res) => {
-    const safety = safetyService.checkText(req.body.message);
+    const locale = req.body.locale ?? "vi";
+    const safety = safetyService.checkText(req.body.message, locale);
     if (!safety.safe) {
+      const fallback = getSafeTopicSwitchMessage(locale);
       await prisma.chatMessage
         .createMany({
           data: [
@@ -125,17 +128,14 @@ routes.post(
             {
               sessionId: req.body.sessionId,
               role: "assistant",
-              content:
-                safety.message ??
-                "Mình chuyển sang chủ đề học tập an toàn nhé.",
+              content: safety.message ?? fallback,
               safetyLevel: safety.status,
             },
           ],
         })
         .catch(() => undefined);
       res.json({
-        answer:
-          safety.message ?? "Mình chuyển sang chủ đề học tập an toàn nhé.",
+        answer: safety.message ?? fallback,
       });
       return;
     }
@@ -143,7 +143,8 @@ routes.post(
     const answer = await openaiService.chat(
       req.body.sessionId,
       req.body.message,
-      req.body.ageGroup
+      req.body.ageGroup,
+      locale
     );
     await prisma.chatMessage.createMany({
       data: [
@@ -169,22 +170,33 @@ routes.post(
   "/ai/prompt-feedback",
   validateBody(promptFeedbackSchema),
   ah(async (req, res) => {
-    const safety = safetyService.checkText(req.body.prompt);
+    const locale = req.body.locale ?? "vi";
+    const safety = safetyService.checkText(req.body.prompt, locale);
     if (!safety.safe) {
-      const result = {
-        score: 20,
-        badges: ["Biết chọn chủ đề an toàn"],
-        feedback: safety.message ?? "Mình đổi sang chủ đề an toàn nhé.",
-        improvedPrompt:
-          "Hãy giải thích AI là gì cho học sinh tiểu học bằng 3 ý ngắn và 1 ví dụ dễ hiểu.",
-      };
+      const result =
+        locale === "en"
+          ? {
+              score: 20,
+              badges: ["Safe topic choice"],
+              feedback: safety.message ?? "Let's switch to a safe topic!",
+              improvedPrompt:
+                "Explain what AI is for elementary students in 3 short points and 1 easy example.",
+            }
+          : {
+              score: 20,
+              badges: ["Biết chọn chủ đề an toàn"],
+              feedback: safety.message ?? "Mình đổi sang chủ đề an toàn nhé.",
+              improvedPrompt:
+                "Hãy giải thích AI là gì cho học sinh tiểu học bằng 3 ý ngắn và 1 ví dụ dễ hiểu.",
+            };
       res.json(result);
       return;
     }
 
     const result = await openaiService.promptFeedback(
       req.body.prompt,
-      req.body.ageGroup
+      req.body.ageGroup,
+      locale
     );
     await prisma.promptAttempt.create({
       data: {
@@ -203,15 +215,15 @@ routes.post(
   "/ai/explain",
   validateBody(explainSchema),
   ah(async (req, res) => {
-    const safety = safetyService.checkText(req.body.topic);
+    const locale = req.body.locale ?? "vi";
+    const safety = safetyService.checkText(req.body.topic, locale);
     if (!safety.safe) {
       res.json({
-        answer:
-          safety.message ?? "Mình chuyển sang chủ đề học tập an toàn nhé.",
+        answer: safety.message ?? getSafeTopicSwitchMessage(locale),
       });
       return;
     }
-    const answer = await openaiService.explain(req.body.topic);
+    const answer = await openaiService.explain(req.body.topic, locale);
     res.json({ answer });
   })
 );

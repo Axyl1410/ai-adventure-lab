@@ -1,6 +1,8 @@
+import type { BuddyChip } from "../types";
+
 interface SuggestedChipsProps {
-  chips: string[];
-  onChipClick: (chip: string) => void;
+  chips: BuddyChip[];
+  onChipClick: (chip: BuddyChip) => void;
 }
 
 export function SuggestedChips({ chips, onChipClick }: SuggestedChipsProps) {
@@ -9,11 +11,11 @@ export function SuggestedChips({ chips, onChipClick }: SuggestedChipsProps) {
       {chips.map((chip) => (
         <button
           className="min-h-11 shrink-0 snap-start rounded-full border border-yellowLab/25 bg-cream/80 px-4 py-2.5 font-bold text-ink text-sm shadow-xs transition-all duration-300 hover:scale-[1.03] hover:border-yellowLab/40 hover:bg-yellowLab/20"
-          key={chip}
+          key={chip.id}
           onClick={() => onChipClick(chip)}
           type="button"
         >
-          {chip}
+          {chip.text}
         </button>
       ))}
     </div>

@@ -1,12 +1,16 @@
 import { motion } from "motion/react";
+import { useTranslation } from "react-i18next";
+import { categoryLabel } from "@/lib/gameContent";
 import { CATEGORIES, categoryStyle } from "../categoryStyles";
-import type { Category } from "../types";
+import type { CategoryId } from "../types";
 
 interface CategoryButtonsProps {
-  onChoose: (category: Category) => void;
+  onChoose: (category: CategoryId) => void;
 }
 
 export function CategoryButtons({ onChoose }: CategoryButtonsProps) {
+  const { t } = useTranslation("gameContent");
+
   return (
     <div className="grid gap-3 md:grid-cols-3">
       {CATEGORIES.map((category) => {
@@ -21,7 +25,7 @@ export function CategoryButtons({ onChoose }: CategoryButtonsProps) {
             whileTap={{ scale: 0.97 }}
           >
             <span className="mr-2 text-2xl">{style.emoji}</span>
-            {category}
+            {categoryLabel(t, category)}
           </motion.button>
         );
       })}

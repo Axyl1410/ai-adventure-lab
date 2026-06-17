@@ -11,7 +11,8 @@ import { getBuddyStoryState } from "./storyPrompt";
 import { useImageStudio } from "./useImageStudio";
 
 export function ImageStudioGame() {
-  const { t } = useTranslation("games");
+  const { t: tGames } = useTranslation("games");
+  const { t: tContent } = useTranslation("gameContent");
   const { session } = useSession();
   const navigate = useNavigate();
   const studio = useImageStudio(session);
@@ -21,15 +22,15 @@ export function ImageStudioGame() {
       return;
     }
     navigate("/games/buddy-bot", {
-      state: getBuddyStoryState(studio.image.promptUsed),
+      state: getBuddyStoryState(tContent, studio.image.promptUsed),
     });
   }
 
   return (
     <GameShell
-      instruction={t("imageStudio.instruction")}
-      subtitle={t("imageStudio.subtitle")}
-      title={t("imageStudio.title")}
+      instruction={tGames("imageStudio.instruction")}
+      subtitle={tGames("imageStudio.subtitle")}
+      title={tGames("imageStudio.title")}
     >
       <div className="flex-1 space-y-8 pr-0 sm:space-y-10 sm:pr-1">
         <section className="grid items-start gap-5 lg:grid-cols-[380px_1fr] lg:gap-6">

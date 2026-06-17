@@ -55,6 +55,14 @@ pnpm dev
 - API health: `http://localhost:3001/api/health`
 - API tự tạo các bảng SQLite còn thiếu khi khởi động.
 
+## Ngôn ngữ (i18n)
+
+- Mặc định tiếng Việt; nút **VI / EN** trên header đổi ngôn ngữ (lưu trong `localStorage`).
+- File dịch: `apps/web/src/locales/{vi,en}/*.json` (`common`, `layout`, `home`, `games`, `gameContent`).
+- Kiểm tra khớp key vi/en: `pnpm i18n:check`
+- Buddy Bot, Prompt Coach và Image Studio gửi `locale` lên API khi bật EN.
+- TTS vẫn dùng giọng tiếng Việt (`TTS_VOICE=vi-female`); chế độ EN có thể đọc text tiếng Anh bằng engine hiện tại hoặc bỏ qua nhẹ nhàng.
+
 ## Chạy Docker
 
 ```bash

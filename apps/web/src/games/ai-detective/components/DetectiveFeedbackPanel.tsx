@@ -1,10 +1,11 @@
 import { Award } from "lucide-react";
 import { motion } from "motion/react";
+import { useTranslation } from "react-i18next";
 import { HappyFeedback, TryAgainFeedback } from "@/components/Feedback";
-import { isCorrectFeedback } from "../detectiveUtils";
 
 interface DetectiveFeedbackPanelProps {
   feedback: string;
+  feedbackCorrect: boolean;
   isLastQuestion: boolean;
   onClearLevel: () => void;
   onNext: () => void;
@@ -14,15 +15,18 @@ interface DetectiveFeedbackPanelProps {
 
 export function DetectiveFeedbackPanel({
   feedback,
+  feedbackCorrect,
   isLastQuestion,
   onClearLevel,
   onNext,
   questionsLength,
   score,
 }: DetectiveFeedbackPanelProps) {
+  const { t } = useTranslation("common");
+
   return (
     <div className="space-y-5">
-      {isCorrectFeedback(feedback) ? (
+      {feedbackCorrect ? (
         <HappyFeedback text={feedback} />
       ) : (
         <TryAgainFeedback text={feedback} />
@@ -37,7 +41,10 @@ export function DetectiveFeedbackPanel({
           >
             <Award className="h-7 w-7 fill-orange-200 text-orange-500" />
             <span>
-              🎉 Hoàn thành: {score}/{questionsLength} điểm!
+              {t("gameUi.completeScore", {
+                score,
+                total: questionsLength,
+              })}
             </span>
           </motion.div>
           <div>
@@ -46,7 +53,7 @@ export function DetectiveFeedbackPanel({
               onClick={onClearLevel}
               type="button"
             >
-              🔄 Chơi lại hoặc chọn cấp độ khác
+              {t("actions.playAgainOrLevel")}
             </button>
           </div>
         </div>
@@ -57,7 +64,7 @@ export function DetectiveFeedbackPanel({
           type="button"
           whileHover={{ scale: 1.03 }}
         >
-          Câu tiếp theo ➡️
+          {t("actions.nextQuestion")}
         </motion.button>
       )}
     </div>

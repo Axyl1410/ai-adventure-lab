@@ -1,12 +1,16 @@
 import { motion } from "motion/react";
+import { useTranslation } from "react-i18next";
+import { verdictLabel } from "@/lib/gameContent";
 import { CHOICES, choiceStyle } from "../choiceStyles";
-import type { Verdict } from "../types";
+import type { VerdictId } from "../types";
 
 interface VerdictButtonsProps {
-  onSubmit: (choice: Verdict) => void;
+  onSubmit: (choice: VerdictId) => void;
 }
 
 export function VerdictButtons({ onSubmit }: VerdictButtonsProps) {
+  const { t } = useTranslation("gameContent");
+
   return (
     <div className="grid gap-3">
       {CHOICES.map((choice) => {
@@ -20,7 +24,8 @@ export function VerdictButtons({ onSubmit }: VerdictButtonsProps) {
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.97 }}
           >
-            <span className="text-2xl">{style.emoji}</span> {choice}
+            <span className="text-2xl">{style.emoji}</span>{" "}
+            {verdictLabel(t, choice)}
           </motion.button>
         );
       })}

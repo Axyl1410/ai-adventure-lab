@@ -1,6 +1,7 @@
 import { BookOpen, Download } from "lucide-react";
 import { motion } from "motion/react";
 import type { Ref } from "react";
+import { useTranslation } from "react-i18next";
 import { BuddyBot } from "@/components/BuddyBot";
 import { SafetyRedirect } from "@/components/Feedback";
 import type { GeneratedImage } from "../types";
@@ -20,6 +21,8 @@ export function ImageShowcaseCanvas({
   onStory,
   resultRef,
 }: ImageShowcaseCanvasProps) {
+  const { t } = useTranslation("gameContent");
+
   return (
     <div className="flex-1" ref={resultRef}>
       <div className="lab-card relative flex min-h-[320px] flex-col items-center justify-center overflow-hidden rounded-[2rem] border-2 border-white/80 bg-white/95 p-4 shadow-2xl sm:min-h-[460px] sm:rounded-[2.5rem] sm:p-6">
@@ -32,13 +35,13 @@ export function ImageShowcaseCanvas({
           >
             <div className="group relative flex aspect-square w-full max-w-[480px] items-center justify-center overflow-hidden rounded-[1.5rem] border-[6px] border-yellowLab bg-cream/30 p-1 shadow-xl transition-transform duration-500 hover:scale-[1.01] sm:rounded-[2rem] sm:border-[8px]">
               <img
-                alt="Tranh AI của em"
+                alt={t("imageStudio.ui.imageAlt")}
                 className="h-full w-full rounded-2xl object-cover shadow-inner transition-transform duration-75 group-hover:scale-101"
                 src={image.imageUrl}
               />
               <div className="absolute bottom-3 left-3 z-10">
                 <span className="flex select-none items-center gap-1 rounded-full border border-yellowLab/10 bg-yellowLab/95 px-3.5 py-2 font-black text-[10px] text-ink shadow-md backdrop-blur-xs">
-                  ✨ Hình này được tạo bởi AI
+                  {t("imageStudio.ui.aiLabelLong")}
                 </span>
               </div>
             </div>
@@ -49,14 +52,16 @@ export function ImageShowcaseCanvas({
                 download={true}
                 href={image.imageUrl}
               >
-                <Download className="h-4.5 w-4.5" /> Tải xuống tranh
+                <Download className="h-4.5 w-4.5" />{" "}
+                {t("shared.buttons.downloadImage")}
               </a>
               <button
                 className="big-button flex items-center justify-center gap-1.5 bg-purpleLab py-3.5 text-sm text-white shadow-md transition-all hover:bg-purpleLab/90 hover:shadow-lg"
                 onClick={onStory}
                 type="button"
               >
-                <BookOpen className="h-4.5 w-4.5" /> Kể câu chuyện
+                <BookOpen className="h-4.5 w-4.5" />{" "}
+                {t("shared.buttons.tellStoryFull")}
               </button>
             </div>
           </motion.article>
@@ -65,11 +70,10 @@ export function ImageShowcaseCanvas({
             <BuddyBot size={140} state="artist" />
             <div className="space-y-1.5 px-4">
               <h3 className="animate-pulse font-black text-ink text-xl">
-                🎨 Đang tô vẽ tranh...
+                {t("imageStudio.ui.paintingTitle")}
               </h3>
               <p className="max-w-xs font-bold text-muted text-xs leading-relaxed">
-                Buddy Bot đang phối hợp màu sắc phép thuật cho bức vẽ của em.
-                Đợi xíu nhé!
+                {t("imageStudio.ui.paintingHint")}
               </p>
             </div>
             <div className="relative h-3 w-56 overflow-hidden rounded-full border border-white/60 bg-white shadow-inner">
@@ -91,12 +95,10 @@ export function ImageShowcaseCanvas({
             <BuddyBot size={140} state="artist" />
             <div className="space-y-1.5">
               <h3 className="font-black text-ink text-lg">
-                Bản thiết kế tranh của em
+                {t("imageStudio.ui.canvasTitle")}
               </h3>
               <p className="max-w-xs font-bold text-muted text-xs leading-relaxed">
-                Chọn các chủ đề và màu sắc lấp lánh bên trái, rồi bấm nút{" "}
-                <strong className="text-purpleLab">🎨 Tạo tranh AI</strong> ở
-                trên để vẽ tranh nhé!
+                {t("imageStudio.ui.canvasHint")}
               </p>
             </div>
           </div>

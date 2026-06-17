@@ -2,7 +2,7 @@ import { Check } from "lucide-react";
 
 interface PickerProps {
   activeColor: string;
-  items: string[];
+  items: { id: string; label: string }[];
   onChange: (value: string) => void;
   title: string;
   value: string;
@@ -22,7 +22,7 @@ export function Picker({
       </h2>
       <div className="flex flex-wrap gap-2.5">
         {items.map((item) => {
-          const isSelected = value === item;
+          const isSelected = value === item.id;
           return (
             <button
               className={`big-button flex items-center gap-1.5 border px-4 py-2.5 font-bold text-sm shadow-sm transition-all duration-300 hover:scale-102 ${
@@ -30,12 +30,12 @@ export function Picker({
                   ? `${activeColor} shadow-md`
                   : "border-white/50 bg-white/80 text-ink hover:border-skyLab/40 hover:bg-white"
               }`}
-              key={item}
-              onClick={() => onChange(item)}
+              key={item.id}
+              onClick={() => onChange(item.id)}
               type="button"
             >
               {isSelected && <Check className="h-4 w-4" />}
-              {item}
+              {item.label}
             </button>
           );
         })}

@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { saveProgress, unlockSticker } from "@/lib/api";
 import { DEFAULT_CLASSES } from "./classData";
 import {
@@ -6,7 +7,6 @@ import {
   INITIAL_PREDICTIONS,
   MIN_CLASSES_TO_TRAIN,
   PREDICTION_INTERVAL_MS,
-  STATUS_WELCOME,
   STICKER_ID,
   TRAINING_STEP_MS,
   TRAINING_STEPS,
@@ -26,19 +26,33 @@ interface SessionLike {
   id: string;
 }
 
+function buildDefaultClasses(
+  t: ReturnType<typeof useTranslation>["t"]
+): ClassConfig[] {
+  return DEFAULT_CLASSES.map((cls) => ({
+    ...cls,
+    name: t(`teachableMachine.classes.${cls.classKey}`),
+  }));
+}
+
 export function useTeachableMachineGame(session: SessionLike | null) {
+  const { t } = useTranslation("gameContent");
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const streamRef = useRef<MediaStream | null>(null);
   const predictIntervalRef = useRef<number | null>(null);
   const trainIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
-  const [classes, setClasses] = useState<ClassConfig[]>(DEFAULT_CLASSES);
+  const [classes, setClasses] = useState<ClassConfig[]>(() =>
+    buildDefaultClasses(t)
+  );
   const [examples, setExamples] = useState<Example[]>([]);
   const [isTraining, setIsTraining] = useState(false);
   const [isTrained, setIsTrained] = useState(false);
   const [showConfetti, setShowConfetti] = useState(false);
   const [cameraActive, setCameraActive] = useState(false);
-  const [status, setStatus] = useState(STATUS_WELCOME);
+  const [status, setStatus] = useState(() =>
+    t("teachableMachine.ui.welcomeStatus")
+  );
   const [predictions, setPredictions] =
     useState<Predictions>(INITIAL_PREDICTIONS);
 
@@ -104,9 +118,7 @@ export function useTeachableMachineGame(session: SessionLike | null) {
 
   const startCamera = useCallback(async () => {
     if (!navigator.mediaDevices?.getUserMedia) {
-      setStatus(
-        "📷 Trình duyệt này chưa hỗ trợ camera. Em vẫn có thể đọc cẩm nang để hiểu AI học từ ví dụ nhé!"
-      );
+      setStatus(t("teachableMachine.ui.noCameraSupport"));
       return;
     }
     try {
@@ -119,19 +131,15 @@ export function useTeachableMachineGame(session: SessionLike | null) {
         videoRef.current.srcObject = stream;
       }
       setCameraActive(true);
-      setStatus(
-        "📸 Camera đã sẵn sàng! Bây giờ em hãy tự sửa tên 3 nhóm bên dưới và chụp ảnh ví dụ nhé!"
-      );
+      setStatus(t("teachableMachine.ui.cameraReady"));
       if (isTrainedRef.current) {
         startPredictionLoop();
       }
     } catch (err) {
       console.error(err);
-      setStatus(
-        "😥 Không mở được camera. Vui lòng cấp quyền truy cập camera cho trình duyệt nhé!"
-      );
+      setStatus(t("teachableMachine.ui.cameraPermissionDenied"));
     }
-  }, [startPredictionLoop]);
+  }, [startPredictionLoop, t]);
 
   const stopCamera = useCallback(() => {
     if (streamRef.current) {
@@ -143,14 +151,14 @@ export function useTeachableMachineGame(session: SessionLike | null) {
     }
     stopPredictionLoop();
     setCameraActive(false);
-    setStatus("📷 Camera đã tạm tắt.");
-  }, [stopPredictionLoop]);
+    setStatus(t("teachableMachine.ui.cameraStopped"));
+  }, [stopPredictionLoop, t]);
 
   const captureExample = useCallback(
     (classId: number) => {
       const video = videoRef.current;
       if (!video || video.readyState < 2) {
-        setStatus("⚠️ Camera chưa sẵn sàng, hãy đợi một chút nhé!");
+        setStatus(t("teachableMachine.ui.cameraNotReady"));
         return;
       }
 
@@ -166,41 +174,42 @@ export function useTeachableMachineGame(session: SessionLike | null) {
         };
 
         setExamples((prev) => [...prev, newExample]);
-        setStatus(
-          `📸 Đã lưu 1 ảnh ví dụ cho nhóm "${classes.find((c) => c.id === classId)?.name}"!`
-        );
+        const className =
+          classes.find((c) => c.id === classId)?.name ??
+          t("teachableMachine.ui.unrecognized");
+        setStatus(t("teachableMachine.ui.photoSaved", { name: className }));
 
         if (isTrainedRef.current) {
           invalidateTraining();
         }
       } catch (err) {
         console.error(err);
-        setStatus("😥 Lỗi khi chụp ảnh từ camera.");
+        setStatus(t("teachableMachine.ui.captureError"));
       }
     },
-    [classes, invalidateTraining]
+    [classes, invalidateTraining, t]
   );
 
   const deleteExample = useCallback(
     (id: string) => {
       setExamples((prev) => prev.filter((ex) => ex.id !== id));
-      setStatus("🗑️ Đã xóa ảnh ví dụ.");
+      setStatus(t("teachableMachine.ui.photoDeleted"));
       if (isTrainedRef.current) {
         invalidateTraining();
       }
     },
-    [invalidateTraining]
+    [invalidateTraining, t]
   );
 
   const clearClassExamples = useCallback(
     (classId: number) => {
       setExamples((prev) => prev.filter((ex) => ex.classId !== classId));
-      setStatus("🗑️ Đã xóa toàn bộ ví dụ của nhóm.");
+      setStatus(t("teachableMachine.ui.groupCleared"));
       if (isTrainedRef.current) {
         invalidateTraining();
       }
     },
-    [invalidateTraining]
+    [invalidateTraining, t]
   );
 
   const handleClassNameChange = useCallback((id: number, newName: string) => {
@@ -212,31 +221,27 @@ export function useTeachableMachineGame(session: SessionLike | null) {
   const trainModel = useCallback(() => {
     const classCount = countDistinctClassIds(examplesRef.current);
     if (classCount < MIN_CLASSES_TO_TRAIN) {
-      setStatus(
-        "⚠️ Robot cần hình ảnh của ít nhất 2 nhóm khác nhau để so sánh học tập!"
-      );
+      setStatus(t("teachableMachine.ui.needTwoGroups"));
       return;
     }
 
     setIsTraining(true);
-    setStatus("⏳ Đang chuẩn bị: Đọc hình ảnh...");
+    setStatus(t("teachableMachine.ui.preparing"));
 
     let step = 0;
     stopTrainInterval();
     trainIntervalRef.current = setInterval(() => {
       step++;
       if (step === 1) {
-        setStatus("🧠 Đang phân tích nhóm màu sắc của ảnh...");
+        setStatus(t("teachableMachine.ui.analyzingColors"));
       } else if (step === 2) {
-        setStatus("⚙️ Đang lập bản đồ toán học đặc trưng...");
+        setStatus(t("teachableMachine.ui.buildingFeatures"));
       } else if (step === TRAINING_STEPS) {
         stopTrainInterval();
         setIsTraining(false);
         setIsTrained(true);
         setShowConfetti(true);
-        setStatus(
-          "🎉 Học xong rồi! Robot đang dự đoán trực tiếp từ camera của em!"
-        );
+        setStatus(t("teachableMachine.ui.trainingComplete"));
 
         unlockSticker(STICKER_ID);
         if (session) {
@@ -246,7 +251,7 @@ export function useTeachableMachineGame(session: SessionLike | null) {
         startPredictionLoop();
       }
     }, TRAINING_STEP_MS);
-  }, [session, startPredictionLoop, stopTrainInterval]);
+  }, [session, startPredictionLoop, stopTrainInterval, t]);
 
   const resetAll = useCallback(() => {
     setExamples([]);
@@ -254,18 +259,21 @@ export function useTeachableMachineGame(session: SessionLike | null) {
     setIsTraining(false);
     setShowConfetti(false);
     setPredictions(INITIAL_PREDICTIONS);
-    setStatus("🔄 Đã xóa tất cả ví dụ. Hãy bắt đầu chụp ảnh mới nhé!");
+    setStatus(t("teachableMachine.ui.allCleared"));
     stopPredictionLoop();
     stopTrainInterval();
-  }, [stopPredictionLoop, stopTrainInterval]);
+  }, [stopPredictionLoop, stopTrainInterval, t]);
 
   const distinctClassCount = countDistinctClassIds(examples);
   const canTrain = distinctClassCount >= MIN_CLASSES_TO_TRAIN;
 
-  const topPrediction = useMemo(
-    () => getTopPrediction(predictions, classes),
-    [predictions, classes]
-  );
+  const topPrediction = useMemo(() => {
+    const result = getTopPrediction(predictions, classes);
+    if (result.id === 0) {
+      return { ...result, name: t("teachableMachine.ui.unrecognized") };
+    }
+    return result;
+  }, [predictions, classes, t]);
 
   const activeBotState: BuddyBotGameState = isTraining
     ? "thinking"

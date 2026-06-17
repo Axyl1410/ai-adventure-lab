@@ -1,28 +1,55 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useLocation } from "react-router-dom";
 import { askBuddy } from "@/lib/api";
-import { getFollowUpChips } from "./chipSuggestions";
 import {
-  BUDDY_ERROR_MESSAGE,
-  DEFAULT_CHIPS,
-  INITIAL_ASSISTANT_MESSAGE,
-} from "./constants";
-import type { ChatMessage } from "./types";
+  chipTranslationKey,
+  getDefaultChipIds,
+  getFollowUpChipIds,
+  resolveChipGroup,
+} from "./chipSuggestions";
+import type { BuddyChip, ChatMessage } from "./types";
 
 interface SessionLike {
   id: string;
 }
 
+function localizeChips(
+  t: ReturnType<typeof useTranslation>["t"],
+  chipIds: string[]
+): BuddyChip[] {
+  return chipIds.map((id) => ({
+    id,
+    text: t(chipTranslationKey(resolveChipGroup(id), id)),
+  }));
+}
+
 export function useBuddyChat(session: SessionLike | null) {
+  const { t, i18n } = useTranslation("gameContent");
   const location = useLocation();
   const [messages, setMessages] = useState<ChatMessage[]>([
-    { role: "assistant", text: INITIAL_ASSISTANT_MESSAGE },
+    { role: "assistant", text: t("buddyBot.initialMessage") },
   ]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
-  const [activeChips, setActiveChips] = useState(DEFAULT_CHIPS);
+  const [activeChipIds, setActiveChipIds] =
+    useState<string[]>(getDefaultChipIds);
   const chatRef = useRef<HTMLDivElement>(null);
   const processedStory = useRef(false);
+
+  const activeChips = useMemo(
+    () => localizeChips(t, activeChipIds),
+    [activeChipIds, t, i18n.language]
+  );
+
+  useEffect(() => {
+    setMessages((items) => {
+      if (items.length === 1 && items[0]?.role === "assistant") {
+        return [{ role: "assistant", text: t("buddyBot.initialMessage") }];
+      }
+      return items;
+    });
+  }, [i18n.language, t]);
 
   const send = useCallback(
     async (text?: string) => {
@@ -33,16 +60,16 @@ export function useBuddyChat(session: SessionLike | null) {
       setInput("");
       setMessages((items) => [...items, { role: "user", text: messageText }]);
       setLoading(true);
-      setActiveChips(getFollowUpChips(messageText));
+      setActiveChipIds(getFollowUpChipIds(messageText));
 
       const answer = await askBuddy(session.id, messageText)
         .then((r) => r.answer)
-        .catch(() => BUDDY_ERROR_MESSAGE)
+        .catch(() => t("buddyBot.errorMessage"))
         .finally(() => setLoading(false));
 
       setMessages((items) => [...items, { role: "assistant", text: answer }]);
     },
-    [session, input]
+    [session, input, t]
   );
 
   useEffect(() => {

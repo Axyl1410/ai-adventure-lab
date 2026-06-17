@@ -1,4 +1,5 @@
 import { Award } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { HappyFeedback, TryAgainFeedback } from "@/components/Feedback";
 
 interface RecommendationFeedbackPanelProps {
@@ -20,6 +21,8 @@ export function RecommendationFeedbackPanel({
   onRestart,
   score,
 }: RecommendationFeedbackPanelProps) {
+  const { t } = useTranslation("common");
+
   return (
     <div className="space-y-5">
       {isSuccess ? (
@@ -31,14 +34,14 @@ export function RecommendationFeedbackPanel({
         <div className="space-y-4">
           <div className="inline-flex items-center gap-3 rounded-2xl bg-yellowLab/35 px-6 py-4 font-black text-ink text-xl">
             <Award className="h-7 w-7 text-orange-500" />
-            Hoàn thành: {score}/{deckLength} điểm!
+            {t("gameUi.completeScorePlain", { score, total: deckLength })}
           </div>
           <button
             className="big-button bg-ink text-lg text-white"
             onClick={onRestart}
             type="button"
           >
-            Chơi lại
+            {t("actions.restart")}
           </button>
         </div>
       ) : (
@@ -47,7 +50,7 @@ export function RecommendationFeedbackPanel({
           onClick={onNext}
           type="button"
         >
-          Gợi ý tiếp theo
+          {t("gameUi.nextRecommendation")}
         </button>
       )}
     </div>

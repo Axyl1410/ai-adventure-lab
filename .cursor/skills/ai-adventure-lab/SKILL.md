@@ -40,13 +40,15 @@ docker compose up -d --build
 ## Language conventions
 
 - **Student/teacher UI copy:** Vietnamese default, English via i18n (`react-i18next`).
-- **Locale files:** `apps/web/src/locales/{vi,en}/*.json` — namespaces: `common`, `layout`, `home`, `games`.
+- **Locale files:** `apps/web/src/locales/{vi,en}/*.json` — namespaces: `common`, `layout`, `home`, `games`, `gameContent`.
 - **Toggle:** header VI/EN; persisted in `localStorage` key `ai-lab-locale`.
-- **New UI strings:** add keys to both `vi` and `en` JSON; use `useTranslation("namespace")` in components.
+- **New UI strings:** add keys to both `vi` and `en` JSON; run `pnpm i18n:check` to verify key parity.
 - **Game shell copy:** `games.json` keys per game (`aiDetective`, `robotCommands`, …).
+- **Game content:** questions, buttons, blocks → `gameContent.json`; use stable IDs in `gameData.ts`, localize via `useTranslation("gameContent")` and helpers in `apps/web/src/lib/gameContent.ts`.
+- **API locale:** web sends `locale: "vi" | "en"` on `/api/ai/chat`, `/api/ai/prompt-feedback`, `/api/images/generate` (Zod `localeSchema` in shared).
+- **TTS:** Vietnamese voice by default; EN UI may still use VI TTS or fail gracefully — no separate EN TTS in MVP.
 - **Code comments:** English.
 - **Secrets:** backend-only; never in frontend or git.
-- **API/AI prompts:** still Vietnamese-first in `apps/api/src/prompts/`; pass `locale` later for Buddy Bot EN.
 
 ## pnpm 11 — build scripts
 

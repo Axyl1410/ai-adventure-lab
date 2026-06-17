@@ -1,35 +1,41 @@
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { saveProgress, unlockSticker } from "@/lib/api";
+import { localizeScenario } from "@/lib/gameContent";
 import { PROGRESS_GAME_KEY, STICKER_ID, STICKER_MIN_SCORE } from "./constants";
 import { buildFeedbackText, shuffleDeck } from "./questUtils";
 import { ALL_SCENARIOS } from "./scenarios";
-import type { Choice, Scenario } from "./types";
+import type { ChoiceId, Scenario } from "./types";
 
 interface SessionLike {
   id: string;
 }
 
 export function useAiSafetyQuest(session: SessionLike | null) {
+  const { t, i18n } = useTranslation("gameContent");
   const [deck, setDeck] = useState<Scenario[]>([]);
   const [index, setIndex] = useState(0);
   const [score, setScore] = useState(0);
   const [feedback, setFeedback] = useState("");
+  const [feedbackCorrect, setFeedbackCorrect] = useState(false);
   const [done, setDone] = useState(false);
 
   useEffect(() => {
-    setDeck(shuffleDeck(ALL_SCENARIOS));
-  }, []);
+    const base = shuffleDeck(ALL_SCENARIOS);
+    setDeck(base.map((s) => localizeScenario(t, s)));
+  }, [i18n.language, t]);
 
   const current = deck[index];
 
-  function submitChoice(choice: Choice) {
+  function submitChoice(choice: ChoiceId) {
     if (!current || feedback) {
       return;
     }
     const correct = choice === current.answer;
     const nextScore = score + (correct ? 1 : 0);
     setScore(nextScore);
-    setFeedback(buildFeedbackText(correct, current.explain));
+    setFeedbackCorrect(correct);
+    setFeedback(buildFeedbackText(t, correct, current.explain));
 
     if (index === deck.length - 1) {
       setDone(true);
@@ -44,14 +50,17 @@ export function useAiSafetyQuest(session: SessionLike | null) {
 
   function goNext() {
     setFeedback("");
+    setFeedbackCorrect(false);
     setIndex((value) => Math.min(value + 1, deck.length - 1));
   }
 
   function restart() {
-    setDeck(shuffleDeck(ALL_SCENARIOS));
+    const base = shuffleDeck(ALL_SCENARIOS);
+    setDeck(base.map((s) => localizeScenario(t, s)));
     setIndex(0);
     setScore(0);
     setFeedback("");
+    setFeedbackCorrect(false);
     setDone(false);
   }
 
@@ -60,6 +69,7 @@ export function useAiSafetyQuest(session: SessionLike | null) {
     index,
     score,
     feedback,
+    feedbackCorrect,
     done,
     current,
     submitChoice,

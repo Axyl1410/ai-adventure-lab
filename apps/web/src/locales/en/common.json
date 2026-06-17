@@ -39,6 +39,36 @@
   "actions": {
     "start": "Start",
     "selectLevel": "Pick a level that's right for you!",
-    "tryAgain": "Try again"
+    "tryAgain": "Try again",
+    "nextQuestion": "Next question ➡️",
+    "playAgainOrLevel": "🔄 Play again or pick another level",
+    "playAgain": "🔄 Play again",
+    "restart": "Play again"
+  },
+  "gameUi": {
+    "questionLabel": "📋 Question {{current}} / {{total}}",
+    "cardLabel": "📋 Card {{current}} / {{total}}",
+    "missionLabel": "🛡️ Mission {{current}} / {{total}}",
+    "recommendationLabel": "Suggestion {{current}} / {{total}}",
+    "objectLabel": "📋 Object {{current}} / {{total}}",
+    "objectNavLabel": "Object {{current}} / {{total}}",
+    "labeledCount": "🎯 Labeled: {{labeled}} / {{total}}",
+    "labelsAssigned": "{{labeled}}/{{total}} labels assigned",
+    "objectNavAria": "Object navigation",
+    "prevObject": "Previous object",
+    "nextObject": "Next object",
+    "objectDotLabel": "Object {{index}}: {{label}}",
+    "roundLabel": "Stage {{current}}/{{total}}: {{title}}",
+    "completeScore": "🎉 Done: {{score}}/{{total}} points!",
+    "completeScorePlain": "Done: {{score}}/{{total}} points!",
+    "nextCard": "Next card ➡️",
+    "nextMission": "Next mission ➡️",
+    "nextRecommendation": "Next suggestion",
+    "nextPuzzle": "Next stage",
+    "importantLesson": "Important lesson:",
+    "oopsLessonBody": "When AI answers, check with a teacher, a book, or a trusted source! 📚"
+  },
+  "api": {
+    "connectionError": "Connection error."
   }
 }

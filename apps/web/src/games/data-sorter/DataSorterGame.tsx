@@ -43,6 +43,7 @@ export function DataSorterGame() {
                   deckLength={sorter.deck.length}
                   done={sorter.done}
                   feedback={sorter.feedback}
+                  feedbackCorrect={sorter.feedbackCorrect}
                   onNext={sorter.goNext}
                   onRestart={sorter.restart}
                   score={sorter.score}

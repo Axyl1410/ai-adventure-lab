@@ -3,7 +3,7 @@ import type {
   Cell,
   Command,
   Direction,
-  Puzzle,
+  PuzzleBase,
   RunResult,
   StepSnapshot,
 } from "./types";
@@ -33,7 +33,7 @@ function cellsEqual(a: Cell, b: Cell): boolean {
   return a.x === b.x && a.y === b.y;
 }
 
-function isWall(puzzle: Puzzle, cell: Cell): boolean {
+function isWall(puzzle: PuzzleBase, cell: Cell): boolean {
   if (
     cell.x < 0 ||
     cell.y < 0 ||
@@ -81,7 +81,7 @@ function pushStep(
 
 function executeForward(
   state: RunState,
-  puzzle: Puzzle,
+  puzzle: PuzzleBase,
   commandIndex: number,
   command: Command,
   stride: number
@@ -110,7 +110,7 @@ function executeForward(
   return null;
 }
 
-function finalizeRun(state: RunState, puzzle: Puzzle): RunResult {
+function finalizeRun(state: RunState, puzzle: PuzzleBase): RunResult {
   if (!state.pickedApple) {
     const endedOnApple = cellsEqual(state.position, puzzle.apple);
     return {
@@ -121,7 +121,7 @@ function finalizeRun(state: RunState, puzzle: Puzzle): RunResult {
   return { steps: state.steps, outcome: "success" };
 }
 
-export function runProgram(puzzle: Puzzle, commands: Command[]): RunResult {
+export function runProgram(puzzle: PuzzleBase, commands: Command[]): RunResult {
   const state: RunState = {
     position: { ...puzzle.start },
     direction: puzzle.startDirection,

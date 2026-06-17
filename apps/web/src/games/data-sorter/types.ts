@@ -1,8 +1,12 @@
-export type Category = "Dữ liệu tốt" | "Dữ liệu nhiễu" | "Thông tin riêng tư";
+export type CategoryId = "good" | "noisy" | "private";
 
-export interface SorterCard {
-  category: Category;
+export interface SorterCardBase {
+  category: CategoryId;
   emoji: string;
+  id: string;
+}
+
+export interface SorterCard extends SorterCardBase {
   explain: string;
   text: string;
 }

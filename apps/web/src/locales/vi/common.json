@@ -39,6 +39,36 @@
   "actions": {
     "start": "Bắt đầu",
     "selectLevel": "Chọn cấp độ chơi phù hợp với em nhé!",
-    "tryAgain": "Thử lại"
+    "tryAgain": "Thử lại",
+    "nextQuestion": "Câu tiếp theo ➡️",
+    "playAgainOrLevel": "🔄 Chơi lại hoặc chọn cấp độ khác",
+    "playAgain": "🔄 Chơi lại",
+    "restart": "Chơi lại"
+  },
+  "gameUi": {
+    "questionLabel": "📋 Câu {{current}} / {{total}}",
+    "cardLabel": "📋 Thẻ {{current}} / {{total}}",
+    "missionLabel": "🛡️ Nhiệm vụ {{current}} / {{total}}",
+    "recommendationLabel": "Gợi ý {{current}} / {{total}}",
+    "objectLabel": "📋 Vật thể {{current}} / {{total}}",
+    "objectNavLabel": "Vật {{current}} / {{total}}",
+    "labeledCount": "🎯 Đã gán nhãn: {{labeled}} / {{total}}",
+    "labelsAssigned": "{{labeled}}/{{total}} nhãn đã gán",
+    "objectNavAria": "Điều hướng vật thể",
+    "prevObject": "Vật thể trước",
+    "nextObject": "Vật thể tiếp theo",
+    "objectDotLabel": "Vật thể {{index}}: {{label}}",
+    "roundLabel": "Màn {{current}}/{{total}}: {{title}}",
+    "completeScore": "🎉 Hoàn thành: {{score}}/{{total}} điểm!",
+    "completeScorePlain": "Hoàn thành: {{score}}/{{total}} điểm!",
+    "nextCard": "Thẻ tiếp theo ➡️",
+    "nextMission": "Nhiệm vụ tiếp theo ➡️",
+    "nextRecommendation": "Gợi ý tiếp theo",
+    "nextPuzzle": "Màn tiếp theo",
+    "importantLesson": "Bài học quan trọng:",
+    "oopsLessonBody": "Khi AI trả lời, mình nên kiểm tra lại với thầy cô, sách hoặc nguồn đáng tin cậy nhé! 📚"
+  },
+  "api": {
+    "connectionError": "Có lỗi kết nối."
   }
 }

@@ -57,6 +57,7 @@ export function AiDetectiveGame() {
               {game.feedback ? (
                 <DetectiveFeedbackPanel
                   feedback={game.feedback}
+                  feedbackCorrect={game.feedbackCorrect}
                   isLastQuestion={game.isLastQuestion}
                   onClearLevel={game.clearLevel}
                   onNext={game.goNext}

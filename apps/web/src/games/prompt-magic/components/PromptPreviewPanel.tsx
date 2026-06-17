@@ -1,4 +1,5 @@
 import { Sparkles, Wand2 } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { LoadingBuddy } from "@/components/Feedback";
 import { TTSButton } from "@/components/TTSButton";
 
@@ -15,6 +16,8 @@ export function PromptPreviewPanel({
   loading,
   onSubmit,
 }: PromptPreviewPanelProps) {
+  const { t } = useTranslation("gameContent");
+
   return (
     <>
       <div className="space-y-4">
@@ -23,7 +26,7 @@ export function PromptPreviewPanel({
             <Wand2 className="h-6 w-6" />
           </span>
           <h2 className="font-black text-2xl text-ink tracking-tight">
-            Prompt của em
+            {t("promptMagic.levelSelect.promptTitle")}
           </h2>
         </div>
         <div className="relative flex flex-col gap-3 sm:flex-row sm:items-center">
@@ -43,8 +46,8 @@ export function PromptPreviewPanel({
           onClick={() => void onSubmit()}
           type="button"
         >
-          <Sparkles className="h-5 w-5 fill-yellowLab text-yellowLab" /> Gửi
-          Prompt Coach
+          <Sparkles className="h-5 w-5 fill-yellowLab text-yellowLab" />{" "}
+          {t("shared.buttons.sendPromptCoach")}
         </button>
       </div>
 

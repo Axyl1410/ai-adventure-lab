@@ -1,6 +1,15 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
+import {
+  imageColorLabel,
+  imageMoodLabel,
+  imageSettingLabel,
+  imageSettingValue,
+  imageSubjectLabel,
+  imageSubjectValue,
+} from "@/lib/gameContent";
 import { DETAIL_COLOR_OPTIONS } from "../constants";
-import { suggestedSettings, suggestedSubjects } from "../studioData";
+import { MOOD_IDS, SETTING_IDS, SUBJECT_IDS } from "../studioData";
 import type { ImageDetails } from "../types";
 import { toggleColorSelection } from "./detailUtils";
 
@@ -13,22 +22,29 @@ export function ImageDetailBuilder({
   details,
   setDetails,
 }: ImageDetailBuilderProps) {
-  const [customSubject, setCustomSubject] = useState(false);
-  const [customSetting, setCustomSetting] = useState(false);
+  const { t } = useTranslation("gameContent");
+  const [customSubject, setCustomSubject] = useState(
+    details.subjectId === "custom"
+  );
+  const [customSetting, setCustomSetting] = useState(
+    details.settingId === "custom"
+  );
 
   return (
     <div className="grid gap-5 rounded-3xl border border-white/50 bg-white/40 p-4 shadow-inner">
       <div className="space-y-2">
         <div className="flex items-center justify-between">
           <label className="ml-1 font-black text-muted text-sm">
-            Vẽ ai hoặc cái gì?
+            {t("imageStudio.ui.subjectLabel")}
           </label>
           <button
             className="rounded-xl border border-purpleLab/20 bg-purpleLab/10 px-2.5 py-1 font-black text-purple-600 text-xs transition-all hover:bg-purpleLab/20 focus:outline-none"
             onClick={() => setCustomSubject(!customSubject)}
             type="button"
           >
-            {customSubject ? "📋 Chọn nhanh" : "✏️ Em tự viết"}
+            {customSubject
+              ? t("shared.buttons.quickPick")
+              : t("shared.buttons.customWrite")}
           </button>
         </div>
 
@@ -36,15 +52,19 @@ export function ImageDetailBuilder({
           <input
             className="w-full rounded-2xl border-2 border-skyLab/20 bg-white px-4 py-3 font-semibold text-ink transition-all duration-300 hover:border-skyLab/40 focus:border-skyLab focus:outline-none focus:ring-4 focus:ring-skyLab/15"
             onChange={(e) =>
-              setDetails({ ...details, subject: e.target.value })
+              setDetails({
+                ...details,
+                subjectId: "custom",
+                subject: e.target.value,
+              })
             }
-            placeholder="Ví dụ: một chú mèo con đeo ba lô"
-            value={details.subject}
+            placeholder={t("imageStudio.ui.subjectPlaceholder")}
+            value={details.subjectId === "custom" ? details.subject : ""}
           />
         ) : (
           <div className="flex flex-wrap gap-2">
-            {suggestedSubjects.map((sub) => {
-              const isSelected = details.subject === sub.value;
+            {SUBJECT_IDS.map((subjectId) => {
+              const isSelected = details.subjectId === subjectId;
               return (
                 <button
                   className={`rounded-2xl border px-3.5 py-2 font-bold text-xs transition-all duration-300 focus:outline-none ${
@@ -52,11 +72,17 @@ export function ImageDetailBuilder({
                       ? "scale-102 border-purpleLab/55 bg-purpleLab font-black text-white shadow-sm"
                       : "border-white/50 bg-white/80 text-ink hover:border-purpleLab/35 hover:bg-white"
                   }`}
-                  key={sub.value}
-                  onClick={() => setDetails({ ...details, subject: sub.value })}
+                  key={subjectId}
+                  onClick={() =>
+                    setDetails({
+                      ...details,
+                      subjectId,
+                      subject: imageSubjectValue(t, subjectId),
+                    })
+                  }
                   type="button"
                 >
-                  {sub.label}
+                  {imageSubjectLabel(t, subjectId)}
                 </button>
               );
             })}
@@ -67,14 +93,16 @@ export function ImageDetailBuilder({
       <div className="space-y-2">
         <div className="flex items-center justify-between">
           <label className="ml-1 font-black text-muted text-sm">
-            Ở đâu? (Bối cảnh)
+            {t("imageStudio.ui.settingLabel")}
           </label>
           <button
             className="rounded-xl border border-purpleLab/20 bg-purpleLab/10 px-2.5 py-1 font-black text-purple-600 text-xs transition-all hover:bg-purpleLab/20 focus:outline-none"
             onClick={() => setCustomSetting(!customSetting)}
             type="button"
           >
-            {customSetting ? "📋 Chọn nhanh" : "✏️ Em tự viết"}
+            {customSetting
+              ? t("shared.buttons.quickPick")
+              : t("shared.buttons.customWrite")}
           </button>
         </div>
 
@@ -82,15 +110,19 @@ export function ImageDetailBuilder({
           <input
             className="w-full rounded-2xl border-2 border-skyLab/20 bg-white px-4 py-3 font-semibold text-ink transition-all duration-300 hover:border-skyLab/40 focus:border-skyLab focus:outline-none focus:ring-4 focus:ring-skyLab/15"
             onChange={(e) =>
-              setDetails({ ...details, setting: e.target.value })
+              setDetails({
+                ...details,
+                settingId: "custom",
+                setting: e.target.value,
+              })
             }
-            placeholder="Ví dụ: trong khu vườn hoa lấp lánh"
-            value={details.setting}
+            placeholder={t("imageStudio.ui.settingPlaceholder")}
+            value={details.settingId === "custom" ? details.setting : ""}
           />
         ) : (
           <div className="flex flex-wrap gap-2">
-            {suggestedSettings.map((set) => {
-              const isSelected = details.setting === set.value;
+            {SETTING_IDS.map((settingId) => {
+              const isSelected = details.settingId === settingId;
               return (
                 <button
                   className={`rounded-2xl border px-3.5 py-2 font-bold text-xs transition-all duration-300 focus:outline-none ${
@@ -98,11 +130,17 @@ export function ImageDetailBuilder({
                       ? "scale-102 border-pinkLab/55 bg-pinkLab font-black text-white shadow-sm"
                       : "border-white/50 bg-white/80 text-ink hover:border-pinkLab/35 hover:bg-white"
                   }`}
-                  key={set.value}
-                  onClick={() => setDetails({ ...details, setting: set.value })}
+                  key={settingId}
+                  onClick={() =>
+                    setDetails({
+                      ...details,
+                      settingId,
+                      setting: imageSettingValue(t, settingId),
+                    })
+                  }
                   type="button"
                 >
-                  {set.label}
+                  {imageSettingLabel(t, settingId)}
                 </button>
               );
             })}
@@ -113,22 +151,28 @@ export function ImageDetailBuilder({
       <div className="grid gap-4 sm:grid-cols-2">
         <div className="space-y-1">
           <label className="ml-1 font-black text-muted text-sm">
-            Cảm xúc tranh
+            {t("imageStudio.ui.moodLabel")}
           </label>
           <select
             className="w-full rounded-2xl border-2 border-skyLab/20 px-4 py-3 font-bold text-ink transition-all duration-300 hover:border-skyLab/40 focus:border-skyLab focus:outline-none focus:ring-4 focus:ring-skyLab/15"
-            onChange={(e) => setDetails({ ...details, mood: e.target.value })}
+            onChange={(e) =>
+              setDetails({
+                ...details,
+                mood: e.target.value as ImageDetails["mood"],
+              })
+            }
             value={details.mood}
           >
-            <option>vui vẻ</option>
-            <option>tò mò</option>
-            <option>ấm áp</option>
-            <option>hào hứng</option>
+            {MOOD_IDS.map((moodId) => (
+              <option key={moodId} value={moodId}>
+                {imageMoodLabel(t, moodId)}
+              </option>
+            ))}
           </select>
         </div>
         <div className="space-y-1">
           <label className="ml-1 font-black text-muted text-sm">
-            Có chữ ngắn
+            {t("imageStudio.ui.includeTextLabel")}
           </label>
           <label className="flex cursor-pointer items-center gap-3 rounded-2xl border border-white/60 bg-white p-3 font-bold text-ink transition-colors hover:bg-cream/40">
             <input
@@ -139,18 +183,19 @@ export function ImageDetailBuilder({
               }
               type="checkbox"
             />
-            <span>Thêm chữ ngắn</span>
+            <span>{t("imageStudio.ui.includeTextCheckbox")}</span>
           </label>
         </div>
       </div>
 
       <div className="mt-1 space-y-2">
         <label className="ml-1 font-black text-muted text-sm">
-          🎨 Chọn các màu sắc chính:
+          {t("imageStudio.ui.colorsLabel")}
         </label>
         <div className="flex flex-wrap gap-2">
-          {DETAIL_COLOR_OPTIONS.map((color) => {
-            const isSelected = details.colors.includes(color);
+          {DETAIL_COLOR_OPTIONS.map((colorId) => {
+            const isSelected = details.colors.includes(colorId);
+            const label = imageColorLabel(t, colorId);
             return (
               <button
                 className={`rounded-full border px-4 py-2 font-bold text-sm shadow-xs transition-all duration-300 ${
@@ -158,16 +203,16 @@ export function ImageDetailBuilder({
                     ? "scale-105 border-yellowLab/50 bg-yellowLab text-ink"
                     : "border-white/40 bg-white text-muted hover:border-skyLab/30"
                 }`}
-                key={color}
+                key={colorId}
                 onClick={() =>
                   setDetails({
                     ...details,
-                    colors: toggleColorSelection(details.colors, color),
+                    colors: toggleColorSelection(details.colors, colorId),
                   })
                 }
                 type="button"
               >
-                {isSelected ? `✓ ${color}` : color}
+                {isSelected ? `✓ ${label}` : label}
               </button>
             );
           })}

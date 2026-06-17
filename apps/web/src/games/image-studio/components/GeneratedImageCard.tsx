@@ -1,4 +1,5 @@
 import { BookOpen, Download, Trash2 } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { TTSButton } from "@/components/TTSButton";
 import { getBuddyStoryState } from "../storyPrompt";
@@ -18,11 +19,12 @@ export function GeneratedImageCard({
   onDelete,
   compact,
 }: GeneratedImageCardProps) {
+  const { t } = useTranslation("gameContent");
   const navigate = useNavigate();
 
   function handleStory() {
     navigate("/games/buddy-bot", {
-      state: getBuddyStoryState(image.promptUsed),
+      state: getBuddyStoryState(t, image.promptUsed),
     });
   }
 
@@ -30,7 +32,7 @@ export function GeneratedImageCard({
     <article className="lab-card space-y-3 p-4 sm:p-5">
       <div className="relative overflow-hidden rounded-2xl border border-white/30 shadow-md">
         <img
-          alt="Tranh AI được tạo từ prompt"
+          alt={t("imageStudio.ui.generatedImageAlt")}
           className={`w-full object-cover transition-transform duration-500 hover:scale-103 ${compact ? "max-h-52" : "aspect-square"}`}
           src={image.imageUrl}
         />
@@ -42,7 +44,7 @@ export function GeneratedImageCard({
       {!compact && (
         <div className="space-y-1.5">
           <p className="ml-1 font-black text-muted text-xs uppercase tracking-wider">
-            Lệnh prompt đã dùng:
+            {t("imageStudio.ui.promptUsedLabel")}
           </p>
           <div className="flex flex-col gap-2.5 sm:flex-row sm:items-center">
             <p className="flex-grow break-words rounded-2xl border border-yellowLab/20 bg-cream/60 p-3 font-bold text-ink text-sm leading-relaxed">
@@ -59,14 +61,14 @@ export function GeneratedImageCard({
           download={true}
           href={image.imageUrl}
         >
-          <Download className="h-5 w-5" /> Tải xuống
+          <Download className="h-5 w-5" /> {t("shared.buttons.download")}
         </a>
         <button
           className="big-button flex flex-1 items-center justify-center gap-1.5 bg-purpleLab text-white hover:bg-purpleLab/90"
           onClick={handleStory}
           type="button"
         >
-          <BookOpen className="h-5 w-5" /> Kể chuyện
+          <BookOpen className="h-5 w-5" /> {t("shared.buttons.tellStory")}
         </button>
         {teacher && (
           <button
@@ -74,7 +76,8 @@ export function GeneratedImageCard({
             onClick={onDelete}
             type="button"
           >
-            <Trash2 className="h-5 w-5 text-red-600" /> Xóa
+            <Trash2 className="h-5 w-5 text-red-600" />{" "}
+            {t("shared.buttons.delete")}
           </button>
         )}
       </div>

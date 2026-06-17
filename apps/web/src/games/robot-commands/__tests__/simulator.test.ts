@@ -13,7 +13,7 @@ const basePuzzle: Puzzle = {
   apple: { x: 0, y: 0 },
   maxCommands: 6,
   allowedCommands: ["forward1", "turnRight", "pick"],
-  hintVi: "",
+  hint: "",
 };
 
 describe("runProgram", () => {

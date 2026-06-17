@@ -1,12 +1,16 @@
 import { motion } from "motion/react";
+import { useTranslation } from "react-i18next";
+import { choiceLabel } from "@/lib/gameContent";
 import { CHOICES, choiceStyle } from "../choiceStyles";
-import type { Choice } from "../types";
+import type { ChoiceId } from "../types";
 
 interface ChoiceButtonsProps {
-  onChoose: (choice: Choice) => void;
+  onChoose: (choice: ChoiceId) => void;
 }
 
 export function ChoiceButtons({ onChoose }: ChoiceButtonsProps) {
+  const { t } = useTranslation("gameContent");
+
   return (
     <div className="grid gap-3 md:grid-cols-3">
       {CHOICES.map((choice) => {
@@ -21,7 +25,7 @@ export function ChoiceButtons({ onChoose }: ChoiceButtonsProps) {
             whileTap={{ scale: 0.97 }}
           >
             <span className="mr-2 text-2xl">{style.emoji}</span>
-            {choice}
+            {choiceLabel(t, choice)}
           </motion.button>
         );
       })}

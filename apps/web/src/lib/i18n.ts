@@ -1,10 +1,12 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 import enCommon from "@/locales/en/common.json";
+import enGameContent from "@/locales/en/gameContent.json";
 import enGames from "@/locales/en/games.json";
 import enHome from "@/locales/en/home.json";
 import enLayout from "@/locales/en/layout.json";
 import viCommon from "@/locales/vi/common.json";
+import viGameContent from "@/locales/vi/gameContent.json";
 import viGames from "@/locales/vi/games.json";
 import viHome from "@/locales/vi/home.json";
 import viLayout from "@/locales/vi/layout.json";
@@ -29,12 +31,14 @@ void i18n.use(initReactI18next).init({
       layout: viLayout,
       home: viHome,
       games: viGames,
+      gameContent: viGameContent,
     },
     en: {
       common: enCommon,
       layout: enLayout,
       home: enHome,
       games: enGames,
+      gameContent: enGameContent,
     },
   },
   lng: readSavedLocale(),
@@ -43,11 +47,16 @@ void i18n.use(initReactI18next).init({
   interpolation: { escapeValue: false },
 });
 
-i18n.on("languageChanged", (lng) => {
+function syncDocumentLocale(lng: string) {
   document.documentElement.lang = lng;
   localStorage.setItem(LOCALE_STORAGE_KEY, lng);
-});
+  const title =
+    lng === "en" ? "Fun AI Adventure Lab" : "Phòng Thí Nghiệm AI Vui Nhộn";
+  document.title = title;
+}
 
-document.documentElement.lang = i18n.language;
+i18n.on("languageChanged", syncDocumentLocale);
+
+syncDocumentLocale(i18n.language);
 
 export default i18n;

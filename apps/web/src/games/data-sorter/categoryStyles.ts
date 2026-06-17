@@ -1,24 +1,20 @@
-import type { Category } from "./types";
+import type { CategoryId } from "./types";
 
-export const CATEGORIES: Category[] = [
-  "Dữ liệu tốt",
-  "Dữ liệu nhiễu",
-  "Thông tin riêng tư",
-];
+export const CATEGORIES: CategoryId[] = ["good", "noisy", "private"];
 
 export const categoryStyle: Record<
-  Category,
+  CategoryId,
   { emoji: string; className: string }
 > = {
-  "Dữ liệu tốt": {
+  good: {
     emoji: "✅",
     className: "from-greenLab to-mintLab text-ink",
   },
-  "Dữ liệu nhiễu": {
+  noisy: {
     emoji: "🧹",
     className: "from-yellowLab to-orangeLab text-ink",
   },
-  "Thông tin riêng tư": {
+  private: {
     emoji: "🔒",
     className: "from-redSoft to-pinkLab text-ink",
   },

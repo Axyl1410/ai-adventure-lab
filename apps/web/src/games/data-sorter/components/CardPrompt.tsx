@@ -1,4 +1,5 @@
 import { Database } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { TTSButton } from "@/components/TTSButton";
 import type { SorterCard } from "../types";
 
@@ -9,10 +10,12 @@ interface CardPromptProps {
 }
 
 export function CardPrompt({ card, deckLength, index }: CardPromptProps) {
+  const { t } = useTranslation("common");
+
   return (
     <>
       <p aria-live="polite" className="mb-3 font-black text-muted text-sm">
-        📋 Thẻ {index + 1} / {deckLength}
+        {t("gameUi.cardLabel", { current: index + 1, total: deckLength })}
       </p>
       <div className="mx-auto mb-5 grid h-24 w-24 place-items-center rounded-full bg-skyLab/15 text-6xl shadow-sm">
         {card.emoji}

@@ -1,9 +1,9 @@
 import { describe, expect, it } from "vitest";
 import { getPuzzlesForLevel } from "../levels";
 import { runProgram } from "../simulator";
-import type { Command, Puzzle } from "../types";
+import type { Command, PuzzleBase } from "../types";
 
-function findSolution(puzzle: Puzzle, maxLen: number): Command[] | null {
+function findSolution(puzzle: PuzzleBase, maxLen: number): Command[] | null {
   function dfs(sequence: Command[]): Command[] | null {
     if (sequence.length > maxLen) {
       return null;

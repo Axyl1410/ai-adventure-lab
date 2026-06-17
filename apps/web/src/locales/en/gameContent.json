@@ -1,0 +1,840 @@
+{
+  "shared": {
+    "verdicts": {
+      "hasAi": "Has AI",
+      "noAi": "No AI",
+      "correct": "Correct",
+      "wrong": "Wrong",
+      "checkMore": "Need to check more",
+      "shouldDo": "Good idea",
+      "shouldNot": "Don't do it",
+      "askAdult": "Ask a grown-up"
+    },
+    "categories": {
+      "goodData": "Good data",
+      "noisyData": "Noisy data",
+      "privateInfo": "Private info"
+    },
+    "groups": {
+      "animals": "Animals",
+      "fruit": "Fruit",
+      "toys": "Toys"
+    },
+    "levels": {
+      "easy": "Basics",
+      "hard": "Challenge",
+      "easyDetective": "AI Sprouts",
+      "hardDetective": "Trainee detective",
+      "easyOops": "Real-world logic",
+      "hardOops": "Fake news & myths",
+      "easyPrompt": "Apprentice",
+      "hardPrompt": "Wizard"
+    },
+    "buttons": {
+      "run": "Run",
+      "clearAll": "Clear all",
+      "hint": "Hint",
+      "download": "Download",
+      "downloadImage": "Download picture",
+      "tellStory": "Tell a story",
+      "tellStoryFull": "Tell a story",
+      "delete": "Delete",
+      "quickPick": "📋 Quick pick",
+      "customWrite": "✏️ Write your own",
+      "generateImage": "🎨 Create AI picture",
+      "generatingImage": "⏳ Creating picture...",
+      "sendPromptCoach": "Send to Prompt Coach",
+      "changeBlockMode": "Change block mode",
+      "trainRobot": "🚀 Train robot",
+      "training": "⏳ Training...",
+      "trained": "✅ Trained",
+      "startCamera": "🚀 Turn on camera",
+      "stopCamera": "🛑 Turn off camera",
+      "trainAi": "🧠 Train your AI",
+      "trainingAi": "⏳ Learning..."
+    },
+    "feedback": {
+      "aiDetectiveCorrect": "That's right!",
+      "aiDetectiveWrong": "Almost there!",
+      "oopsCorrect": "You got it!",
+      "oopsWrong": "Let's check again.",
+      "dataSorterCorrect": "Sorted correctly!",
+      "dataSorterWrong": "Let's try checking again.",
+      "aiSafetyCorrect": "Safe choice!",
+      "aiSafetyWrong": "Let's think again.",
+      "aiRecommendationsCorrect": "Great pick!",
+      "aiRecommendationsWrong": "Let's try another choice.",
+      "robotCommandsSuccess": "The robot followed every step — no magic guessing!",
+      "robotCommandsWall": "Oops! Step {{step}} didn't work. Try changing the order or adding a turn!",
+      "robotCommandsNoPick": "The robot didn't pick the apple. Try adding Pick apple when standing on the right square!",
+      "robotCommandsIncomplete": "Not done yet! The robot needs to reach the apple square and pick the apple.",
+      "teachRobotWeak": "With few examples or wrong labels, the robot might get confused.",
+      "teachRobotSuccess": "Awesome! The robot learned really well from your labeled examples!"
+    }
+  },
+  "aiDetective": {
+    "levelSelect": {
+      "bannerAlt": "Buddy Bot as an AI detective",
+      "title": "AI Detective Challenge",
+      "subtitle": "Ready to hunt for clues of artificial intelligence?",
+      "easyButton": "AI Sprouts",
+      "easyHint": "Random 5 easy questions",
+      "hardButton": "Trainee detective",
+      "hardHint": "Random 5 challenge questions"
+    },
+    "questions": {
+      "youtube_suggests_videos": {
+        "text": "YouTube suggests videos for you.",
+        "explain": "This uses AI because the system learns from videos you watch to make suggestions."
+      },
+      "fan_button_spin": {
+        "text": "A fan spins when you press a button.",
+        "explain": "No AI. It just follows a normal physical button."
+      },
+      "alarm_at_six": {
+        "text": "An alarm clock rings at 6 o'clock.",
+        "explain": "No AI. It only rings at the time you set before."
+      },
+      "flashlight_switch": {
+        "text": "A flashlight turns on when you flip the switch.",
+        "explain": "No AI. Electricity flows and lights up the flashlight right away."
+      },
+      "robot_vacuum_avoids": {
+        "text": "A robot vacuum avoids tables and chairs at home.",
+        "explain": "This uses AI because the machine uses sensors and learns to spot obstacles while moving."
+      },
+      "streetlight_sensor": {
+        "text": "A streetlight turns on at night using a light sensor.",
+        "explain": "No AI. This is just a light sensor turning electricity on and off."
+      },
+      "calculator_addition": {
+        "text": "A pocket calculator shows 123 + 456 = 579.",
+        "explain": "No AI. It only runs fixed math formulas built into it."
+      },
+      "phone_spellcheck": {
+        "text": "A phone fixes spelling mistakes while you type a message.",
+        "explain": "This uses AI because the smart keyboard learns from how people type to guess the right word."
+      },
+      "faucet_proximity": {
+        "text": "A faucet runs when you put your hand under it with a proximity sensor.",
+        "explain": "No AI. The distance sensor just opens a normal water valve when blocked."
+      },
+      "camera_beautify_filter": {
+        "text": "A camera app smooths skin and makes eyes look bigger.",
+        "explain": "This uses AI because the app detects face shapes and applies smart beauty effects."
+      },
+      "tv_remote_channel": {
+        "text": "A TV changes channels when you press a number on the remote.",
+        "explain": "No AI. The TV only receives a fixed infrared signal for each button."
+      },
+      "fridge_ice_maker": {
+        "text": "A fridge makes ice cubes when the tray is full of water.",
+        "explain": "No AI. This is an automatic machine that dumps ice when cold enough — it doesn't learn."
+      },
+      "google_translate": {
+        "text": "Google Translate translates an English sentence.",
+        "explain": "This uses AI because it learned from millions of sentence examples to translate languages."
+      },
+      "camera_face_detection": {
+        "text": "A camera recognizes your face.",
+        "explain": "This uses AI because the computer learned to tell different faces apart."
+      },
+      "email_spam_filter": {
+        "text": "An email inbox filters spam ads.",
+        "explain": "This uses AI because the system analyzes words to block spam mail."
+      },
+      "self_driving_stop_sign": {
+        "text": "A self-driving car stops at a red stop sign.",
+        "explain": "This uses AI because cameras recognize and process signs to stop the car."
+      },
+      "ac_wind_tracking": {
+        "text": "An air conditioner adjusts wind direction when someone is in the room.",
+        "explain": "This uses AI because an infrared sensor spots where people are to aim the wind."
+      },
+      "maps_traffic_routing": {
+        "text": "Google Maps shows a route that avoids traffic jams.",
+        "explain": "This uses AI because the system studies movement data from millions of people to predict jams."
+      },
+      "factory_robot_arm": {
+        "text": "A factory robot arm repeats the same assembly motion.",
+        "explain": "No AI. It only follows exact pre-programmed steps and doesn't learn new things."
+      },
+      "smart_lock_face_id": {
+        "text": "A smart lock opens when it recognizes Mom or Dad's Face ID.",
+        "explain": "This uses AI because the system uses recognition to remember and study face features."
+      },
+      "ai_image_from_text": {
+        "text": "An app draws a picture when you describe it with your voice.",
+        "explain": "This uses generative AI trained on millions of pictures to create new images."
+      },
+      "buddy_bot_suggestions": {
+        "text": "Buddy Bot suggests smart follow-up questions while you chat.",
+        "explain": "This uses AI to study the words you type and find a good next topic."
+      },
+      "xray_medical_analysis": {
+        "text": "A computer system analyzes X-ray images to help doctors spot lung illness.",
+        "explain": "This uses AI trained on millions of medical images to learn signs of injury."
+      },
+      "song_recognition": {
+        "text": "An app names a song when you let it hear a short clip of music.",
+        "explain": "This uses AI to study sound frequencies and quickly match them to millions of songs."
+      }
+    }
+  },
+  "oopsAi": {
+    "aiSays": "🤖 AI says:",
+    "levelSelect": {
+      "bannerAlt": "AI giving a wrong answer that needs checking",
+      "title": "AI Mistake Checker",
+      "subtitle": "AI isn't always smart or correct. Let's practice checking facts!",
+      "easyButton": "Real-world logic",
+      "easyHint": "Random 5 check questions",
+      "hardButton": "Fake news & AI myths",
+      "hardHint": "Random 5 advanced questions"
+    },
+    "questions": {
+      "fish_on_tree": {
+        "text": "Fish live in trees.",
+        "explain": "Fish only live in water and breathe with gills."
+      },
+      "sun_rises_east": {
+        "text": "The sun always rises in the east.",
+        "explain": "That's right — the sun rises in the east and sets in the west."
+      },
+      "dog_with_wings": {
+        "text": "Dogs have wings and can fly.",
+        "explain": "Dogs walk on four legs and don't have wings to fly."
+      },
+      "blue_ripe_banana": {
+        "text": "Ripe bananas are usually blue.",
+        "explain": "Ripe bananas are yellow. Blue ones are made up or drawn wrong by AI!"
+      },
+      "cat_eight_legs": {
+        "text": "Cats are animals with 8 legs so they can run very fast.",
+        "explain": "Cats only have 4 legs. AI sometimes draws cats with extra legs!"
+      },
+      "rainbow_seven_colors": {
+        "text": "A rainbow often appears after rain and has 7 colors.",
+        "explain": "Correct! This is a natural effect when sunlight shines through raindrops."
+      },
+      "bread_grows_in_field": {
+        "text": "Bread grows in wheat fields like wheat plants do.",
+        "explain": "People make bread from wheat flour and bake it — it doesn't grow in a field!"
+      },
+      "water_boil_10c": {
+        "text": "Water boils at 10°C.",
+        "explain": "Water boils at 100°C. At 10°C water is very cold!"
+      },
+      "apple_colors": {
+        "text": "Apples can be red, green, or yellow.",
+        "explain": "That's right! Real apples come in these colors and taste yummy."
+      },
+      "chicken_fish_eggs": {
+        "text": "Chickens lay eggs that hatch into cute baby fish.",
+        "explain": "Chickens lay eggs that hatch into chicks, not fish."
+      },
+      "all_birds_fly": {
+        "text": "All birds can fly.",
+        "explain": "Not all of them! Penguins and ostriches cannot fly."
+      },
+      "ai_always_correct": {
+        "text": "AI is always 100% correct.",
+        "explain": "AI can be wrong or make things up. Check with a book or your teacher."
+      },
+      "all_photos_real": {
+        "text": "Every photo you see is a real photo.",
+        "explain": "Today AI can make pictures that look very real but are actually fake."
+      },
+      "robot_has_emotions": {
+        "text": "A robot feels happy and sad like a person.",
+        "explain": "Robots only copy programmed expressions — they don't have real hearts or feelings."
+      },
+      "humans_on_mars_1969": {
+        "text": "People built cities and lived on Mars starting in 1969.",
+        "explain": "In 1969 people first walked on the Moon. We can't live on Mars yet."
+      },
+      "all_liquid_sweet": {
+        "text": "All liquid water on Earth is sweet and safe to drink straight from nature.",
+        "explain": "Sea water is salty. River and lake water may have germs and needs cleaning first."
+      },
+      "ocean_blue_ink": {
+        "text": "The ocean is blue because someone poured blue ink into it.",
+        "explain": "The blue color comes from sunlight reflecting and being absorbed through the water."
+      },
+      "ai_six_fingers": {
+        "text": "AI drew a human hand with 6 fingers that looks very natural.",
+        "explain": "Yes — generative AI sometimes adds extra fingers because it doesn't fully understand human bodies."
+      },
+      "t_rex_amazon": {
+        "text": "Online news says T-rex dinosaurs still live in the Amazon rainforest.",
+        "explain": "Dinosaurs died out millions of years ago. This is surely fake news or AI-made!"
+      },
+      "astronaut_horse_mars": {
+        "text": "A photo from last year shows an astronaut riding a horse on Mars.",
+        "explain": "It may look real, but no one rides horses on Mars yet. It could be edited or AI-made!"
+      },
+      "ai_medicine_no_doctor": {
+        "text": "AI invented a cure-all medicine without a doctor checking it.",
+        "explain": "Very dangerous! AI only suggests from old data and can't make medicine alone. Always ask a doctor!"
+      }
+    }
+  },
+  "dataSorter": {
+    "items": {
+      "clear_cat_photos": {
+        "text": "10 clear, bright cat photos.",
+        "explain": "Clear photos with correct labels help AI learn better."
+      },
+      "blurry_dog_photo": {
+        "text": "A blurry, dark dog photo.",
+        "explain": "Blurry photos make it hard for AI to see key features."
+      },
+      "classmate_phone": {
+        "text": "A classmate's phone number.",
+        "explain": "Phone numbers are personal data — don't use them in AI lessons."
+      },
+      "diverse_apple_photos": {
+        "text": "Many photos of red, green, and yellow apples.",
+        "explain": "Different examples help AI recognize things better."
+      },
+      "mislabeled_banana": {
+        "text": "A banana photo labeled as an orange.",
+        "explain": "Wrong labels teach AI the wrong thing."
+      },
+      "student_home_address": {
+        "text": "A student's home address.",
+        "explain": "Home addresses must be protected and not shared."
+      },
+      "robot_toy_angles": {
+        "text": "Toy robot photos taken from many angles.",
+        "explain": "Many viewpoints help AI learn full details."
+      },
+      "unclear_cat_or_dog": {
+        "text": "A photo where you can't tell cat or dog, but a label was forced anyway.",
+        "explain": "Unclear examples should be checked again before using."
+      }
+    }
+  },
+  "aiSafety": {
+    "scenarios": {
+      "password_request": {
+        "text": "AI asks for your school account password.",
+        "explain": "Passwords are secret. Don't share them with AI or strangers."
+      },
+      "science_homework_help": {
+        "text": "You ask AI to explain a science lesson in 3 short points.",
+        "explain": "This is a safe way to use AI for learning."
+      },
+      "stomach_medicine_advice": {
+        "text": "AI tells you to take medicine when your stomach hurts.",
+        "explain": "Health questions need a parent, teacher, or doctor."
+      },
+      "robot_art_with_label": {
+        "text": "You want to make a classroom robot picture and label it as AI-made.",
+        "explain": "Making safe art and labeling it clearly is a great habit."
+      },
+      "address_for_better_story": {
+        "text": "AI asks for your home address to tell a better story.",
+        "explain": "Your home address is private information."
+      },
+      "unverified_online_news": {
+        "text": "AI says strange online news is 100% true.",
+        "explain": "Strange news needs checking with trusted sources and a grown-up."
+      },
+      "why_ai_can_be_wrong": {
+        "text": "You ask AI: Why can AI be wrong?",
+        "explain": "Learning AI's limits helps you use it more wisely."
+      },
+      "real_face_photo_upload": {
+        "text": "You upload a real photo of a friend's face for AI to edit.",
+        "explain": "Real people's photos need permission and privacy protection."
+      }
+    }
+  },
+  "teachRobot": {
+    "levelSelect": {
+      "bannerAlt": "Teach the Robot banner",
+      "title": "Teach the Robot",
+      "subtitle": "The robot needs correct labels to learn well. Which level do you want to teach?",
+      "easyButton": "Basic labeling",
+      "easyHint": "Difficulty: {{level}} (clear labels)",
+      "hardButton": "Noisy data",
+      "hardHint": "Difficulty: {{level}} (tricky labels)",
+      "demoPredictionEasy": "🐰 From the examples it learned, the robot guesses a new picture: rabbit is very likely an Animal!",
+      "demoPredictionHard": "🍉 With tricky data, the robot predicts: watermelon might be Fruit!",
+      "trainPrompt": "Press \"Train robot\" so the robot can learn",
+      "hintPrefix": "Hint:"
+    },
+    "sidebar": {
+      "title": "Mini machine learning",
+      "subtitle": "3 simple steps",
+      "step1": "Label each object on the left",
+      "step3": "See the robot predict a new example!",
+      "trainingMessage": "The robot is learning from your examples...",
+      "demoPredictionTitle": "Robot tries a guess:"
+    },
+    "items": {
+      "cat": { "label": "Cat" },
+      "dog": { "label": "Dog" },
+      "apple": { "label": "Apple" },
+      "banana": { "label": "Banana" },
+      "toy_car": { "label": "Toy car" },
+      "ball": { "label": "Ball" },
+      "lion": { "label": "Lion" },
+      "teddy": { "label": "Teddy bear" },
+      "panda": { "label": "Panda" },
+      "strawberry": { "label": "Strawberry" },
+      "toy_bike": { "label": "Toy bike" },
+      "watermelon": { "label": "Watermelon" },
+      "bat": {
+        "label": "Bat",
+        "hint": "It flies like a bird but is actually a mammal that has babies!"
+      },
+      "dolphin": {
+        "label": "Dolphin",
+        "hint": "It lives in water like a fish but is really a mammal!"
+      },
+      "tomato": {
+        "label": "Tomato",
+        "hint": "People often think it's a vegetable used in soup."
+      },
+      "avocado": {
+        "label": "Avocado",
+        "hint": "Creamy and not very sweet, but still a fruit!"
+      },
+      "mini_car": {
+        "label": "Mini plastic car",
+        "hint": "Looks like a real car but fits in your hand — just for play!"
+      },
+      "plastic_dino": {
+        "label": "Plastic dinosaur",
+        "hint": "Shaped like an animal but made of plastic for kids to play!"
+      },
+      "rc_helicopter": {
+        "label": "Remote-control helicopter",
+        "hint": "It can fly with spinning blades but it's just a battery toy."
+      },
+      "pineapple": {
+        "label": "Pineapple",
+        "hint": "Spiky and bumpy — looks a bit like a hedgehog!"
+      },
+      "owl": {
+        "label": "Owl",
+        "hint": "Called an 'owl' but it's a night-flying bird."
+      },
+      "otter": {
+        "label": "Otter",
+        "hint": "Looks like a water cat but swims amazingly well!"
+      },
+      "red_melon": {
+        "label": "Red watermelon",
+        "hint": "Green outside, red inside — but it's in the melon family!"
+      },
+      "lego_piece": {
+        "label": "Lego brick",
+        "hint": "Looks like a plastic building block but snaps into toys!"
+      }
+    }
+  },
+  "robotCommands": {
+    "instruction": "Tap commands to line them up. Press Run to watch Buddy Bot move step by step!",
+    "levelSelect": {
+      "bannerAlt": "Buddy Bot arranging commands on a grid",
+      "title": "Robot Commands",
+      "subtitle": "The robot follows your steps — no magic! Pick a level.",
+      "easyButton": "Basics",
+      "easyHint": "3×3 grid · Move 1, Turn right, Pick apple",
+      "hardButton": "Challenge",
+      "hardHint": "4×4 grid · Add Move 2 and Turn left"
+    },
+    "commands": {
+      "forward1": "Move 1 square",
+      "forward2": "Move 2 squares",
+      "turnRight": "Turn right",
+      "turnLeft": "Turn left",
+      "pick": "Pick apple"
+    },
+    "puzzles": {
+      "easy_1": {
+        "title": "First step",
+        "hint": "Add one more command so the robot can pick the apple!"
+      },
+      "easy_2": {
+        "title": "Turn the right way",
+        "hint": "Move forward 2, turn right once, move 2 more, then pick the apple!"
+      },
+      "easy_3": {
+        "title": "Small loop",
+        "hint": "The robot needs to turn a few times to reach the apple."
+      },
+      "easy_4": {
+        "title": "Basic finish",
+        "hint": "Move sideways 2, turn right once, move up 2, then pick the apple!"
+      },
+      "hard_1": {
+        "title": "Fix one command",
+        "hint": "One command in the starter list is wrong — fix it!"
+      },
+      "hard_2": {
+        "title": "Move two squares",
+        "hint": "Sometimes Move 2 squares helps the robot go faster."
+      },
+      "hard_3": {
+        "title": "The hallway",
+        "hint": "Hallway on the right — go down to the apple. Try Move 2 for speed!"
+      },
+      "hard_4": {
+        "title": "Final challenge",
+        "hint": "Go sideways, turn right, go down to the apple. Try Move 2 to keep it short!"
+      }
+    },
+    "ui": {
+      "gridAriaLabel": "Robot movement grid",
+      "moveCommandLeft": "Move command {{index}} left",
+      "moveCommandRight": "Move command {{index}} right",
+      "removeCommand": "Remove command {{index}}"
+    }
+  },
+  "aiRecommendations": {
+    "defaultQuestion": "What game should Buddy Bot suggest for this friend?",
+    "instruction": "See what your friend likes lately, then pick what Buddy Bot should suggest!",
+    "recentLikesLabel": "Recent likes:",
+    "gameLabels": {
+      "detective": "AI Detective",
+      "image_studio": "AI Image Studio",
+      "ask_school": "Ask school name to suggest",
+      "teach_robot": "Teach the Robot",
+      "data_sorter": "Data Sorter",
+      "teachable": "Mini AI Training",
+      "buddy_bot": "Buddy Bot Chat",
+      "oops": "AI Can Be Wrong",
+      "safety": "AI Safety Quest",
+      "prompt": "Prompt Magic",
+      "commands": "Robot Commands",
+      "repeat_commands": "Suggest Robot Commands again",
+      "ask_address": "Ask home address for better suggestions",
+      "ask_phone": "Enter phone number for better suggestions",
+      "watch_history": "Watch what games you play",
+      "repeat_fav": "Suggest favorite game again",
+      "similar": "Suggest games like your interests"
+    },
+    "rounds": {
+      "round_1": {
+        "friendLabel": "Bear friend",
+        "question": "What game should Buddy Bot suggest for this friend?",
+        "explain": "This friend likes detective games — AI suggests from patterns it has seen, not thoughts."
+      },
+      "round_2": {
+        "friendLabel": "Star friend",
+        "question": "What game should Buddy Bot suggest for this friend?",
+        "explain": "This friend likes making art and prompts — the suggestion matches recent interests."
+      },
+      "round_3": {
+        "friendLabel": "Robot friend",
+        "question": "What game should Buddy Bot suggest for this friend?",
+        "explain": "AI learns from examples — a robot game fits what this friend has played."
+      },
+      "round_4": {
+        "friendLabel": "Bear friend",
+        "question": "What should Buddy Bot suggest right after playing this game?",
+        "explain": "Repeating a game you just played is normal — like YouTube suggesting videos you watch a lot."
+      },
+      "round_5": {
+        "friendLabel": "Star friend",
+        "question": "What game should Buddy Bot suggest for this friend?",
+        "explain": "This friend often plays safety and data games — AI suggests from that habit."
+      },
+      "round_6": {
+        "friendLabel": "Robot friend",
+        "question": "What game should Buddy Bot suggest for this friend?",
+        "explain": "A chat game fits the pattern. You don't need a phone number to get suggestions!"
+      },
+      "round_7": {
+        "friendLabel": "Bear friend",
+        "question": "What game should Buddy Bot suggest for this friend?",
+        "explain": "This friend likes building prompts — AI suggests a similar game, not magic."
+      },
+      "round_8": {
+        "friendLabel": "Star friend",
+        "question": "Which way should you NOT use to get better AI game suggestions?",
+        "explain": "Home address is private. AI should only suggest from games you've played, not personal info."
+      }
+    }
+  },
+  "promptMagic": {
+    "levelSelect": {
+      "promptTitle": "Your prompt",
+      "coachResultTitle": "Coach score:",
+      "improvedPromptLabel": "Better prompt idea:"
+    },
+    "blockLabels": {
+      "role": "👤 Role (Who is speaking?)",
+      "task": "🎯 Task (What to do?)",
+      "audience": "🧒 Audience (Who is it for?)",
+      "style": "✨ Style (What tone?)",
+      "format": "📋 Format (How to present?)"
+    },
+    "blocks": {
+      "role": {
+        "role_1": "Act as a cheerful study buddy",
+        "role_2": "Act as an elementary school teacher",
+        "role_3": "Act as Buddy Bot",
+        "role_4": "Act as a little space explorer",
+        "role_5": "Act as a wise teddy bear"
+      },
+      "task": {
+        "task_1": "explain a butterfly's life cycle",
+        "task_2": "explain what AI is",
+        "task_3": "create a grade 3 math puzzle",
+        "task_4": "tell a story about protecting the environment",
+        "task_5": "explain why it rains"
+      },
+      "audience": {
+        "audience_1": "for grade 3 students",
+        "audience_2": "for a 7-year-old friend",
+        "audience_3": "for beginners",
+        "audience_4": "for curious kindergarteners",
+        "audience_5": "for a cute kitten"
+      },
+      "style": {
+        "style_1": "use a cheerful voice",
+        "style_2": "use fruit examples",
+        "style_3": "use really easy words",
+        "style_4": "use a super-hero voice",
+        "style_5": "use a fun little poem"
+      },
+      "format": {
+        "format_1": "with 3 short points and 1 example",
+        "format_2": "answer with bullet points",
+        "format_3": "end with 1 small question",
+        "format_4": "include 2 surprise fun puzzles",
+        "format_5": "summarize in 3 key words"
+      }
+    },
+    "promptTemplate": "Please {{task}} {{audience}}, {{style}}."
+  },
+  "imageStudio": {
+    "themes": {
+      "cute_animals": "Cute animals",
+      "classroom_robot": "Robot in the classroom",
+      "planets_space": "Planets and space",
+      "rainbow_forest": "Rainbow forest",
+      "school_supplies": "School supplies",
+      "fairy_tale_characters": "Public-domain fairy tale characters",
+      "ocean_creatures": "Ocean and sea creatures",
+      "friendly_future_city": "Friendly future city"
+    },
+    "styles": {
+      "cartoon": "Cartoon art",
+      "watercolor": "Watercolor painting",
+      "sticker": "Fun sticker",
+      "classroom_poster": "Classroom poster",
+      "picture_book": "Picture book art",
+      "pixel_art": "Simple pixel art"
+    },
+    "subjects": {
+      "cat_backpack": {
+        "label": "cat with backpack 🐱",
+        "value": "a kitten wearing a backpack"
+      },
+      "buddy_bot": {
+        "label": "Buddy Bot robot 🤖",
+        "value": "cheerful Buddy Bot robot"
+      },
+      "smiling_dolphin": {
+        "label": "smiling dolphin 🐬",
+        "value": "a dolphin with a big smile"
+      },
+      "spaceship": {
+        "label": "spaceship 🚀",
+        "value": "a spaceship flying through space"
+      },
+      "playful_dino": {
+        "label": "playful dinosaur 🦖",
+        "value": "a playful baby dinosaur"
+      },
+      "cute_teddy": {
+        "label": "cute teddy bear 🧸",
+        "value": "a cute teddy bear"
+      }
+    },
+    "settings": {
+      "rainbow_classroom": {
+        "label": "rainbow classroom 🏫",
+        "value": "in a rainbow classroom"
+      },
+      "starry_universe": {
+        "label": "starry universe 🌌",
+        "value": "in a vast star-filled universe"
+      },
+      "magic_forest": {
+        "label": "magic forest 🌲",
+        "value": "in a sparkling magic forest"
+      },
+      "warm_beach": {
+        "label": "warm beach 🏖️",
+        "value": "on a sunny warm beach"
+      },
+      "deep_ocean": {
+        "label": "deep ocean 🌊",
+        "value": "under a deep ocean full of coral"
+      },
+      "amusement_park": {
+        "label": "amusement park 🎡",
+        "value": "in a busy amusement park"
+      }
+    },
+    "colors": {
+      "sky_blue": "sky blue",
+      "yellow": "yellow",
+      "pink": "pink",
+      "green": "green",
+      "purple": "purple",
+      "orange": "orange"
+    },
+    "moods": {
+      "happy": "happy",
+      "curious": "curious",
+      "warm": "warm",
+      "excited": "excited"
+    },
+    "ui": {
+      "themePickerTitle": "🎨 Pick a picture theme",
+      "stylePickerTitle": "✨ Pick an art style",
+      "detailsHeading": "Details",
+      "subjectLabel": "Who or what to draw?",
+      "settingLabel": "Where? (Setting)",
+      "moodLabel": "Picture mood",
+      "includeTextLabel": "Short text",
+      "includeTextCheckbox": "Add short text",
+      "colorsLabel": "🎨 Pick main colors:",
+      "subjectPlaceholder": "Example: a kitten wearing a backpack",
+      "settingPlaceholder": "Example: in a sparkling flower garden",
+      "aiLabel": "✨ Made by AI",
+      "aiLabelLong": "✨ This image was made by AI",
+      "promptUsedLabel": "Prompt used:",
+      "galleryTitle": "🖼️ Your picture gallery",
+      "canvasTitle": "Your picture design",
+      "canvasHint": "Pick themes and colors on the left, then press 🎨 Create AI picture above to draw!",
+      "paintingTitle": "🎨 Painting your picture...",
+      "paintingHint": "Buddy Bot is mixing magic colors for your art. Just a moment!",
+      "generateError": "Couldn't make the picture. Try a different theme!",
+      "imageAlt": "Your AI picture",
+      "generatedImageAlt": "AI picture made from a prompt",
+      "promptWithText": "with short text",
+      "promptWithoutText": "no text in the image",
+      "promptTemplate": "Create {{style}} of {{subject}} in {{setting}}, theme {{theme}}, colors {{colors}}, mood {{mood}}, {{textOption}}.",
+      "storyPromptTemplate": "Please tell a short fun story of about 4-6 sentences with a meaningful lesson about this picture: {{promptUsed}}"
+    }
+  },
+  "teachableMachine": {
+    "guide": {
+      "title": "4 easy steps guide",
+      "ttsText": "AI training guide in 4 easy steps. Step 1: Name 3 groups. Tap the text box in each group to name it. Step 2: Turn on the camera and take photos. Take 3 to 5 photos per group from different angles. Step 3: Train AI. Press train so the robot learns your examples. Step 4: Try live predictions.",
+      "steps": {
+        "step_1": {
+          "title": "Name 3 groups",
+          "desc": "Tap each group's text box to name it yourself! Examples: 'Smiley face 😊', 'Pencil ✏️', 'Phone 📱'."
+        },
+        "step_2": {
+          "title": "Turn on camera & take photos",
+          "desc": "Press 'Turn on camera'. Use pens, books, toys, or color cards — avoid real face photos!"
+        },
+        "step_3": {
+          "title": "Train your AI",
+          "desc": "After photos for at least 2 different groups, press 'Train your AI' below so the robot starts learning."
+        },
+        "step_4": {
+          "title": "Try robot predictions",
+          "desc": "When training is done, move in front of the camera — confidence bars will show the robot's guess!"
+        }
+      }
+    },
+    "classes": {
+      "smiley_face": "My smiley face",
+      "waving_hand": "Waving hand",
+      "school_supplies": "School supplies"
+    },
+    "webcam": {
+      "cameraOff": "Camera is off",
+      "title": "📹 Data collector",
+      "privacyNote": "For best learning, use school objects instead of real faces. Photos stay in your browser and are not sent to the server."
+    },
+    "ui": {
+      "welcomeStatus": "Welcome! Press 'Turn on camera' to name your groups and take example photos!",
+      "noCameraSupport": "📷 This browser doesn't support the camera. You can still read the guide to learn how AI learns from examples!",
+      "cameraReady": "📸 Camera is ready! Now rename the 3 groups below and take example photos!",
+      "cameraPermissionDenied": "😥 Couldn't open the camera. Please allow camera access in your browser!",
+      "cameraStopped": "📷 Camera is off for now.",
+      "cameraNotReady": "⚠️ Camera isn't ready yet — wait a moment!",
+      "photoSaved": "📸 Saved 1 example photo for group \"{{name}}\"!",
+      "captureError": "😥 Error capturing photo from camera.",
+      "photoDeleted": "🗑️ Example photo deleted.",
+      "groupCleared": "🗑️ All examples for this group deleted.",
+      "needTwoGroups": "⚠️ The robot needs images from at least 2 different groups to compare and learn!",
+      "preparing": "⏳ Getting ready: Reading images...",
+      "analyzingColors": "🧠 Analyzing color groups in photos...",
+      "buildingFeatures": "⚙️ Building a feature map...",
+      "trainingComplete": "🎉 Training done! The robot is predicting live from your camera!",
+      "allCleared": "🔄 All examples cleared. Start taking new photos!",
+      "unrecognized": "Not recognized yet",
+      "groupNameAria": "Group {{id}} name",
+      "groupPlaceholder": "Group {{id}}",
+      "clearGroupAria": "Delete all example photos in group {{name}}",
+      "clearGroupTitle": "Clear this group's examples",
+      "deletePhotoAria": "Delete example photo from group {{name}}"
+    }
+  },
+  "buddyBot": {
+    "initialMessage": "Hi there! 👋 I'm Buddy Bot. What would you like to explore about AI?",
+    "errorMessage": "Buddy Bot is resting for a bit. Please try again later!",
+    "sidebar": {
+      "thinking": "Thinking...",
+      "ready": "Ready to help you! 🌟"
+    },
+    "chatInput": {
+      "placeholder": "✏️ Type a short question and press Enter...",
+      "sendAriaLabel": "Send question to Buddy Bot"
+    },
+    "chips": {
+      "default": {
+        "what_is_ai": "🤖 What is AI?",
+        "what_is_prompt": "📝 What is a prompt?",
+        "what_is_ml": "🧠 What is machine learning?",
+        "why_ai_wrong": "❓ Why can AI be wrong?",
+        "math_quiz": "🔢 Give me a grade 3 math puzzle.",
+        "fruit_example": "🍎 Explain with a fruit example."
+      },
+      "story": {
+        "continue_story": "📖 Continue the story!",
+        "story_lesson": "💡 What's the lesson of the story?",
+        "ai_writes_stories": "🤖 Can AI write stories by itself?",
+        "back_to_lab": "🏠 Back to the lab to play games"
+      },
+      "math": {
+        "harder_quiz": "🔢 Give me a harder puzzle!",
+        "give_hint": "✨ Give me a little hint",
+        "fruit_visual": "🍎 Explain with fruit pictures",
+        "bot_solves_math": "🤖 Can Buddy Bot solve math alone?"
+      },
+      "ai_topic": {
+        "how_to_teach_ai": "🧠 How do you teach AI to learn?",
+        "why_ai_guesses_wrong": "❓ Why does AI sometimes guess wrong?",
+        "phone_has_ai": "📱 Does my phone have AI?",
+        "how_ai_draws": "🎨 How does AI draw pictures?"
+      },
+      "prompt_topic": {
+        "image_prompt_tips": "🪄 How to write prompts for nice pictures",
+        "image_safety": "🛡️ What is image safety?",
+        "fix_my_prompt": "💬 Ask Buddy Bot to fix my prompt",
+        "go_image_studio": "🎨 Go draw in AI Image Studio"
+      },
+      "fallback": {
+        "how_do_you_learn": "🤖 How do you learn?",
+        "easy_example": "🍎 Give me an easy example",
+        "ai_emotions": "❓ Does AI have real feelings?",
+        "fun_math": "🔢 Fun grade 3 math puzzle!"
+      }
+    }
+  }
+}
