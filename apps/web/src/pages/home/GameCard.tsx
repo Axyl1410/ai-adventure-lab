@@ -18,6 +18,7 @@ export function GameCard({
     <motion.article
       animate={{ opacity: 1, y: 0 }}
       className="group overflow-hidden rounded-[2rem] border border-white bg-white shadow-md transition-all duration-300 hover:-translate-y-1.5 hover:border-purpleLab/35 hover:shadow-xl"
+      data-testid={`game-card${card.to.replace(/\//g, "-")}`}
       initial={{ opacity: 0, y: 18 }}
       transition={{ duration: 0.35, delay: index * 0.04 }}
     >

@@ -120,4 +120,35 @@ describe("runProgram", () => {
     expect(result.outcome).toBe("success");
     expect(commands.length).toBeLessThanOrEqual(puzzle.maxCommands);
   });
+
+  it("turnLeft changes direction", () => {
+    const puzzle: Puzzle = {
+      ...basePuzzle,
+      start: { x: 1, y: 1 },
+      startDirection: "north",
+      apple: { x: 0, y: 1 },
+    };
+    const result = runProgram(puzzle, ["turnLeft", "forward1", "pick"]);
+    expect(result.outcome).toBe("success");
+  });
+
+  it("returns incomplete when apple not reached", () => {
+    const result = runProgram(basePuzzle, ["forward1"]);
+    expect(result.outcome).toBe("incomplete");
+  });
+
+  it("returns max_steps when execution exceeds limit", () => {
+    const puzzle: Puzzle = {
+      ...basePuzzle,
+      gridSize: 30,
+      walls: [],
+      start: { x: 15, y: 28 },
+      startDirection: "north",
+      apple: { x: 15, y: 0 },
+      maxCommands: 30,
+    };
+    const commands: Command[] = Array.from({ length: 25 }, () => "forward1");
+    const result = runProgram(puzzle, commands);
+    expect(result.outcome).toBe("max_steps");
+  });
 });

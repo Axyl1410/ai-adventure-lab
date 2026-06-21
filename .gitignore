@@ -120,6 +120,13 @@ dev.db
 uploads/
 **/uploads/
 apps/api/uploads/
+apps/api/.test-uploads/
+apps/api/.test.db
+apps/api/e2e.db
+apps/api/e2e-uploads/
+e2e.db
+playwright-report/
+test-results/
 
 # macOS compression files
 __MACOSX/

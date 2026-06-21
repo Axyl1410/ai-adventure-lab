@@ -60,6 +60,7 @@ export function DetectiveFeedbackPanel({
       ) : (
         <motion.button
           className="big-button bg-ink text-lg text-white"
+          data-testid="feedback-next"
           onClick={onNext}
           type="button"
           whileHover={{ scale: 1.03 }}

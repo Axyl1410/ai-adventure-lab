@@ -17,7 +17,10 @@ export function HomeHero({
   const quickStats = useQuickStats();
 
   return (
-    <section className="relative overflow-hidden rounded-[2rem] border border-white/70 bg-white/80 p-5 shadow-soft backdrop-blur-md sm:p-7 lg:p-8">
+    <section
+      className="relative overflow-hidden rounded-[2rem] border border-white/70 bg-white/80 p-5 shadow-soft backdrop-blur-md sm:p-7 lg:p-8"
+      data-testid="home-hero"
+    >
       <div
         aria-hidden="true"
         className="absolute inset-x-8 top-0 h-1 rounded-full bg-gradient-to-r from-skyLab via-purpleLab to-pinkLab"

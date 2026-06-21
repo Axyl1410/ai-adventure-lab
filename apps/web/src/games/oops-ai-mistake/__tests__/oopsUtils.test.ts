@@ -1,6 +1,7 @@
 import type { TFunction } from "i18next";
 import { describe, expect, it } from "vitest";
-import { buildFeedbackText } from "../oopsUtils";
+import { ROUND_SIZE } from "../constants";
+import { buildFeedbackText, shuffleRound } from "../oopsUtils";
 
 const t = ((key: string) => {
   const map: Record<string, string> = {
@@ -16,5 +17,10 @@ describe("oopsUtils", () => {
     expect(buildFeedbackText(t, false, "Giải thích.")).toContain(
       "Mình kiểm tra"
     );
+  });
+
+  it("shuffleRound giới hạn ROUND_SIZE", () => {
+    const round = shuffleRound(Array.from({ length: 12 }, (_, index) => index));
+    expect(round).toHaveLength(ROUND_SIZE);
   });
 });

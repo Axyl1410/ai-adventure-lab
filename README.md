@@ -55,6 +55,18 @@ pnpm dev
 - API health: `http://localhost:3001/api/health`
 - API tự tạo các bảng SQLite còn thiếu khi khởi động.
 
+## Kiểm thử (tests)
+
+```bash
+pnpm test              # unit + API integration (Vitest), tự chạy prisma:generate
+pnpm test:e2e          # E2E Playwright (tự cài Chromium nếu thiếu)
+pnpm test:coverage     # báo cáo coverage Vitest cho shared, api, web
+```
+
+- **API tests** dùng SQLite tách (`apps/api/.test.db`), không đụng `dev.db`.
+- **E2E** khởi động API + web dev server, kiểm tra home, AI Detective, và Teacher API.
+- Lần đầu chạy E2E cần mạng để tải Chromium (~300MB).
+
 ## Ngôn ngữ (i18n)
 
 - Mặc định tiếng Việt; nút **VI / EN** trên header đổi ngôn ngữ (lưu trong `localStorage`).

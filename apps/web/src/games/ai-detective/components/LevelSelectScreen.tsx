@@ -28,6 +28,7 @@ export function LevelSelectScreen({ onSelectLevel }: LevelSelectScreenProps) {
       <div className="grid gap-4 sm:grid-cols-2">
         <motion.button
           className="big-button bg-gradient-to-br from-greenLab to-mintLab py-4 text-ink text-lg"
+          data-testid="level-easy"
           onClick={() => onSelectLevel("easy")}
           type="button"
           whileHover={{ scale: 1.05 }}
@@ -41,6 +42,7 @@ export function LevelSelectScreen({ onSelectLevel }: LevelSelectScreenProps) {
         </motion.button>
         <motion.button
           className="big-button bg-gradient-to-br from-purpleLab to-pinkLab py-4 text-lg text-white"
+          data-testid="level-hard"
           onClick={() => onSelectLevel("hard")}
           type="button"
           whileHover={{ scale: 1.05 }}
